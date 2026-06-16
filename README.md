@@ -95,7 +95,7 @@ I want to find an app idea in the productivity space.
 
 **Steps:** background interview → builder profile → trend analysis → idea generation → scoring
 
-**Methodology:** Trend signals are pulled from TikTok Creative Center (hashtag velocity), Reddit (community pain language), App Store (new entrants + review patterns), and Google Trends (search demand). Ideas are filtered against your domain expertise, skills, and distribution advantages from the interview — so you get ideas you can actually build and sell.
+**Methodology:** Trend signals are pulled from TikTok Creative Center (hashtag velocity), Reddit (community pain language), X/Twitter (public builder and buyer conversations), App Store (new entrants + review patterns), and Google Trends (search demand). Ideas are filtered against your domain expertise, skills, and distribution advantages from the interview — so you get ideas you can actually build and sell.
 
 **Output:** Ranked + scored list of app ideas saved to `memory/ideas/`
 
@@ -141,6 +141,7 @@ Is the meditation app market still worth entering?
 
 **Methodology:**
 - Trend velocity scored across platforms: rising-fast / rising / stable / declining
+- X/Twitter analysis separates public demand signals from viral noise, then corroborates them against pricing, competitors, and cross-platform evidence
 - Market saturation rated via a 5-factor rubric (competitor count, incumbent dominance, funding activity, keyword saturation, content saturation)
 - Market size uses triangulated bottom-up estimation: search volume × intent conversion rate, community size × platform multiplier, and competitor revenue proxies — cross-checked for consistency
 - SOM estimates use indie-realistic capture rate benchmarks by app category (e.g. niche productivity: 0.5–2.0% year 1)

@@ -5,5 +5,8 @@
       "Read(memory/**)",
       "Write(memory/**)"
     ]
+  },
+  "worktree": {
+    "bgIsolation": "none"
   }
 }

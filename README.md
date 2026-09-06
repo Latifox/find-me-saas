@@ -10,6 +10,7 @@
 
 It is built to disagree with you.
 
+[![npm](https://img.shields.io/npm/v/find-me-saas)](https://www.npmjs.com/package/find-me-saas)
 ![License](https://img.shields.io/badge/license-MIT-yellow)
 ![Skills](https://img.shields.io/badge/skills-15-blue)
 ![Workflows](https://img.shields.io/badge/workflows-4-blue)
@@ -19,7 +20,7 @@ It is built to disagree with you.
 
 *Maintained by [Latif Abderrahmane](https://github.com/Latifox)*
 
-**[See two real verdicts →](examples/)**  ·  **[60-second start ↓](#60-second-start)**
+**[See two real verdicts →](examples/)**  ·  **[Install in one command ↓](#install)**
 
 **If you have ever asked an AI to generate a million-dollar idea and believed the answer, star this.**
 
@@ -40,31 +41,65 @@ FindMeSaaS is the opposite by construction:
 
 ---
 
-## 60-second start
+## Install
 
-No API keys, no configuration, no dependencies.
-
-### Add it to any project
+No API keys, no configuration, no dependencies. One command.
 
 ```bash
 npx find-me-saas init
 ```
 
-That is it. Open the folder in Claude Code, Codex or Cursor and the commands are there.
+Run it inside any project folder, existing or empty. It writes the skills,
+workflows, commands and hooks in place, then tells you exactly what it wrote.
 
-Useful flags:
+```
+FindMeSaaS 1.0.0 -> /your/project
 
-```bash
-npx find-me-saas init --dry-run              # show what it would write, change nothing
-npx find-me-saas init --platform claude      # claude | codex | cursor | all (default all)
-npx find-me-saas init --force                # overwrite existing tool files
+  wrote  .claude     27 files
+  wrote  .codex      16 files
+  wrote  .cursor     15 files
+  wrote  skills      22 files
+  wrote  workflows    5 files
+  wrote  tests        4 files
+  wrote  memory       4 files
+
+  Done. Next:
+    1. Open this folder in Claude Code, Codex or Cursor.
+    2. Run /founder-profile to set up your builder profile.
+    3. Or just say: "validate my idea: <your idea>"
 ```
 
-**It will never overwrite your analyses.** `memory/user_profile.md`, `memory/ideas/`
-and your research files are protected even with `--force`, and every protected path
-is printed. A reinstall cannot cost you work.
+Then open the folder in your agent and type `/`. The nine commands are there.
 
-### Or clone the repo
+### Options
+
+```bash
+npx find-me-saas init --dry-run          # list what it would write, change nothing
+npx find-me-saas init --platform claude  # claude | codex | cursor | all (default: all)
+npx find-me-saas init --force            # overwrite existing tool files
+npx find-me-saas --help
+```
+
+Install it globally if you set up projects often:
+
+```bash
+npm install -g find-me-saas
+find-me-saas init
+```
+
+### Your work is safe on reinstall
+
+`memory/user_profile.md`, everything in `memory/ideas/`, and your research files
+are **never overwritten**, with or without `--force`. Upgrading to a newer version
+cannot cost you an analysis. Every path the installer protects or skips is printed.
+
+### Requirements
+
+Node 18 or newer to run the installer. Python 3.10 or newer if you want the
+validation harness and hooks, which are optional but recommended. Nothing else,
+and no packages are downloaded at runtime.
+
+### Or clone the repo instead
 
 ```bash
 git clone https://github.com/Latifox/find-me-saas.git
@@ -73,6 +108,8 @@ claude      # or: codex
 ```
 
 Cursor users open the folder and the chat; rules load from `.cursor/rules/`.
+Cloning also gets you [`examples/`](examples/) and the project's own docs, which
+the npm package leaves out to stay small.
 
 ---
 

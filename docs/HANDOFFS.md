@@ -100,4 +100,4 @@ First-run onboarding now runs ahead of any workflow when no profile exists, not 
 A mutation test reported a false failure because the test removed a needle case-sensitively while the assertion lowercases the text before matching, leaving one capitalised occurrence alive. When mutation-testing a case-insensitive assertion, remove the needle case-insensitively too. The assertion was right and the test was wrong, which is the more dangerous of the two failure modes because it looks like a product bug.
 
 ### State after task 5
-Five tasks DONE, board empty. `--check-specs` 0 errors, both live runs 0 errors and 0 warnings, fixture suite at 29, `--baseline` exits 0, 15 skills and 15 adapters intact. The README assumes a published slug of `latifox/find-me-saas`; correct every link together if that changes.
+Five tasks DONE, board empty. `--check-specs` 0 errors, both live runs 0 errors and 0 warnings, fixture suite at 29, `--baseline` exits 0, 15 skills and 15 adapters intact. The README assumes a published slug of `Latifox/find-me-saas`; correct every link together if that changes.

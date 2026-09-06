@@ -17,7 +17,7 @@ It is built to disagree with you.
 ![Tests](https://img.shields.io/badge/tests-validation%20harness-success)
 ![Platforms](https://img.shields.io/badge/Claude%20Code%20%7C%20Codex%20%7C%20Cursor-informational)
 
-*Maintained by [Latif Abderrahmane](https://github.com/latifox)*
+*Maintained by [Latif Abderrahmane](https://github.com/Latifox)*
 
 **[See two real verdicts →](examples/)**  ·  **[60-second start ↓](#60-second-start)**
 
@@ -47,7 +47,7 @@ No install, no API keys, no configuration.
 ### Claude Code
 
 ```bash
-git clone https://github.com/latifox/find-me-saas.git
+git clone https://github.com/Latifox/find-me-saas.git
 cd find-me-saas
 claude
 ```
@@ -58,7 +58,7 @@ Then just talk. The agent loads from `CLAUDE.md` and starts by asking who you ar
 
 ```bash
 npm install -g @openai/codex
-git clone https://github.com/latifox/find-me-saas.git
+git clone https://github.com/Latifox/find-me-saas.git
 cd find-me-saas
 codex
 ```
@@ -288,7 +288,7 @@ The most valuable issue you can file is a verdict you think is wrong.
 
 ## Credits
 
-Built and maintained by **[Latif Abderrahmane](https://github.com/latifox)** — the business-model rubric lanes, the validation harness and fixture suite, the fast-path, micro-pivot, quick-scan and pivot-lineage workflows, the B2B research prompt, and the scoring recalibrations.
+Built and maintained by **[Latif Abderrahmane](https://github.com/Latifox)** — the business-model rubric lanes, the validation harness and fixture suite, the fast-path, micro-pivot, quick-scan and pivot-lineage workflows, the B2B research prompt, and the scoring recalibrations.
 
 Originally forked from [MaxKmet/idea-validation-agents](https://github.com/MaxKmet/idea-validation-agents), which created the skill system, workflow specifications and memory protocol this builds on. Thank you.
 
@@ -302,6 +302,6 @@ Originally forked from [MaxKmet/idea-validation-agents](https://github.com/MaxKm
 
 **Validate in fifteen minutes. Or lose six months finding out the hard way.**
 
-⭐ **[Star this repo](https://github.com/latifox/find-me-saas)** so it is there when you need it.
+⭐ **[Star this repo](https://github.com/Latifox/find-me-saas)** so it is there when you need it.
 
 </div>

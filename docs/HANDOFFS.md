@@ -101,3 +101,29 @@ A mutation test reported a false failure because the test removed a needle case-
 
 ### State after task 5
 Five tasks DONE, board empty. `--check-specs` 0 errors, both live runs 0 errors and 0 warnings, fixture suite at 29, `--baseline` exits 0, 15 skills and 15 adapters intact. The README assumes a published slug of `Latifox/find-me-saas`; correct every link together if that changes.
+
+## Task 6 — Distribution: installer, commands, autonomy, hooks (2026-09-06)
+
+### Fetch the format, do not remember it
+Both platform formats were fetched from the docs during planning, and both differed from what a reasonable guess would have produced. Slash-command namespacing by arbitrary subdirectory does not exist, so `/fms:validate` was impossible and command names had to be flat and collision-resistant. The documented hook example uses bash and `jq`, neither of which a Windows user reliably has, so the hooks were written in Python instead. Guessing either would have shipped something broken.
+
+### Where the commands live, and why it is confusing
+`.claude/skills/` now holds two kinds of entry: fifteen adapter stubs named after analyses (nouns, one per canonical skill) and nine commands named after jobs (verbs, dispatching to workflows). The harness checks both, in different ways. CONTRIBUTING explains the split; do not merge them.
+
+Commands dispatch to workflows rather than restating them. A command that duplicates workflow logic will drift from it the first time the workflow changes.
+
+### Hook design rules that earned their place
+- **Fail open.** Both scripts wrap `main()` and exit 0 on any unexpected exception. A hook that breaks a session is worse than a hook that does nothing.
+- **`PostToolUse` reports, it does not block.** On that event exit 2 does not undo the write; it surfaces stderr to the agent. That is the right shape: the file is already on disk and the agent still has the context to fix it.
+- **Consume stdin even when returning early**, so the caller never blocks on a full pipe.
+- Derive the project root from `Path(__file__).resolve().parents[2]` rather than trusting the working directory.
+
+### The installer bugs, both found by running it
+- The first dry run was packaging `.claude/scheduled_tasks.lock`, a local runtime artifact. An installer copies from the maintainer's working copy, so it needs an explicit exclusion list, not just a source manifest.
+- The user-data guard initially classified `memory/ideas/.gitkeep` and `memory/market_insights/README.md` as user analyses, so a reinstall reported protecting its own scaffolding. Negative lookahead fixed it.
+- A user with an existing `.claude/settings.json` would have silently received no hooks. The installer now detects that specific skip and prints the JSON block to merge.
+
+Neither bug was visible by reading the code. Run the installer into a temp directory every time it changes.
+
+### State after task 6
+Six tasks DONE. `--check-specs` is at 28 checks and 0 errors, both live runs and the shipped examples are clean, the fixture suite is at 29, and `--baseline` exits 0. The npm name `find-me-saas` is unverified; run `npm view find-me-saas` before publishing and change `package.json` plus the README install command if it resolves.

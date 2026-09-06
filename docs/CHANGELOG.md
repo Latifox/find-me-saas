@@ -27,6 +27,13 @@
 - Intent-router rows for the fast path and micro-pivot in `CLAUDE.md` and `AGENTS.md`; memo version and supersede-footer rules in `skills/decision-memo/SKILL.md`.
 - Harness support for all of the above plus six fixtures (`fixture-fast`, `fixture-fast-broken`, `fixture-micro`, `fixture-micro-broken`, `fixture-superseded`, `fixture-superseded-v2`, `fixture-superseded-broken`).
 
+### Added (task 6)
+- **npx installer.** `npx find-me-saas init` adds the system to any existing project, with `--dry-run`, `--platform claude|codex|cursor|all` and `--force`. Zero dependencies, Node built-ins only. User analyses under `memory/` are never overwritten, even with `--force`.
+- **Nine slash commands**, one per job: `/founder-profile`, `/find-idea`, `/validate-idea`, `/gut-check`, `/market-scan`, `/pivot-idea`, `/auto-pilot`, `/idea-status`, `/verify-memory`. Each dispatches to a workflow rather than restating it.
+- **Autonomous mode.** `/auto-pilot` runs onboarding, research, ranking, full validation, memo and harness without stopping to ask, recording assumptions instead of blocking, and stops early only for no market signal, insufficient dimensions, or an unfixable harness error.
+- **Two hooks.** `SessionStart` reports profile and portfolio status into context; `PostToolUse` validates any idea directory that is written to and returns contract errors to the agent. Both are dependency-free Python that fails open.
+- `--check-specs` now asserts all nine commands exist with matching frontmatter and that both hooks are registered and point at scripts that exist.
+
 ### Launched (task 5)
 - Project branded **FindMeSaaS**, applied across `README.md`, `CLAUDE.md`, `AGENTS.md` and `skills/README.md`. No directory, skill identifier or adapter path changed.
 - `LICENSE` rewritten as MIT with two copyright blocks: the upstream original work and the 2026 extensions, each stating what it covers.

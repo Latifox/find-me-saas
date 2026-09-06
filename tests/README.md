@@ -76,6 +76,8 @@ Rounding: `final_score = round(base * floor_penalty * missing_discount)` uses Py
 - No `(task-2)` TODO remains anywhere in `skills/` or `workflows/`.
 - `skills/user-background-interviewer/SKILL.md` has a First-Run Onboarding section and captures `risk_tolerance` and `preferred_business_model`.
 - `CLAUDE.md` and `AGENTS.md` route first-run onboarding.
+- All nine slash commands exist under `.claude/skills/` with a `description` and a `name` matching their directory.
+- `.claude/settings.json` registers the `SessionStart` and `PostToolUse` hooks, and both hook scripts exist on disk.
 
 ## Adding or changing a contract
 

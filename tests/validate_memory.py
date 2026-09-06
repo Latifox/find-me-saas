@@ -90,6 +90,24 @@ LANE_SKILLS = (
     "idea-scoring",
 )
 IMPROVISATION_PHRASES = ("assumes b2c", "replaced with an equivalent")
+# Slash commands shipped with the project. Each is a directory under
+# .claude/skills/ whose name becomes the command the user types.
+COMMANDS = (
+    "founder-profile",
+    "find-idea",
+    "validate-idea",
+    "gut-check",
+    "market-scan",
+    "pivot-idea",
+    "auto-pilot",
+    "idea-status",
+    "verify-memory",
+)
+# Hook events the project registers, and the script each must point at.
+HOOKS = {
+    "SessionStart": ".claude/hooks/session_start.py",
+    "PostToolUse": ".claude/hooks/validate_idea.py",
+}
 
 
 class Report:
@@ -511,6 +529,43 @@ def _add_months(start: date, months: int) -> date:
 # --------------------------------------------------------------------------
 
 
+def check_commands(report: Report) -> None:
+    """Every shipped slash command exists with usable frontmatter."""
+    for command in COMMANDS:
+        skill = ROOT / ".claude" / "skills" / command / "SKILL.md"
+        if not skill.is_file():
+            report.error(rel(skill), f"slash command /{command} is missing")
+            continue
+        report.checked += 1
+        front = parse_frontmatter(read_text(skill))
+        if not front.get("description"):
+            report.error(rel(skill), "command frontmatter has no description")
+        if front.get("name") != command:
+            report.error(rel(skill), f"frontmatter name {front.get('name')!r} != directory {command!r}")
+
+
+def check_hooks(settings: dict[str, Any], where: str, report: Report) -> None:
+    """Both hooks are registered and point at scripts that exist."""
+    hooks = settings.get("hooks")
+    if not isinstance(hooks, dict):
+        report.error(where, "no hooks registered; expected SessionStart and PostToolUse")
+        return
+    for event, script in HOOKS.items():
+        entries = hooks.get(event)
+        if not entries:
+            report.error(where, f"hooks.{event} is not registered")
+            continue
+        commands = " ".join(
+            handler.get("command", "")
+            for entry in entries
+            for handler in entry.get("hooks", [])
+        )
+        if Path(script).name not in commands:
+            report.error(where, f"hooks.{event} does not invoke {script}")
+        if not (ROOT / script).is_file():
+            report.error(where, f"hooks.{event} points at {script}, which does not exist")
+
+
 def check_specs(report: Report) -> None:
     """Validate the skill and workflow specs rather than a corpus."""
     skills_dir = ROOT / "skills"
@@ -627,6 +682,8 @@ def check_specs(report: Report) -> None:
         if "first-run onboarding" not in router_text.lower():
             report.error(rel(router), "intent router does not route first-run onboarding")
 
+    check_commands(report)
+
     settings = ROOT / ".claude" / "settings.json"
     doc = load_json(settings, report)
     if isinstance(doc, dict):
@@ -634,6 +691,7 @@ def check_specs(report: Report) -> None:
         for needed in ("WebSearch", "WebFetch", "Read(memory/**)", "Write(memory/**)"):
             if needed not in allow:
                 report.error(rel(settings), f"permissions.allow lacks {needed}")
+        check_hooks(doc, rel(settings), report)
 
     prompt = ROOT / "skills" / "trend-analysis" / "prompts" / "b2b-communities.md"
     if not prompt.exists():

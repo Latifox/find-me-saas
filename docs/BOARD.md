@@ -7,6 +7,7 @@
 | 3 | Live validation runs against the new specs (acceptance test for tasks 1-2) | P0 | DONE 2026-09-06T06:12Z | 1, 2 | 2026-09-06 |
 | 4 | Spec fixes from the live runs (memo budget, CAC ceiling, niche penalty, empty-platform guidance) | P2 | DONE 2026-09-06T06:31Z | 3 | 2026-09-06 |
 | 5 | Public launch: branding, README, licence, first-run onboarding | P1 | DONE 2026-09-06T06:58Z | 1, 2, 3, 4 | 2026-09-06 |
+| 6 | Distribution: npx installer, slash commands, autonomous mode, hooks | P1 | DONE 2026-09-06T07:34Z | 1, 2, 3, 4, 5 | 2026-09-06 |
 
 ## Backlog (not yet written as tasks)
 - (none)

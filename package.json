@@ -1,0 +1,49 @@
+{
+  "name": "find-me-saas",
+  "version": "1.0.0",
+  "description": "An AI venture analyst that runs in your terminal. Finds SaaS ideas worth building, then tries to talk you out of them.",
+  "keywords": [
+    "ai-agent",
+    "claude-code",
+    "startup-ideas",
+    "idea-validation",
+    "market-research",
+    "product-validation",
+    "saas",
+    "indie-hackers"
+  ],
+  "homepage": "https://github.com/Latifox/find-me-saas#readme",
+  "bugs": {
+    "url": "https://github.com/Latifox/find-me-saas/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Latifox/find-me-saas.git"
+  },
+  "license": "MIT",
+  "author": "Latif Abderrahmane (https://github.com/Latifox)",
+  "type": "module",
+  "bin": {
+    "find-me-saas": "bin/cli.js"
+  },
+  "files": [
+    "bin",
+    "skills",
+    "workflows",
+    "memory",
+    "tests",
+    ".claude",
+    ".codex",
+    ".cursor",
+    "CLAUDE.md",
+    "AGENTS.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "python tests/validate_memory.py --check-specs"
+  }
+}

@@ -47,3 +47,13 @@
 - Brand: FindMeSaaS, applied in prose only across README, CLAUDE.md, AGENTS.md and skills/README.md; no path renamed
 - Licence: MIT with two copyright blocks, retaining the upstream copyright as MIT requires
 - Tests: check-specs 0 errors; both live runs 0 errors 0 warnings; fixture suite 29; baseline exit 0; three new spec assertions each mutation-tested
+
+## Task 6: Distribution — npx installer, slash commands, autonomous mode, hooks
+- Agent: opus-5 (session_01Ju41VNQW6nSZrWbsneq8Xn)
+- Started: 2026-09-06T07:02Z
+- Completed: 2026-09-06T07:34Z
+- Files: 13 created, 6 modified, 0 deleted
+- Deviations: 4 (see .ay/plans/task-6/diff-from-plan.md), all found by running the code rather than reading it
+- Learnings: 5 (.ay/learnings.jsonl) and docs/HANDOFFS.md
+- Delivered: `npx find-me-saas init` with dry-run, platform and force flags; nine slash commands including autonomous /auto-pilot; SessionStart and PostToolUse hooks in dependency-free Python; harness assertions for both
+- Tests: check-specs 28 checks 0 errors; live runs and examples clean; ten fixtures at documented counts; baseline exit 0; three new assertions mutation-tested; real install verified in a temp directory

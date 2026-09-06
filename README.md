@@ -42,41 +42,89 @@ FindMeSaaS is the opposite by construction:
 
 ## 60-second start
 
-No install, no API keys, no configuration.
+No API keys, no configuration, no dependencies.
 
-### Claude Code
+### Add it to any project
+
+```bash
+npx find-me-saas init
+```
+
+That is it. Open the folder in Claude Code, Codex or Cursor and the commands are there.
+
+Useful flags:
+
+```bash
+npx find-me-saas init --dry-run              # show what it would write, change nothing
+npx find-me-saas init --platform claude      # claude | codex | cursor | all (default all)
+npx find-me-saas init --force                # overwrite existing tool files
+```
+
+**It will never overwrite your analyses.** `memory/user_profile.md`, `memory/ideas/`
+and your research files are protected even with `--force`, and every protected path
+is printed. A reinstall cannot cost you work.
+
+### Or clone the repo
 
 ```bash
 git clone https://github.com/Latifox/find-me-saas.git
 cd find-me-saas
-claude
+claude      # or: codex
 ```
 
-Then just talk. The agent loads from `CLAUDE.md` and starts by asking who you are.
+Cursor users open the folder and the chat; rules load from `.cursor/rules/`.
 
-### OpenAI Codex CLI
+---
 
-```bash
-npm install -g @openai/codex
-git clone https://github.com/Latifox/find-me-saas.git
-cd find-me-saas
-codex
-```
+## Nine commands
 
-Reads `AGENTS.md`.
+Type `/` and they are all there. Each one does a single job.
 
-### Cursor
+| Command | What it does | Time |
+|---|---|---|
+| `/founder-profile` | Build or refresh your profile: background, constraints, target buyer | 15 sec – 5 min |
+| `/find-idea` | Research a market, generate and rank 7–10 candidates matched to your edge | ~15 min |
+| `/validate-idea` | The full ten-step chain, ending in a decision memo | ~15 min |
+| `/gut-check` | Four dimensions, no memo. Can rule an idea out, never rules one in | ~3 min |
+| `/market-scan` | Trends, competitors, sizing, channels. Add `--quick` for trends only | 5–15 min |
+| `/pivot-idea` | Root-cause the weak dimensions and generate evidence-backed pivots | ~10 min |
+| `/auto-pilot` | **Autonomous.** Onboard, research, rank, fully validate the best one, hand you the memo | ~25 min |
+| `/idea-status` | Portfolio view of every idea, its score, and what is still missing | instant |
+| `/verify-memory` | Run the test suite over your analyses and explain anything it flags | instant |
 
-Clone, open the folder, open the chat. Rules load from `.cursor/rules/`.
+Or ignore all of them and just talk. `"validate my idea: ..."` routes to the same place.
 
-Say any of these:
+### About `/auto-pilot`
 
-```
-I don't have an idea yet. Help me find one.
-Validate this: an AI tool that rewrites your emails to sound professional.
-Tell me about the journaling app market.
-My idea scored 34. Should I pivot?
-```
+It runs the entire pipeline without stopping to ask. Where it would normally ask a
+question it takes the documented default, records the assumption, and keeps going;
+gaps land in the memo's watermark rather than in your inbox. It stops early only for
+three things: no usable market signal, too few dimensions to score honestly, or a
+harness error it cannot fix. It costs real research time and produces a real analysis,
+so it tells you that before it starts.
+
+---
+
+## Two hooks keep it honest
+
+Installing for Claude Code registers two hooks, and both exist because a prompt
+system that only checks itself when asked eventually stops checking.
+
+**On session start**, it reads your profile and idea directory and tells the agent
+where things stand: whether you have been onboarded, which constraints are still
+unset, what you have already analysed, and which ideas were started and abandoned.
+No more re-explaining yourself at the top of every session.
+
+**After any write into an idea directory**, it runs that idea through the validation
+harness. If the file breaks its contract — a score whose arithmetic does not
+reconcile, a verdict that does not match the threshold table, a missing source array
+— the errors go straight back to the agent while it still has the context to fix
+them. The write is not blocked, because it already happened; the agent is simply told
+what it got wrong.
+
+Both are plain Python with no dependencies, so they behave the same on Windows,
+macOS and Linux. They fail open: a broken hook exits quietly rather than breaking
+your session.
 
 ---
 

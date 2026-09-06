@@ -29,6 +29,35 @@ python tests/validate_memory.py --memory /tmp/fx/memory   # fixture suite
 
 If you have run the agent and produced idea directories, `python tests/validate_memory.py --idea <slug>` checks one of them. Use `--baseline` on older corpora; it reports without failing.
 
+## Two kinds of thing live in `.claude/skills/`
+
+This trips people up, so it is worth stating plainly.
+
+| Kind | Example | What it is |
+|---|---|---|
+| **Adapter** | `.claude/skills/idea-scoring/` | A six-line stub pointing at `skills/idea-scoring/SKILL.md`. One per canonical skill, mirrored in `.codex/` and `.cursor/` |
+| **Command** | `.claude/skills/validate-idea/` | A slash command the user types. Dispatches to a workflow; has no canonical counterpart |
+
+Adapters are named after the analysis they wrap (nouns). Commands are named after
+what the user wants to do (verbs). The harness checks that every canonical skill has
+its three adapters, and separately that all nine commands exist.
+
+## Adding a command
+
+1. Create `.claude/skills/<verb-name>/SKILL.md`. **The directory name becomes the
+   command**, so `/validate-idea` comes from `.claude/skills/validate-idea/`.
+2. Frontmatter needs `name` (must match the directory), `description` (Claude uses
+   this to decide when to auto-invoke), and `argument-hint` if it takes arguments.
+3. In the body, dispatch to a workflow rather than restating its logic. A command
+   that duplicates a workflow will drift from it.
+4. Add the name to `COMMANDS` in `tests/validate_memory.py` and to the table in the
+   README.
+5. Run the harness.
+
+Command names are flat. Namespacing by subdirectory only works for monorepo project
+directories, so there is no way to get `/fms:validate`; pick a name unlikely to
+collide with the user's own commands.
+
 ## Adding a skill
 
 1. Write `skills/<name>/SKILL.md` following the shape of an existing one: frontmatter, a version comment, Purpose, Input, rubric tables, a numbered Process, an Output section with a single parseable JSON block, and Notes.

@@ -290,11 +290,9 @@ The most valuable issue you can file is a verdict you think is wrong.
 
 Built and maintained by **[Latif Abderrahmane](https://github.com/Latifox)** — the business-model rubric lanes, the validation harness and fixture suite, the fast-path, micro-pivot, quick-scan and pivot-lineage workflows, the B2B research prompt, and the scoring recalibrations.
 
-Originally forked from [MaxKmet/idea-validation-agents](https://github.com/MaxKmet/idea-validation-agents), which created the skill system, workflow specifications and memory protocol this builds on. Thank you.
-
 ## Licence
 
-[MIT](LICENSE), with copyright retained for both the original work and the later extensions.
+[MIT](LICENSE).
 
 ---
 

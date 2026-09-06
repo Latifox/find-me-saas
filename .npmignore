@@ -1,0 +1,25 @@
+# Belt and braces alongside the "files" allowlist in package.json.
+# Anything listed here can never be published even if "files" widens by accident.
+
+# The user's own analyses. These are personal and must never reach the registry.
+memory/user_profile.md
+memory/ideas/*
+!memory/ideas/.gitkeep
+memory/market_insights/*.md
+!memory/market_insights/README.md
+
+# Local runtime artifacts from a working copy
+.claude/scheduled_tasks.lock
+.claude/settings.local.json
+.claude/worktrees/
+__pycache__/
+*.pyc
+
+# Repository-only material
+.ay/
+docs/
+examples/
+specs/
+readme-assets/
+CONTRIBUTING.md
+.gitignore

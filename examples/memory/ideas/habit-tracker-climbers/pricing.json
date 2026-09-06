@@ -1,0 +1,139 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "modeled_at": "2026-09-06",
+  "lane": "b2c",
+  "competitive_pricing_range": {
+    "min": 0,
+    "max": 30,
+    "modal": 4.99,
+    "note": "Crimpd's free tier sets the floor at zero with over 100 structured workouts. Crimpd+ at $4.99/month billed annually is the modal price and the reference point every entrant is compared against. Sequence sits at about $7 and LatticePlan at roughly $29-30. General habit trackers occupy $2.99-9.99."
+  },
+  "anchors": [
+    {
+      "product": "Crimpd (free tier)",
+      "price": "$0 for 100+ structured workouts",
+      "relevance": "The real competitor. A credible free product from Lattice Training, the sport's coaching authority."
+    },
+    {
+      "product": "Crimpd+",
+      "price": "$4.99/month billed annually, $9.99 month-to-month",
+      "relevance": "The modal paid price in climbing training, and a ceiling a less credible entrant cannot exceed."
+    },
+    {
+      "product": "Sequence",
+      "price": "~$7/month with a 50-workout free trial",
+      "relevance": "Shows what a fuller feature set (periodization, force-gauge support) commands."
+    },
+    {
+      "product": "LatticePlan",
+      "price": "£22.99/month or £124.99/year",
+      "relevance": "Premium coaching ceiling; its complaints define the unmet need in the category."
+    },
+    {
+      "product": "Streaks, Productive, Habitify",
+      "price": "$2.99-9.99/month",
+      "relevance": "General habit tracker band, and the products a climber would otherwise use for free or near-free."
+    }
+  ],
+  "van_westendorp": {
+    "too_cheap": 1.99,
+    "cheap_but_acceptable": 2.99,
+    "getting_expensive": 4.99,
+    "too_expensive": 9.99,
+    "unit": "USD per month",
+    "methodology_note": "Anchored on the habit-tracking band ($2.99-9.99) intersected with the climbing training modal price of $4.99. Above $9.99 the app is priced against LatticePlan's coaching without offering coaching. Below $1.99 it signals a hobby project, but the more important constraint is that the floor is not $1.99, it is zero, because Crimpd's free tier is a genuine substitute rather than a crippled teaser."
+  },
+  "desire_premium_multiplier": 1.2,
+  "desire_premium_rationale": "Status is the primary driver, which the table places at 1.5-2.0x, but desire_strength_label is moderate rather than strong and the status in question is delivered by the sport rather than by the app. More decisively, a premium cannot be charged over a free credible substitute. Applied at 1.2x against the $2.99 cheap-but-acceptable point to reach roughly $3.59, rounded to a $3.99 target that sits deliberately below Crimpd+.",
+  "recommended_pricing_model": "Freemium with a subscription upgrade",
+  "pricing_model_rationale": "Forced by the market rather than chosen. Freemium accounts for 52.3% of habit-tracking revenue and the direct competitor gives away its core library, so a paywall at the front door would be compared unfavourably with a free product from a more credible brand within one App Store screenshot. The free tier must carry the climbing-load intelligence, which is the only differentiator, and charge for history, multi-week planning and advanced analytics. This is a weak position: the differentiator has to be given away to get anyone in the door.",
+  "pricing_models_considered": [
+    {
+      "model": "Freemium subscription",
+      "fit_rationale": "Matches category convention and the free incumbent.",
+      "risk": "Conversion must clear roughly 5% for the unit economics to work, against a category typical of 2-5% and a stronger free alternative than most categories present."
+    },
+    {
+      "model": "Paid-only at $4.99",
+      "fit_rationale": "Produces workable economics on paper: LTV of about $19.96 against ASO acquisition costs of $0.50-3.00.",
+      "risk": "Commercially implausible. Asking for money at the door against a free, credible, brand-backed competitor with 100+ workouts converts almost nobody."
+    },
+    {
+      "model": "One-time purchase $9.99",
+      "fit_rationale": "Removes churn from the model and suits a simple utility.",
+      "risk": "No recurring revenue, and the same door problem as paid-only."
+    }
+  ],
+  "wtp_range": {
+    "low": 2.99,
+    "target": 3.99,
+    "aspirational": 5.99,
+    "currency": "USD",
+    "period": "monthly"
+  },
+  "recommended_price": {
+    "monthly": 4.99,
+    "annual": 29.99,
+    "annual_discount_pct": 50,
+    "one_time": 0
+  },
+  "category_benchmark_range": {
+    "min": 2,
+    "max": 6
+  },
+  "freemium_conversion_estimate": 0.025,
+  "freemium_conversion_rationale": "The category typical for health, fitness and habit apps is 2-5%, with a top quartile of 8-12%. Placed at 2.5%, in the lower half, for one specific reason: the free alternative is not a competitor's crippled tier but a genuinely useful product from the brand climbers already trust. Value gating is also structurally weak here, because the differentiator (climbing load intelligence) has to sit in the free tier to be visible at all. This is the single most consequential number in the B2C analysis, and cac.json shows the economics fail even if it were doubled.",
+  "trial_to_paid_estimate": null,
+  "rebilling_strategy": {
+    "importance": "none",
+    "detail": "Not applicable to a consumer product.",
+    "evidence": ""
+  },
+  "annual_strategy": "Annual at $29.99 is a 50% discount on monthly, which is the aggressive end of the 40-50% sweet spot. Justified by high expected churn: locking a year of revenue from a user who would otherwise leave at month four is worth the discount.",
+  "b2b2c_potential": {
+    "exists": false,
+    "b2b_price_estimate": 0,
+    "rationale": "A gym-facing version was considered and rejected. Climbing gyms sell memberships and coaching, not software, and 574 US gyms is too small and too fragmented a buyer base to build a B2B motion against."
+  },
+  "price_sensitivity_notes": [
+    "The binding constraint is not price but the presence of a free credible alternative. No price below Crimpd+ makes the comparison favourable when the comparison is against Crimpd free.",
+    "Category budget commentary puts a serious climber's total app spend at $20-25 per month across a coaching app and a logbook. A new subscription competes for room inside that, it does not expand it.",
+    "Pricing above $5.99 invites direct comparison with Sequence at $7, which has periodization and force-gauge support this product would not."
+  ],
+  "monetization_risk": "high",
+  "monetization_risk_explanation": "The pricing itself is straightforward; the position is not. The market's revealed price for the core of this product is zero, set by a competitor with more credibility than a new entrant can assemble. Freemium is therefore compulsory, conversion is likely to sit at the low end of a low band, and the resulting blended revenue per install is measured in cents. cac.json shows that no acquisition channel, including free ones, clears a 3:1 ratio against it.",
+  "market_insights_pricing_signals": [
+    "Crimpd free tier with 100+ structured workouts; Crimpd+ at $4.99/month annual, $9.99 monthly",
+    "Sequence approximately $7/month with a 50-workout free trial",
+    "LatticePlan at £22.99/month or £124.99/year",
+    "General habit trackers at $2.99-9.99/month; freemium is 52.3% of category revenue",
+    "Serious climber total app budget described as $20-25/month across two apps"
+  ],
+  "market_insights_sources_used": [
+    "habit-tracking-climbing-apps-2026-09.md"
+  ],
+  "pricing_rationale": "Freemium with a $4.99 monthly and $29.99 annual upgrade, targeting an effective WTP of $3.99, deliberately below Crimpd+. The number is defensible and the position it prices into is not: the product must give away its only differentiator to be seen, then convert against a free product from a more trusted brand.",
+  "inputs_missing": [
+    "Actual conversion data for climbing-specific apps; none is published, so the estimate is drawn from the general health and fitness band."
+  ],
+  "sources": [
+    {
+      "url": "https://fitnessaitrends.com/blog/crimpd-vs-lattice-vs-sequence-climbing-training-app/",
+      "title": "Crimpd vs Lattice vs Sequence 2026, Fitness AI Trends",
+      "accessed": "2026-09-06",
+      "used_for": "Competitor pricing, free tier scope and user complaints"
+    },
+    {
+      "url": "https://straitsresearch.com/report/habit-tracking-apps-market",
+      "title": "Habit Tracking Apps Market Size and Growth, Straits Research",
+      "accessed": "2026-09-06",
+      "used_for": "Category size, freemium share of revenue, paid price band"
+    },
+    {
+      "url": "https://getsendo.app/blog/which-climbing-app-should-you-use-2026",
+      "title": "Best climbing apps in 2026, SENDO",
+      "accessed": "2026-09-06",
+      "used_for": "Category budget commentary and app role separation"
+    }
+  ]
+}

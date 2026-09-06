@@ -3,7 +3,7 @@ name: tam-sam-som-builder
 description: Estimates TAM, SAM, and realistic SOM for a B2C app idea using triangulated bottom-up methodology anchored to market_insights trend data, competitor revenue proxies, and community size signals. Includes indie capture rate benchmarks and growth-rate adjustments by trend velocity.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/market_size.json -->
+<!-- version: 0.3.0 | outputs: memory/ideas/<slug>/market_size.json -->
 
 # Skill: tam-sam-som-builder
 
@@ -14,8 +14,9 @@ Provide a realistic market size estimate that an indie developer can actually us
 ## Input
 
 - Idea slug (or market research slug for pre-idea deep dives)
-- `memory/ideas/<slug>/keywords.json` (search volume estimates — if available)
-- `memory/ideas/<slug>/competitors.json` (competitor scale and pricing signals)
+- `memory/ideas/<slug>/idea.md` (`business_model`, buyer)
+- Search volume figures from the web-search market_insights file (Approach A) — there is no separate keywords file
+- `memory/ideas/<slug>/competitors.json` (competitor scale and pricing signals; B2B review counts and customer counts)
 - `memory/ideas/<slug>/pricing.json` (target price — if available)
 - `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` (trend analysis files — **use all available platform files for this niche**)
 
@@ -35,14 +36,18 @@ If `overall_verdict` across platforms is "cold", flag the entire estimate as spe
 
 ## Methodology
 
-### Approach A — Search Volume (primary when keywords.json available)
+### Lane selection
+
+`business_model` = `b2c` or `prosumer` uses Approaches A–C and the B2C capture-rate table. `b2b-smb` and `b2b2c` use Approach D as primary, Approach C as the cross-check, and the B2B capture-rate rows. Record the lane in the output.
+
+### Approach A — Search Volume (primary when the web-search insight file reports volumes)
 
 ```
 TAM = monthly_search_volume × 12 × intent_conversion_rate × annual_price
 ```
 
 Where:
-- `monthly_search_volume` = total from `keywords.json` across all relevant keywords
+- `monthly_search_volume` = total across all relevant keywords reported in the web-search market_insights file (or researched directly; cite the source)
 - `intent_conversion_rate` = % of searchers who have genuine purchase intent (see benchmarks below)
 - `annual_price` = from `pricing.json` target WTP, annualized
 
@@ -87,6 +92,22 @@ TAM = sum of estimated annual revenue across all mapped competitors × market_co
 Where:
 - Estimate competitor revenue from: `estimated_users × competitor_price × 12 × estimated_conversion_rate`
 - `market_coverage_factor` = 1.3–2.0× (competitors don't capture the full market). Use 1.3× for saturated markets, 2.0× for markets with few competitors.
+
+### Approach D — ICP Count × ACV (primary for the B2B lane)
+
+```
+TAM = icp_count × annual_contract_value
+SAM = icp_count_after_filters × annual_contract_value
+SOM_year_1 = SAM × penetration_year_1
+```
+
+Where:
+- `icp_count` = number of organisations matching the buyer definition. Sources, in order of preference: LinkedIn Sales Navigator company filters (industry × headcount × geography), industry directories and association member counts, government business statistics (Census/NAICS, Companies House, Eurostat SBS), trade-press population estimates (cite the article and its method).
+- `annual_contract_value` = primary tier price × 12 from `pricing.json`, plus documented expansion.
+- Filters for SAM: geography and language, the qualifying behaviour (for example "has 3+ active clients", "uses n8n or Make"), and reachability through the channels in `distribution.json`.
+- `penetration_year_1` from the B2B rows of the capture-rate table below.
+
+Always state the ICP count source and its date; a market size built on an ICP count with no source is a guess and must be flagged as such.
 
 ### Triangulation
 
@@ -154,6 +175,9 @@ SOM is what an indie developer can realistically capture. This is where most est
 | **Creative tools** (photo, video, design) | 0.2–1.0% | 1.0–3.0% | Shareable output drives organic growth |
 | **Education / learning** | 0.2–1.0% | 1.0–3.0% | Retention is the main challenge |
 | **Lifestyle / habit** | 0.3–1.5% | 1.0–4.0% | Success varies wildly by habit loop quality |
+| **B2B: SMB horizontal tool** (any small business) | 0.05–0.3% of SAM logos | 0.3–1.0% | Huge SAM, diffuse buyer, weak channels |
+| **B2B: vertical or role-specific tool** (one buyer type, reachable community) | 0.5–3.0% of SAM logos | 2.0–8.0% | Concentrated buyer; warm network + content can reach a few percent |
+| **B2B2C: agency / MSP / franchise resale** | 0.5–2.0% of SAM logos | 2.0–6.0% | Each logo carries downstream accounts; count logos, not end users |
 
 Use the **lower end** of the range when:
 - `market_saturation` from `competitors.json` is "high"
@@ -193,13 +217,14 @@ Before finalizing, run these sanity checks:
 |---|---|---|
 | **TAM inflation** | TAM > $10B for a niche indie app | Almost certainly using top-down numbers. Redo with bottom-up only. |
 | **SAM too broad** | SAM > 50% of TAM | Filters are too loose. Add platform/geography/niche constraints. |
-| **SOM fantasy** | SOM year 1 > $500K for a solo developer | Reality-check the capture rate. Most indie apps earn $0–$50K in year 1. |
+| **SOM fantasy** | SOM year 1 > $500K for a solo developer | Reality-check the capture rate. Most indie apps earn $0–$50K in year 1; a solo B2B SaaS rarely passes $150K ARR in year 1. |
+| **ICP count without a source** (B2B lane) | `icp_count.source` is empty or is another estimate | Flag the whole estimate as speculative; find a directory, statistics table, or LinkedIn count before scoring. |
 | **No monetization evidence** | `monetization_evidence` from market_insights is empty across all platforms | Discount TAM by 30–50%. People may want this but not pay for it. |
 | **Cold market** | All market_insights files show `overall_verdict` = "cold" or "cool" | Flag as speculative. Note that market demand is unvalidated. |
 
 ## Market Size Verdict Thresholds
 
-Based on **SOM year 1** (the number that actually matters for an indie developer deciding whether to build):
+Based on **SOM year 1** (the number that actually matters for an indie developer deciding whether to build). The thresholds apply to both lanes; in the B2B lane SOM is expressed as year-1 ARR.
 
 | SOM year 1 | Verdict | Meaning for an indie dev |
 |---|---|---|
@@ -210,9 +235,9 @@ Based on **SOM year 1** (the number that actually matters for an indie developer
 
 ## Process
 
-1. Load all available inputs: `keywords.json`, `competitors.json`, `pricing.json`, and all matching `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` files.
+1. Load all available inputs: `idea.md`, `competitors.json`, `pricing.json`, and all matching `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` files.
 2. Extract calibration data from market_insights (trend velocity, top signals, monetization evidence, overall verdict).
-3. Run Approach A (search volume) if `keywords.json` is available.
+3. Run Approach A (search volume) if the web-search insight file reports search volumes.
 4. Run Approach B (community size proxy) if market_insights contain community signals.
 5. Run Approach C (competitor revenue proxy) if `competitors.json` has user/pricing data.
 6. Triangulate: compare estimates, determine confidence, select final TAM.
@@ -229,14 +254,18 @@ Write to `memory/ideas/<slug>/market_size.json`:
 
 ```json
 {
-  "methodology": "bottom-up | community-proxy | competitor-proxy | triangulated",
+  "idea_slug": "",
+  "estimated_at": "YYYY-MM-DD",
+  "lane": "b2c | b2b",
+  "methodology": "bottom-up | community-proxy | competitor-proxy | icp-count | triangulated",
   "estimation_approaches": [
     {
-      "approach": "search-volume | community-proxy | competitor-proxy",
+      "approach": "search-volume | community-proxy | competitor-proxy | icp-count",
       "tam_estimate": 0,
       "key_assumptions": []
     }
   ],
+  "icp_count": { "value": null, "source": "", "as_of": "", "acv": null, "penetration_year_1_pct": null },
   "triangulation_confidence": "high | medium | low",
   "tam": {
     "value": 0,
@@ -261,9 +290,14 @@ Write to `memory/ideas/<slug>/market_size.json`:
   "trend_velocity_observed": "rising-fast | rising | stable | declining",
   "monetization_evidence_found": true,
   "reality_checks_triggered": [],
-  "market_size_verdict": "large | medium | niche | micro-niche"
+  "market_size_verdict": "large | medium | niche | micro-niche",
+  "sources": [
+    { "url": "https://", "title": "", "accessed": "YYYY-MM-DD", "used_for": "" }
+  ]
 }
 ```
+
+`icp_count` is filled in the B2B lane and left null in the B2C lane. `sources` must include the ICP count source and every competitor or pricing page used in Approach C.
 
 ## Notes
 

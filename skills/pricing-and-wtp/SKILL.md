@@ -3,7 +3,7 @@ name: pricing-and-wtp
 description: Models willingness to pay using Van Westendorp price sensitivity analysis, desire-premium multipliers, category benchmarks, and market_insights monetization signals. Recommends pricing model, freemium conversion estimate, and annual/monthly strategy.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/pricing.json -->
+<!-- version: 0.3.0 | outputs: memory/ideas/<slug>/pricing.json -->
 
 # Skill: pricing-and-wtp
 
@@ -14,9 +14,8 @@ Determine what users would actually pay, not what the developer hopes to charge.
 ## Input
 
 - Idea slug
-- `memory/ideas/<slug>/idea.md` (app concept, key features)
-- `memory/ideas/<slug>/user_extraction.json` (pain intensity)
-- `memory/ideas/<slug>/competitors.json` (competitive pricing, pricing models in use)
+- `memory/ideas/<slug>/idea.md` (app concept, key features, `business_model`, `price_point_hypothesis`)
+- `memory/ideas/<slug>/competitors.json` (competitive pricing, pricing models in use, `anchors` for the B2B lane)
 - `memory/ideas/<slug>/desire_scores.json` (desire strength, primary/secondary drivers)
 - `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` (trend data — **use all available platform files**)
 
@@ -31,6 +30,10 @@ Trend analysis files provide monetization reality-checks that desk research alon
 | Platform narratives — App Store | Review complaints about pricing reveal the ceiling: "Great app but not worth $X/mo." Review praise about pricing reveals the floor: "Amazing value at $X." |
 | Platform narratives — TikTok | Creator recommendations often mention price as part of the hook ("this FREE app...", "worth every penny of $X"). Signals whether freemium or premium positioning resonates with the audience. |
 | `trend_velocity` | Rising-fast markets can support premium pricing (early adopters pay more). Declining markets face price pressure (users comparison-shop harder). |
+
+### Lane selection
+
+`business_model` = `b2c` or `prosumer` uses the B2C lane: the category WTP table in Step 4, freemium conversion in Step 5, and `wtp_range` + `recommended_price` in the output. `b2b-smb` and `b2b2c` use the B2B lane: the benchmark table in Step 4b, trial-to-paid in Step 5b, tiers in Step 7, and `target_wtp_range` + `recommended_tiers` in the output. Van Westendorp (Step 2) and the desire multiplier (Step 3) apply to both lanes; in B2B, anchor the thresholds on the closest product that sells to the same buyer rather than on the category as a whole.
 
 ## Pricing Models
 
@@ -135,6 +138,24 @@ Use these ranges as a sanity check against the Van Westendorp and desire-adjuste
 
 If the estimated WTP is more than 2× above the category range, it's likely too optimistic. If it's below the category minimum, the app may struggle to sustain development.
 
+### Step 4b — B2B lane benchmarks (SMB and agency buyers, self-serve or light sales; heuristic ranges)
+
+| Pricing unit | Typical SMB range | Use when | Buyer resentment risk |
+|---|---|---|---|
+| **Flat monthly tiers** | $29–99 / $99–299 / $299–799 | Value does not scale with seats; buyer wants a predictable line item | Low; publish the prices |
+| **Per seat** | $8–30 per user/mo | Every user gets individual value (inbox, CRM, editor) | High when only one person uses it; punishes growing teams |
+| **Per client / workspace / location** | $10–50 per unit/mo on top of a base | Agencies, MSPs, franchises: value is per managed account | Low; aligns cost with the buyer's revenue |
+| **Usage / credits** | Metered with a floor of $49–199/mo | AI generation, scans, exports with variable volume | Medium; unpredictable bills drive churn |
+| **Annual contract** | 10–20% below 12× monthly | Buyers with budget cycles; lock-in before incumbents react | Low |
+
+Sanity anchors: routine SMB tooling sits at $20–100/mo per company (heuristic: Zapier, Make, Notion team plans); agency white-label tooling at $59–349/mo with per-client overage (AgencyAnalytics pricing page); compliance and security platforms at $10k–80k/yr (Vanta, Drata, Nudge published or quoted pricing). If the idea sits between two clusters with nothing in the gap, the revealed price is a gap, not a validation; say so and set `monetization_risk` no lower than "medium".
+
+Rules for the B2B lane:
+- Copy the billing unit the buyer already accepts from the closest comparable product; do not invent a unit.
+- Do not price per seat unless the per-user value is real.
+- Recommend a free **trial** (time-boxed or one-unit) rather than a free tier unless a free incumbent must be defended against.
+- Publish prices unless every comparable hides them; transparency is a free differentiator in categories full of "contact sales".
+
 ### Step 5 — Freemium Conversion Estimation
 
 If the recommended model includes a free tier, estimate what percentage of free users will convert to paid:
@@ -165,6 +186,19 @@ Use the typical rate as the base estimate. Adjust toward top-quartile if:
 - The free tier design has strong value gating
 - Category benchmarks from market_insights show successful freemium competitors
 
+### Step 5b — B2B trial-to-paid estimation
+
+In the B2B lane set `freemium_conversion_estimate` to `null` unless a free tier is genuinely recommended, and estimate `trial_to_paid_estimate` instead (heuristic ranges for self-serve SMB SaaS):
+
+| Trial design | Typical trial-to-paid |
+|---|---|
+| Opt-in trial, no card, no onboarding | 5–10% |
+| Opt-in trial with guided onboarding or a real artefact produced during the trial | 15–25% |
+| Card-required trial | 30–50% of a much smaller trial pool |
+| Sales-assisted pilot | 40–60% |
+
+Choose the row matching the recommended trial and state why. A trial that lets the buyer produce something they can show a client or boss during the trial period sits at the top of its band.
+
 ### Step 6 — Annual vs. Monthly Strategy
 
 Most indie apps benefit from offering both monthly and annual plans. The annual plan serves as the anchor.
@@ -180,9 +214,11 @@ Most indie apps benefit from offering both monthly and annual plans. The annual 
 
 **Recommended annual price** = monthly price × 12 × (1 - discount). Present the annual plan as the default/highlighted option.
 
-### Step 7 — B2C vs. B2B2C Pricing
+### Step 7 — Pricing lane by business model
 
-Some ideas have a viable path to both consumer and business revenue. Evaluate if the app concept could serve both:
+**B2B lane (`b2b-smb`, `b2b2c`): recommended tiers.** Build 3 tiers (plus a trial) from the Van Westendorp range: entry at `cheap_but_acceptable`, the primary revenue tier at `getting_expensive`, and a top tier near the midpoint to `too_expensive` with the features only larger buyers need. Name the target for each tier. For `b2b2c` add a `rebilling_strategy`: how the buyer marks the product up to its own customers, with evidence that comparable buyers do this. Rebilling moves the subscription from the buyer's cost line to its revenue line and is the strongest churn lever available; say whether it is critical, useful, or absent.
+
+**B2C lane with a business path (B2B2C expansion).** Some consumer ideas have a viable path to both consumer and business revenue. Evaluate if the app concept could serve both:
 
 | Signal that B2B2C path exists | Example |
 |---|---|
@@ -203,6 +239,9 @@ Write to `memory/ideas/<slug>/pricing.json`:
 
 ```json
 {
+  "idea_slug": "",
+  "modeled_at": "YYYY-MM-DD",
+  "lane": "b2c | b2b",
   "wtp_range": {
     "low": 0,
     "target": 0,
@@ -210,21 +249,28 @@ Write to `memory/ideas/<slug>/pricing.json`:
     "currency": "USD",
     "period": "monthly | yearly | one-time"
   },
+  "target_wtp_range": {
+    "low": 0,
+    "target": 0,
+    "high": 0,
+    "unit": "USD per month per <company | seat | client>"
+  },
   "van_westendorp": {
     "too_cheap": 0,
     "cheap_but_acceptable": 0,
     "getting_expensive": 0,
-    "too_expensive": 0
+    "too_expensive": 0,
+    "methodology_note": ""
   },
-  "desire_premium_multiplier": 0,
+  "anchors": [
+    { "product": "", "price": "", "relevance": "" }
+  ],
+  "desire_premium_multiplier": null,
   "desire_premium_rationale": "",
   "recommended_pricing_model": "",
+  "pricing_model_rationale": "",
   "pricing_models_considered": [
-    {
-      "model": "",
-      "fit_rationale": "",
-      "risk": ""
-    }
+    { "model": "", "fit_rationale": "", "risk": "" }
   ],
   "recommended_price": {
     "monthly": 0,
@@ -232,12 +278,17 @@ Write to `memory/ideas/<slug>/pricing.json`:
     "annual_discount_pct": 0,
     "one_time": 0
   },
-  "freemium_conversion_estimate": 0,
+  "recommended_tiers": [
+    { "name": "", "price": 0, "billing": "per month | per year | one-time", "scope": "", "target": "" }
+  ],
+  "freemium_conversion_estimate": null,
   "freemium_conversion_rationale": "",
+  "trial_to_paid_estimate": null,
+  "rebilling_strategy": { "importance": "critical | useful | none", "detail": "", "evidence": "" },
   "competitive_pricing_range": {
     "min": 0,
     "max": 0,
-    "modal": 0
+    "modal": null
   },
   "category_benchmark_range": {
     "min": 0,
@@ -248,10 +299,18 @@ Write to `memory/ideas/<slug>/pricing.json`:
     "b2b_price_estimate": 0,
     "rationale": ""
   },
+  "monetization_risk": "low | medium | high",
+  "monetization_risk_explanation": "",
   "market_insights_pricing_signals": [],
-  "pricing_rationale": ""
+  "market_insights_sources_used": [],
+  "pricing_rationale": "",
+  "sources": [
+    { "url": "https://", "title": "", "accessed": "YYYY-MM-DD", "used_for": "" }
+  ]
 }
 ```
+
+Fill `wtp_range` + `recommended_price` in the B2C lane and `target_wtp_range` + `recommended_tiers` in the B2B lane; the other pair may be omitted. `modal` is `null` when no competitor occupies the idea's price position. `sources` lists every pricing page and anchor consulted.
 
 ## Notes
 
@@ -260,3 +319,4 @@ Write to `memory/ideas/<slug>/pricing.json`:
 - For apps competing with strong free alternatives (Google Keep, Apple Notes, default apps), the effective WTP ceiling may be $0 for most users. In this case, the pricing model must create value that the free alternative structurally cannot (social features, AI, specialized workflows).
 - Lifetime deal pricing should only appear as a launch tactic, never as the recommended primary model. LTD price = 3–5× annual price. Cap at $60 for consumer apps.
 - If market_insights files are past their `stale_after` date, note that competitive pricing may have shifted and recommend refreshing.
+- cac-modeler reads `target` (B2C) or the primary tier price (B2B) as ARPU, and `trial_to_paid_estimate` or `freemium_conversion_estimate` for funnel maths. Keep those fields numeric.

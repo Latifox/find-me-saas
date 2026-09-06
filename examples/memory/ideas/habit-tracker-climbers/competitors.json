@@ -1,0 +1,207 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "mapped_at": "2026-09-06",
+  "lane": "b2c",
+  "headline_finding": "The category's authority brand gives away the core product. Crimpd, built by Lattice Training, publishes over 100 structured climbing workouts free and charges $4.99/month for premium, which is the price point a new entrant would target. More decisively, the complaints climbers actually make are about force-gauge integration and periodization, not about failing to keep habits.",
+  "direct_competitors": [
+    {
+      "name": "Crimpd",
+      "platform": "iOS, Android",
+      "buyer": "Recreational and intermediate climber",
+      "estimated_users": "not disclosed; the most widely recommended free climbing training app across 2026 listicles",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "app-store",
+      "last_updated": "2026",
+      "pricing": "Free tier; Crimpd+ $4.99/month billed annually, $9.99/month month-to-month",
+      "pricing_model": "freemium subscription",
+      "top_features": [
+        "Library of 100+ structured workouts covering hangboard sets, power-endurance circuits, warm-ups, benchmarks and antagonist training, all in the free tier",
+        "Built by Lattice Training, which carries genuine coaching authority in the sport",
+        "Session logging and training plans in the paid tier"
+      ],
+      "top_complaints": [
+        "No native Tindeq or force-gauge integration",
+        "No built-in periodization; load progression is manual and scheduling is done by hand",
+        "Cannot log grades during a workout, so multi-problem climbing sessions must be tracked elsewhere",
+        "Cannot change reps in a set mid-workout, only at the end",
+        "UI friction: reviewers ask for drag-and-drop workout reordering and simpler side navigation"
+      ],
+      "complaint_themes": ["missing hardware integration", "no automated periodization", "in-workout logging gaps", "UI friction"],
+      "distribution_channels_observed": ["App Store and Play Store search", "Lattice brand halo", "climbing media listicles"]
+    },
+    {
+      "name": "LatticePlan (Lattice Training app)",
+      "platform": "iOS, Android",
+      "buyer": "Committed climber willing to pay for coaching",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "app-store",
+      "last_updated": "2026",
+      "pricing": "£22.99/month or £124.99/year, roughly $29-30/month",
+      "pricing_model": "subscription with 7-day trial",
+      "top_features": [
+        "The most thorough physical assessment in the category",
+        "Structured plans from a recognised coaching organisation",
+        "Weekly check-ins"
+      ],
+      "top_complaints": [
+        "Sets unrealistic plans: 2.5-hour workouts, rarely under 90 minutes",
+        "Did not ask for finger, pulling or flexibility assessments before generating a plan",
+        "Fingerboard assessment integration promised but not shipped as of mid-2026; described as still feeling half finished",
+        "Weekly check-in adaptation is not test-based"
+      ],
+      "complaint_themes": ["unrealistic session length", "missing personalisation", "unshipped roadmap"],
+      "distribution_channels_observed": ["Lattice coaching business", "climbing media", "App Store"]
+    },
+    {
+      "name": "Sequence",
+      "platform": "iOS, Android",
+      "buyer": "Climber who understands training structure",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "app-store",
+      "last_updated": "2026",
+      "pricing": "Approximately $7/month; 50-workout free trial with no card required",
+      "pricing_model": "freemium subscription",
+      "top_features": [
+        "Supports Tindeq and force gauges through custom metrics, closing the gap the other two leave",
+        "Full periodization structure",
+        "Generous 50-workout trial"
+      ],
+      "top_complaints": [
+        "Higher learning curve; assumes the user understands periodization and training blocks",
+        "Not designed for beginners"
+      ],
+      "complaint_themes": ["complexity", "assumes prior knowledge"],
+      "distribution_channels_observed": ["App Store", "comparison content"]
+    },
+    {
+      "name": "General habit trackers (Streaks, Productive, Habitify)",
+      "platform": "iOS, Android",
+      "buyer": "Anyone building a habit",
+      "estimated_users": "large, category-wide",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "app-store",
+      "last_updated": "2026",
+      "pricing": "$2.99-9.99/month; freemium accounts for 52.3% of category revenue",
+      "pricing_model": "freemium and paid-only",
+      "top_features": [
+        "Mature streak, reminder and analytics mechanics refined over years",
+        "Polished interfaces and platform integrations",
+        "Flexible enough to track any commitment including climbing sessions"
+      ],
+      "top_complaints": [
+        "Sport-agnostic: no understanding of training load, so they cannot warn about consecutive finger-intensive days",
+        "Generic presets require the user to design their own regime"
+      ],
+      "complaint_themes": ["no domain knowledge", "self-directed setup"],
+      "distribution_channels_observed": ["App Store category ranking", "productivity media", "ASO"]
+    }
+  ],
+  "indirect_competitors": [
+    {
+      "name": "KAYA and Stökt",
+      "approach": "Session logging, spray-wall beta sharing and social discovery rather than coaching",
+      "why_users_choose_it": "Climbers already have them open at the wall. They occupy the logging slot in the $20-25 monthly budget commentary describes, competing for the same wallet without competing on training."
+    },
+    {
+      "name": "A coach, or a training partner",
+      "approach": "Human accountability and programming",
+      "why_users_choose_it": "Solves consistency far better than software because a person notices when you do not turn up. This is the strongest indirect competitor to a habit product specifically."
+    }
+  ],
+  "substitutes": [
+    {
+      "description": "A note in the phone's default notes app, or a spreadsheet",
+      "cost": "$0",
+      "friction_level": "low",
+      "switching_cost_to_app": "Low effort to leave, but adequate for most. This is the honest baseline a $5/month subscription must beat."
+    },
+    {
+      "description": "Doing nothing structured and simply climbing more",
+      "cost": "$0",
+      "friction_level": "low",
+      "switching_cost_to_app": "The dominant behaviour among recreational climbers, and it produces improvement for most of them until a genuine plateau."
+    },
+    {
+      "description": "Crimpd's free tier",
+      "cost": "$0",
+      "friction_level": "low",
+      "switching_cost_to_app": "The most dangerous substitute: free, credible, over 100 structured workouts, from the brand the sport trusts. Any paid entrant must be visibly better than this on day one."
+    }
+  ],
+  "emerging_threats": [
+    {
+      "name": "Crimpd adding periodization and scheduling",
+      "stage": "announced",
+      "funded": true,
+      "threat_level": "high",
+      "notes": "Its two most-cited gaps are automated periodization and manual scheduling, which is precisely the territory a habit-and-consistency product would occupy. Closing them is an obvious roadmap item for Lattice."
+    },
+    {
+      "name": "Sequence broadening down-market",
+      "stage": "launched",
+      "funded": false,
+      "threat_level": "medium",
+      "notes": "Already has periodization and force-gauge support at $7/month. Its only documented weakness is a learning curve, and simplifying is easier than building the engine."
+    }
+  ],
+  "review_mining_summary": {
+    "most_common_complaint_across_competitors": "Missing hardware integration and missing automated periodization. Crimpd lacks both; Lattice lacks force-gauge logging and has only partial mesocycle structure; Sequence is the only one that covers them and is criticised for complexity instead.",
+    "strongest_gap_signal": "Time-realistic plans. The sharpest complaint about the premium product is that it prescribes 90-minute to 2.5-hour sessions that do not fit around a job. That is the closest thing to a behavioural complaint in the mined set, and it is a plan-design problem rather than a tracking problem.",
+    "competitors_mined": 3
+  },
+  "review_sources_used": [
+    "Apple App Store review page for Crimpd",
+    "Crimpd vs Lattice vs Sequence comparison (Fitness AI Trends), which aggregates user complaints per app",
+    "Climbing.com and SENDO best-climbing-apps roundups"
+  ],
+  "review_mining_note": "Exact star ratings and review counts were not obtainable from the sources reached, so app_store_rating and review_count are left null rather than estimated. Complaint themes are drawn from named review content and from a comparison article that quotes user complaints directly, which is sufficient for gap analysis but leaves incumbent scale unmeasured. This is recorded in missing inputs and is the main reason competition confidence is not higher.",
+  "positioning_gaps": [
+    {
+      "gap_type": "feature",
+      "description": "Training-load awareness across habits: warning a climber that fingers have had three hard days in a row. No competitor combines habit tracking with climbing domain knowledge.",
+      "defensibility": "low",
+      "evidence": "General habit trackers are sport-agnostic by design; Crimpd and Lattice track sessions but do not model habit adherence. The combination is genuinely absent. Defensibility is low because it is a feature, not a philosophy, and Crimpd could add it."
+    },
+    {
+      "gap_type": "experience",
+      "description": "Time-realistic, short sessions that fit a working week, against LatticePlan's documented 90-minute to 2.5-hour prescriptions.",
+      "defensibility": "medium",
+      "evidence": "Directly quoted user complaint about Lattice: sets completely unreasonable plans, 2.5 hour workouts, basically never less than 90 minutes. This is the strongest evidenced gap found, and it belongs to a different product than the one proposed."
+    },
+    {
+      "gap_type": "price",
+      "description": "Sitting below Sequence at $7 and above free.",
+      "defensibility": "low",
+      "evidence": "There is no room. Crimpd occupies free with 100+ workouts and $4.99 for premium. A price gap does not exist between free and $4.99."
+    }
+  ],
+  "saturation_score": {
+    "direct_competitor_count": 3,
+    "incumbent_dominance": 2,
+    "funding_in_space": 2,
+    "keyword_saturation": 3,
+    "content_saturation": 3,
+    "total": 13
+  },
+  "saturation_rationale": "High at 13 of 15. Direct competitor count is high: three dedicated climbing training apps plus a mature general habit-tracker category plus two logging apps competing for the same wallet. Incumbent dominance is scored medium rather than high only because exact review counts could not be obtained; qualitatively Crimpd and Lattice dominate every 2026 recommendation list, so this factor may be understated. Funding is medium: Lattice is an established coaching business rather than a venture-funded app company, and no heavy outside funding was found in the category. Keyword saturation is high, with top results for climbing training app queries occupied by solid, maintained products. Content saturation is high, with at least six best-climbing-apps roundups published for 2026 alone.",
+  "market_saturation": "high",
+  "differentiation_opportunities": [
+    "Training-load awareness applied to habits, the one genuinely absent combination, though it is a feature rather than a defensible position",
+    "Short, time-realistic sessions for climbers with jobs, which is the best-evidenced complaint in the category and argues for a different product than the one proposed",
+    "Simplicity against Sequence's learning curve, which is a crowded way to compete"
+  ],
+  "market_insights_sources_used": ["habit-tracking-climbing-apps-2026-09.md"],
+  "sources": [
+    { "url": "https://fitnessaitrends.com/blog/crimpd-vs-lattice-vs-sequence-climbing-training-app/", "title": "Crimpd vs Lattice vs Sequence 2026: Honest Verdict, Fitness AI Trends", "accessed": "2026-09-06", "used_for": "Pricing for all three apps, free tier scope, per-app user complaints, feature gap table" },
+    { "url": "https://apps.apple.com/us/app/crimpd/id1252333138?see-all=reviews", "title": "Crimpd ratings and reviews, Apple App Store", "accessed": "2026-09-06", "used_for": "In-workout logging complaints, UI friction, positive review themes" },
+    { "url": "https://www.climbing.com/gear/6-best-climbing-apps/", "title": "The Best Climbing Apps, Climbing.com", "accessed": "2026-09-06", "used_for": "Category landscape and which apps are recommended" },
+    { "url": "https://getsendo.app/blog/which-climbing-app-should-you-use-2026", "title": "Best climbing apps in 2026, SENDO", "accessed": "2026-09-06", "used_for": "KAYA and Stokt positioning as social rather than coaching tools; category budget commentary" },
+    { "url": "https://straitsresearch.com/report/habit-tracking-apps-market", "title": "Habit Tracking Apps Market Size and Growth, Straits Research", "accessed": "2026-09-06", "used_for": "Freemium share of category revenue, paid-only price band for general habit trackers" }
+  ]
+}

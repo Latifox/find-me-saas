@@ -1,0 +1,266 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "mapped_at": "2026-09-06",
+  "lane": "b2b",
+  "headline_finding": "The down-market price gap this idea was built on is real, but the position inside it is already occupied by two purpose-built multi-tenant vendors, and Microsoft has begun bundling the capability into the SKU most SMBs already own.",
+  "direct_competitors": [
+    {
+      "name": "ShadowLock",
+      "platform": "web, multi-tenant",
+      "buyer": "MSP, selling to SMB clients",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "none",
+      "last_updated": "2026 (actively publishing)",
+      "pricing": "Per device per month, rate card on request",
+      "pricing_model": "per-device monthly, MSP channel",
+      "top_features": [
+        "True multi-tenant architecture described as multi-tenant from the data model up rather than a retrofitted partner view",
+        "Policy cascading across client organisations",
+        "MSP-oriented AI governance reporting"
+      ],
+      "top_complaints": [
+        "No public rate card, so an MSP cannot self-qualify the economics before a sales conversation",
+        "No published review corpus or customer count, so maturity is unverifiable"
+      ],
+      "complaint_themes": ["pricing opacity", "unproven maturity"],
+      "distribution_channels_observed": ["MSP-targeted content marketing", "comparison and listicle SEO"]
+    },
+    {
+      "name": "Lavawall",
+      "platform": "web, MSP platform",
+      "buyer": "MSP, selling to SMB clients",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "none",
+      "last_updated": "2026",
+      "pricing": "Published MSP partner pricing model with volume tiers; bundled platform, month-to-month or annual with two months free",
+      "pricing_model": "MSP partner volume tiers, bundled platform",
+      "top_features": [
+        "Curated 1,130-item SaaS catalogue with shadow-AI detection",
+        "Bundled with CRM and helpdesk for MSPs, avoiding a separate invoice",
+        "Explicitly positioned against enterprise per-user CASB pricing"
+      ],
+      "top_complaints": [
+        "Discovery is one feature inside a broader platform, so depth is unclear",
+        "Bundling means an MSP must adopt the wider platform to get the capability"
+      ],
+      "complaint_themes": ["breadth over depth", "platform lock-in"],
+      "distribution_channels_observed": ["MSP comparison content", "published partner pricing page"]
+    },
+    {
+      "name": "Nudge Security",
+      "platform": "web, browser extension",
+      "buyer": "In-house security team, mid-market and up",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "g2",
+      "last_updated": "2026-05 (added browser-based discovery for shadow AI agents)",
+      "pricing": "$5 per user per month for 150-2,500 users; $750 per month flat below 150 users",
+      "pricing_model": "per-user monthly with a flat floor",
+      "top_features": [
+        "SaaS and shadow-AI inventory built from broad SaaS feeds",
+        "Browser-based discovery that passively observes AI agent context",
+        "Established category presence and comparison content"
+      ],
+      "top_complaints": [
+        "The $750/month floor makes a 60-seat client uneconomic, roughly $12.50 per seat",
+        "Built for an organisation governing itself, not for a partner governing many client tenants"
+      ],
+      "complaint_themes": ["price floor excludes true SMB", "single-tenant assumption"],
+      "distribution_channels_observed": ["content marketing", "comparison pages", "security press"]
+    },
+    {
+      "name": "Microsoft Purview",
+      "platform": "Microsoft 365",
+      "buyer": "The SMB itself, via an existing licence",
+      "estimated_users": "bundled into M365 Business Premium",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "none",
+      "last_updated": "2026",
+      "pricing": "Approximately $22 per user per month equivalent, included in M365 Business Premium as of 2026",
+      "pricing_model": "bundled into an existing subscription",
+      "top_features": [
+        "Data governance and AI usage visibility inside the Microsoft tenant",
+        "No new vendor, no new invoice, no new security review",
+        "Already covered by a licence many SMBs hold"
+      ],
+      "top_complaints": [
+        "Weak coverage outside the Microsoft estate",
+        "Configuration burden that a small IT team may never complete"
+      ],
+      "complaint_themes": ["Microsoft-only coverage", "setup complexity"],
+      "distribution_channels_observed": ["licence bundling", "Microsoft partner channel"]
+    },
+    {
+      "name": "Cynomi",
+      "platform": "web, multi-tenant vCISO platform",
+      "buyer": "MSP and MSSP",
+      "estimated_users": "not disclosed",
+      "app_store_rating": null,
+      "review_count": 0,
+      "review_source": "none",
+      "last_updated": "2026 (publishing AI-governance guidance for MSPs)",
+      "pricing": "Low five figures per year for a small MSP team licence, scaling with client count",
+      "pricing_model": "per-MSP licence scaling with clients",
+      "top_features": [
+        "Already multi-tenant across client portfolios",
+        "Generates client-facing security deliverables, the exact artefact shape this idea sells",
+        "Established MSP partner relationships and enablement"
+      ],
+      "top_complaints": [
+        "Priced above a small MSP's tolerance for a single capability",
+        "Broad vCISO scope rather than deep AI discovery"
+      ],
+      "complaint_themes": ["price", "breadth over depth"],
+      "distribution_channels_observed": ["MSP partner programme", "trade press", "content marketing"]
+    },
+    {
+      "name": "Harmonic Security",
+      "platform": "browser extension, data-in-motion",
+      "buyer": "In-house security team",
+      "estimated_users": "not disclosed",
+      "app_store_rating": 4.8,
+      "review_count": 2,
+      "review_source": "g2",
+      "last_updated": "2026",
+      "pricing": "Not published",
+      "pricing_model": "quote-based",
+      "top_features": [
+        "Prompt-layer inspection of what employees type into AI tools",
+        "Real-time flagging of sensitive prompts and file uploads"
+      ],
+      "top_complaints": [
+        "Two G2 reviews in total, so there is effectively no independent evidence of outcomes",
+        "No published pricing"
+      ],
+      "complaint_themes": ["no social proof", "pricing opacity"],
+      "distribution_channels_observed": ["security press", "G2 category listing"]
+    }
+  ],
+  "indirect_competitors": [
+    {
+      "name": "MSP-channel security platforms (Barracuda SKOUT, Keeper Security, ThreatLocker, Huntress)",
+      "approach": "Add shadow-AI visibility to an existing MSP-sold security platform rather than selling it standalone",
+      "why_users_choose_it": "The MSP already resells them, already trusts them, and already has a billing and support relationship. All four are publishing shadow-AI or AI-governance content to their MSP base during 2026."
+    },
+    {
+      "name": "Enterprise DLP and posture vendors (Cyberhaven, Obsidian, Reco, Nightfall)",
+      "approach": "Deep enterprise data-loss and SaaS posture management",
+      "why_users_choose_it": "Chosen by organisations with a security team and a five-figure budget; they define the ceiling of the category rather than compete for SMB spend."
+    }
+  ],
+  "substitutes": [
+    {
+      "description": "An acceptable-use policy document plus employee attestation, produced once by the MSP in a word processor",
+      "cost": "A few hours of MSP time per client",
+      "friction_level": "low",
+      "switching_cost_to_app": "Low in effort but the MSP must believe a tool answers the audit question better than the document does. For many audit questionnaires the document is literally sufficient."
+    },
+    {
+      "description": "Doing nothing until an audit, insurance renewal or breach forces the conversation",
+      "cost": "$0 until the trigger fires",
+      "friction_level": "low",
+      "switching_cost_to_app": "This is the dominant substitute. Only 18% of organisations have a formal AI security policy, which means 82% are currently choosing it."
+    },
+    {
+      "description": "Existing Microsoft licence: turning on Purview features already paid for inside M365 Business Premium",
+      "cost": "$0 marginal on that SKU, plus configuration time",
+      "friction_level": "medium",
+      "switching_cost_to_app": "Very high as a barrier. Persuading an MSP to add a paid invoice for something the client's existing licence nominally covers requires proving the gap, client by client."
+    }
+  ],
+  "emerging_threats": [
+    {
+      "name": "Microsoft Purview bundling into M365 Business Premium",
+      "stage": "launched",
+      "funded": true,
+      "threat_level": "high",
+      "notes": "The classic way an SMB security category is closed: a good-enough capability arrives inside a subscription the buyer already pays for. Confirmed in the 2026 SMB buyer guide at roughly $22 per user per month equivalent."
+    },
+    {
+      "name": "Cynomi adding an AI governance module",
+      "stage": "announced",
+      "funded": true,
+      "threat_level": "high",
+      "notes": "Already multi-tenant, already selling per-client deliverable generation to MSPs, and already publishing on how MSPs should govern client AI adoption. Adding a module to existing multi-tenancy and an existing partner base is far easier than building both."
+    },
+    {
+      "name": "Barracuda, Keeper and ThreatLocker extending existing MSP platforms",
+      "stage": "announced",
+      "funded": true,
+      "threat_level": "high",
+      "notes": "All publishing shadow-AI content to their MSP bases in 2026. Distribution already exists; the feature is the only missing piece."
+    }
+  ],
+  "review_mining_summary": {
+    "most_common_complaint_across_competitors": "Pricing opacity and single-tenant assumptions: the two vendors with published SMB-accessible pricing are Nudge (whose $750/month floor prices out a 60-seat client) and Microsoft (bundled), while the MSP-native vendors publish no rate card at all.",
+    "strongest_gap_signal": "Every MSP-facing comparison article argues the same thing, that per-user enterprise CASB pricing does not fit MSP economics and per-device monthly does. That is a real and repeated buyer complaint, but it is a complaint two competitors have already built their pricing around.",
+    "competitors_mined": 6
+  },
+  "review_sources_used": [
+    "G2 AI Security Solutions category listing",
+    "G2 Harmonic Security product page (4.8 stars from 2 reviews)",
+    "Vendor pricing pages and published rate cards (Nudge, Lavawall, Microsoft via SMB buyer guide)",
+    "MSP-facing comparison content (Lavawall, ShadowLock, Rhindon Cyber, Torii)",
+    "MSP trade press (ChannelE2E, Barracuda, Keeper, Cynomi)"
+  ],
+  "review_mining_note": "There is no meaningful independent review corpus for this category. The leading pure-play, Harmonic Security, carries two G2 reviews in total. Per the competitor-mapper B2B lane, pricing-page teardown and comparison content were substituted for review mining. The absence of reviews is itself the finding: no vendor here has demonstrated a repeatable, referenceable buyer.",
+  "positioning_gaps": [
+    {
+      "gap_type": "price",
+      "description": "Clients under roughly 150 seats sit below Nudge's $750/month floor and far below the $25,000-40,000 enterprise contracts, so a per-device price of a few dollars is genuinely unoccupied by the enterprise vendors.",
+      "defensibility": "low",
+      "evidence": "Nudge $750/month floor under 150 users; Cyberhaven ~$40,000/yr with a $36,444 median contract; Obsidian ~$30,000/yr; Reco ~$25,000/yr. But ShadowLock already prices per device per month for MSPs and Lavawall publishes MSP volume tiers, so the gap is priced by others already. Price gaps are explicitly the least defensible gap type."
+    },
+    {
+      "gap_type": "audience",
+      "description": "SMBs on non-Microsoft stacks (Google Workspace and mixed environments) are not reached by the Purview bundle and are too small for Nudge.",
+      "defensibility": "medium",
+      "evidence": "Purview coverage is weak outside the Microsoft estate per the vendor comparison content; Nudge's floor excludes sub-150-seat clients. This is the narrowest genuinely open segment found, and it is a fraction of a fraction of the MSP client base."
+    },
+    {
+      "gap_type": "trust",
+      "description": "Security tooling is a trust sale and the founder has SOC-analyst credibility, which most vendors in this space cannot claim personally.",
+      "defensibility": "low",
+      "evidence": "Undermined by the channel's actual gate: published MSP vendor-selection criteria require SOC 2 Type II, ISO 27001 and current penetration-test reports from the vendor company, not credibility from the founder. Personal trust does not substitute for institutional attestation in this channel."
+    }
+  ],
+  "saturation_score": {
+    "direct_competitor_count": 3,
+    "incumbent_dominance": 3,
+    "funding_in_space": 3,
+    "keyword_saturation": 3,
+    "content_saturation": 3,
+    "total": 15
+  },
+  "saturation_rationale": "Maximum on every B2B factor. Direct competitor count: at least six products sell shadow-AI discovery to this buyer (ShadowLock, Lavawall, Nudge, Purview, Cynomi, Harmonic), above the 7+ threshold once MSP-platform incumbents are included. Incumbent dominance: Microsoft bundles the capability into M365 Business Premium, a SKU with a customer base orders of magnitude beyond the 5,000-customer threshold. Funding: multiple funded startups (Nudge, Cyberhaven, Obsidian, Reco, Harmonic, Cynomi) plus a platform vendor shipping it natively, which the rubric calls out explicitly as the maximum condition. Search and directory saturation: MSP-specific comparison pages already exist from Lavawall, ShadowLock, Rhindon Cyber, Torii, MintMCP and Netwrix. Content saturation: Barracuda, Keeper, Cynomi and ChannelE2E are all publishing to this exact buyer. This is a 15 out of 15, the first maximum recorded in this project.",
+  "market_saturation": "high",
+  "differentiation_opportunities": [
+    "Non-Microsoft SMB estates under 150 seats, the one segment neither the Purview bundle nor Nudge's floor reaches. Narrow, and it requires an MSP whose client base skews away from Microsoft, which is uncommon.",
+    "Per-device pricing published openly, against a category where ShadowLock and Cynomi both withhold rate cards. A real but easily copied differentiator.",
+    "Depth of AI-specific discovery versus Lavawall's breadth-first SaaS catalogue approach. Defensible only until a better-funded competitor decides depth matters."
+  ],
+  "market_insights_sources_used": [
+    "shadow-ai-msp-b2b-communities-2026-09.md",
+    "ai-agent-ops-security-web-search-2026-08.md"
+  ],
+  "sources": [
+    { "url": "https://raic.rhindoncyber.com/resources/shadow-ai/smb-buyerguide-2026", "title": "Best Shadow AI Detection Tools 2026 - SMB Buyer's Guide, Rhindon Cyber", "accessed": "2026-09-06", "used_for": "Enterprise pricing floors (Cyberhaven, Obsidian, Reco), Nudge pricing, Microsoft Purview bundling" },
+    { "url": "https://shadowlock.io/blog/best-ai-governance-tools-for-msps/", "title": "Best AI Governance Tools for MSPs 2026, ShadowLock", "accessed": "2026-09-06", "used_for": "ShadowLock positioning, per-device pricing model, multi-tenancy claims" },
+    { "url": "https://lavawall.com/best-saas-discovery-shadow-ai-detection.php", "title": "Best SaaS discovery and shadow-AI detection tools for MSPs 2026, Lavawall", "accessed": "2026-09-06", "used_for": "Lavawall MSP partner pricing, SaaS catalogue size, MSP pricing-model argument" },
+    { "url": "https://g2.com/products/harmonic-security/reviews", "title": "Harmonic Security reviews, G2", "accessed": "2026-09-06", "used_for": "Review count of 2 as evidence of category immaturity" },
+    { "url": "https://www.g2.com/categories/ai-security-solutions", "title": "AI Security Solutions category, G2", "accessed": "2026-09-06", "used_for": "Category review corpus assessment" },
+    { "url": "https://www.helpnetsecurity.com/2026/05/28/nudge-browser-based-agentic-ai-security/", "title": "Nudge Security adds browser-based discovery for shadow AI agents, Help Net Security", "accessed": "2026-09-06", "used_for": "Nudge feature velocity and browser-based discovery approach" },
+    { "url": "https://cynomi.com/blog/how-msps-should-govern-client-ai-adoption/", "title": "How MSPs Should Govern Client AI Adoption, Cynomi", "accessed": "2026-09-06", "used_for": "Cynomi moving into AI governance for its existing MSP base" },
+    { "url": "https://blog.barracuda.com/2026/06/04/shadow-ai-security-tips", "title": "What is shadow AI? AI security tips for SMBs and MSP, Barracuda", "accessed": "2026-09-06", "used_for": "MSP-channel incumbent publishing to the same buyer" },
+    { "url": "https://www.keepersecurity.com/blog/2026/09/02/shadow-ai-what-clients-arent-telling-their-msps/", "title": "Shadow AI: What Clients Aren't Telling Their MSPs, Keeper Security", "accessed": "2026-09-06", "used_for": "MSP-channel incumbent content, September 2026 recency" },
+    { "url": "https://www.zomentum.com/blog/how-to-choose-vendor-partners-for-msp-business", "title": "How to Choose Vendor Partners for MSP Business, Zomentum", "accessed": "2026-09-06", "used_for": "MSP vendor selection criteria and partner programme expectations" },
+    { "url": "https://www.magentrix.com/blog/cybersecurity-partner-programs-complete-guide", "title": "How Cybersecurity Vendors Build Partner Programs 2026, Magentrix", "accessed": "2026-09-06", "used_for": "SOC 2 Type II, ISO 27001 and pen-test requirements for security partner programmes" },
+    { "url": "https://www.toriihq.com/articles/five-shadow-ai-discovery-tools", "title": "5 Shadow AI Discovery Tools for 2026, Torii", "accessed": "2026-09-06", "used_for": "Category vendor landscape and comparison-content saturation" }
+  ]
+}

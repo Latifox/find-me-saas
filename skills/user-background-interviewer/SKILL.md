@@ -3,7 +3,7 @@ name: user-background-interviewer
 description: Conducts a deep background interview to understand what types of app ideas this specific user is most likely to succeed with based on their domain knowledge, networks, and skills.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/user_profile.md -->
+<!-- version: 0.3.0 | outputs: memory/user_profile.md -->
 
 # Skill: user-background-interviewer
 
@@ -15,6 +15,21 @@ Understand what types of ideas this specific user is most likely to succeed with
 
 - Fresh conversation (no prior context needed)
 - Optional: existing `memory/user_profile.md` to extend
+
+## First-Run Onboarding
+
+This skill is the front door of FindMeSaaS. It runs **before any workflow** when `memory/user_profile.md` does not exist, not only before idea generation. A user who opens with "validate my idea" or "tell me about this market" still gets onboarded first, because every downstream skill reads this profile: founder-market fit is scored from it, distribution and CAC adjust their channel recommendations to the tier and budget, and the decision memo calibrates its kill criteria to the stated risk tolerance.
+
+Four things must come out of onboarding, and the system worked badly without them:
+
+| Captured | Why it matters | What happened when it was missing |
+|---|---|---|
+| **Technical level** | Filters ideas to what the user can build | Mandatory in every path already |
+| **Domain, audience, inner circle** | Founder-market fit and warm-channel scoring | Ideas were generated with no edge filter |
+| **Constraints** — hours per week, monthly budget, risk tolerance | Budget tier gates paid channels; hours decide whether a slow channel can ramp; risk tolerance sets how fast kill criteria fire | Four decision memos in this repository state they could not calibrate kill criteria because these were unknown |
+| **Target buyer** | Sets `preferred_business_model`, which selects the B2C or B2B rubric lane in eight skills | The lane had to be inferred or asked mid-workflow |
+
+If a profile already exists, go to Step 0 instead and offer to reuse, update or extend it.
 
 ## Process
 
@@ -47,15 +62,15 @@ Before showing the opening message, check if `memory/user_profile.md` already ex
 
 Before asking the first question, say exactly this:
 
-> I'm going to ask you **10 questions** to understand your background, skills, and interests. This helps me find app ideas that genuinely fit you — not generic ideas, but ones where you have a real edge.
+> Before we start, I want to know who I'm working with. Everything downstream depends on it — which ideas I surface, which channels I recommend, and how fast I tell you to walk away from something.
 >
-> Answer as freely as you'd like. There are no right or wrong answers.
+> **11 questions, about 5 minutes.** Answer as freely as you like; there are no wrong answers, and you can skip any single question.
 >
-> **Not sure where to start, or prefer not to answer questions?** No problem — pick one:
+> Prefer something shorter? Pick one:
 >
-> - **"Browse topics"** — I'll show you real product domains people pay for. Pick 2–3 that interest you, and I'll generate ideas around those.
-> - **"Short version"** — Just 4 quick questions instead of 10.
-> - **"Skip"** — Jump straight to idea generation with generic recommendations.
+> - **"Short version"** — 5 questions, about 2 minutes. Covers the essentials.
+> - **"Browse topics"** — about 1 minute. I show you 20 product domains people actually pay for, you pick 2–3, and I work from your interests instead of your background.
+> - **"Skip"** — 15 seconds. One mandatory question, then generic recommendations. You can always come back and say "run the interview".
 
 **Routing:**
 - User says "browse", "show me topics", "browse topics", "I have no idea", or similar → go to **Browse Path** below.
@@ -229,16 +244,19 @@ Wait for their answer. If they don't pick one of the four levels, map their resp
 
 The `selected_interest_domains` field is used by the orchestrator to guide `trend-analysis` (which niches to research) and `trend-to-product-mapper` (filter ideas to these domains). This replaces domain-fit scoring — instead of matching ideas to expertise, the system matches ideas to stated interest.
 
-### Fast Path (4 questions)
+### Fast Path (5 questions)
 
-Ask only these four questions (numbered [1/4] through [4/4]):
+Ask only these five questions (numbered [1/5] through [5/5]):
 
-1. **[1/4]** — "What's your technical skill level? (no-code / beginner / intermediate / expert) And what domain or industry do you know best?"
-2. **[2/4]** — "Do you have any existing audience, community, or content presence online? If yes, what topic and roughly how large?"
-3. **[3/4]** — "What do your close friends or family do for work? Would any of them test an app or give you feedback regularly?"
-4. **[4/4]** — "What are your constraints? Hours per week, monthly budget, and is this your main focus or a side project?"
+1. **[1/5]** — "What's your technical skill level? (no-code / beginner / intermediate / expert) And what domain or industry do you know best?"
+2. **[2/5]** — "Do you have any existing audience, community, or content presence online? If yes, what topic and roughly how large?"
+3. **[3/5]** — "What do your close friends or family do for work? Would any of them test a product or give you feedback regularly?"
+4. **[4/5]** — "Three constraints, in one answer: roughly how many hours a week can you give this, what monthly budget for tools and ads, and how much risk are you comfortable with — low (needs to work within a few months), medium, or high (can experiment for a year)?"
+5. **[5/5]** — "Who do you want to sell to? Consumers paying with their own card, individual professionals and freelancers, small and mid-sized companies, agencies or resellers who serve their own clients, or not sure yet?"
 
-Question [1/4] covers the mandatory technical ability question. If the user's answer to [1/4] only addresses domain and skips technical level, follow up: "Got it — and what's your technical level? (no-code / beginner / intermediate / expert)"
+Question [1/5] covers the mandatory technical ability question. If the answer only addresses domain and skips technical level, follow up: "Got it — and what's your technical level? (no-code / beginner / intermediate / expert)"
+
+Questions [4/5] and [5/5] are the ones that were missing before and they are worth insisting on gently. If the user gives a partial answer to [4/5], ask once for the missing part. If they decline, write `unknown` for that field and add it to `profile_gaps`; downstream skills treat unknown budget as bootstrap and unknown risk as low, and the decision memo will say so.
 
 Apply the same validation rules as the full interview. Write the output using the same schema, filling in what's available and noting gaps.
 
@@ -322,15 +340,34 @@ Ask each question one at a time. Show the counter format **[X/10]** at the start
 
 *Covers: content creation and distribution advantages*
 
-**[10/10] — Constraints**
+**[10/11] — Constraints**
 
-> What are your real constraints for building an app? Give me your best estimate for:
-> - Available hours per week
-> - Monthly budget for tools, ads, or subscriptions (in USD)
-> - Is this a main focus or a side project?
-> - How much risk are you comfortable with: low (I need it to work fast), medium, or high (I can experiment for months)?
+> Three numbers that shape everything I recommend. Best estimates are fine:
+> - **Hours per week** you can realistically give this
+> - **Monthly budget** in USD for tools, ads and subscriptions
+> - **Risk tolerance**: low (I need this to show signal within a few months), medium, or high (I can experiment for a year)
+>
+> And is this your main focus or a side project?
 
 *Covers: budget, time, risk tolerance*
+
+**Do not skip this question or accept a vague answer without one follow-up.** These three fields decide whether paid channels are on the table at all, whether a content strategy has time to ramp, and how quickly the decision memo tells you to stop. Four validations in this repository were completed without them and every one of them flagged that its kill criteria could not be calibrated. If the user genuinely declines, write `unknown` and record it in `profile_gaps`.
+
+---
+
+**[11/11] — Target Buyer**
+
+> Last one. Who do you want to sell to?
+>
+> - **Consumers** paying with their own card
+> - **Individual professionals** — freelancers, creators, solo operators
+> - **Small and mid-sized companies**
+> - **Agencies or resellers** who would serve their own clients with it
+> - **Not sure yet** — that's a fine answer
+
+*Covers: preferred_business_model*
+
+This sets the rubric lane. Consumer and professional answers put pricing, retention and distribution into the B2C lane (app-store discovery, freemium conversion, D30 retention); company and reseller answers put them into the B2B lane (content and community channels, contract value tiers, logo churn). "Not sure yet" is recorded as `unsure` and asked again per idea when a validation starts.
 
 ---
 
@@ -363,11 +400,23 @@ Write to `memory/user_profile.md`:
   "selected_interest_domains": [],
   "technical_level": "",
   "fit_score_by_niche": {},
+  "time_per_week_hours": null,
+  "budget_constraint": "low | medium | high | unknown",
+  "budget_monthly_usd": null,
+  "risk_tolerance": "low | medium | high | unknown",
+  "preferred_business_model": "b2c | prosumer | b2b-smb | b2b2c | unsure",
+  "main_focus_or_side_project": "main | side | unknown",
+  "constraints_captured_at": "YYYY-MM-DD",
+  "profile_gaps": [],
   "interview_summary": "",
   "interview_mode": "full | fast | browse | skipped",
   "all_questions_and_answers": []
 }
 ```
+
+Map the target-buyer answer to `preferred_business_model`: consumers to `b2c`, individual professionals to `prosumer`, small and mid-sized companies to `b2b-smb`, agencies or resellers to `b2b2c`, and anything uncertain to `unsure`. Map budget to `budget_constraint`: under $100 is `low`, $100-500 is `medium`, above $500 is `high`.
+
+In the browse and skip paths, the constraint and target-buyer fields are written as `unknown` and `unsure` and listed in `profile_gaps`. The idea-validation workflow will ask for them at the CAC step, which is the fallback rather than the intended route.
 
 ## Notes
 
@@ -375,3 +424,5 @@ Write to `memory/user_profile.md`:
 - When `interview_mode` = "skipped", downstream skills should treat all profile-dependent adjustments as neutral (no domain fit bonus, no distribution advantage, no tier adjustment).
 - When `interview_mode` = "browse", the `selected_interest_domains` field drives niche selection in trend-analysis and idea filtering in trend-to-product-mapper. The system trades domain-fit precision for user engagement — a user who actively chose "Personal Finance" and "Side Hustles" is more motivated than one assigned those niches by an algorithm.
 - The browse path domains are derived from `memory/extra-context/core-human-desires.md` but reframed as consumer product categories. The underlying desires (survival, status, belonging, etc.) inform why people pay — the domain labels are how users naturally think about what interests them.
+- `preferred_business_model` is a default, not a lock. Each idea carries its own `business_model` in `idea.md`, and a user who said `b2b-smb` may still validate a consumer idea; the per-idea value always wins.
+- Capturing constraints here makes the profile-gap gate in `workflows/idea-validation.md` a fallback rather than the primary route. It stays in place for profiles created through the browse or skip paths.

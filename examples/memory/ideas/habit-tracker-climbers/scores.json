@@ -1,0 +1,137 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "scored_at": "2026-09-06",
+  "scoring_stage": "full-validation",
+  "lane": "b2c",
+  "dimension_scores": {
+    "demand": 42,
+    "competition": 32,
+    "monetization": 22,
+    "distribution": 26,
+    "retention": 42,
+    "founder_market_fit": 30
+  },
+  "dimension_rationale": {
+    "demand": "desire_strength_label is moderate with a rising trend, which places this in the 40-59 band for moderate desire with some signal validation. Scored 42, at the low end, for a specific reason the research surfaced: the assumed pain is not one the audience articulates. Documented complaints about climbing training apps concern force-gauge integration, automated periodization, in-workout grade logging and unrealistic session lengths. Habit consistency appears nowhere. The desire to send harder is genuinely strong, but it is three steps removed from a habit tracker, and no bonus applies for cross-platform resonance (a single platform file) or monetization validation (idea.md records it as false).",
+    "competition": "market_saturation is high with real differentiation opportunities in the category, which maps to 25-49. Scored 32. Saturation totalled 13 of 15: three dedicated climbing training apps, a mature general habit-tracker category, six best-of roundups published for 2026, and head keywords held by well-maintained products. The +10 adjustment for competitor complaints revealing an unserved pain does not apply, because the unserved pains that do exist (force gauges, periodization, time-realistic plans) belong to a different product than this one. No FAANG-class penalty: no platform vendor owns climbing apps. Held above the bottom band because a genuine feature gap exists in training-load-aware habit tracking, even though it is low defensibility.",
+    "monetization": "viability_verdict is not-viable, which maps directly to the 10-34 band. Scored 22. Freemium is compulsory because the direct competitor gives away a credible product, conversion is placed at 2.5% against a category typical of 2-5%, and $4.99 at 2.5% produces a blended install value of $0.50. No acquisition channel returns more than 33 cents on the dollar against that. No +10 adjustment, since the conversion estimate is below 5%, and no +5, since market_size_verdict is niche rather than large. This is the killer dimension.",
+    "distribution": "distribution_verdict is weak, mapping to 15-39. Scored 26, mid-band. Channels exist and function; they simply lose money on every install. The k-factor of 0.064 is non-viral because the product creates no shareable artefact, ASO scores a medium 9 of 15 but only long-tail terms are winnable, and creator fit is low despite climbing's strong creator ecosystem because a habit tracker cannot be demonstrated in a short clip and $4.99 funds no commission. No founder-edge adjustment: the profile shows no audience, no climbing presence and no consumer distribution experience.",
+    "retention": "retention_verdict is moderate with D30 at 8%, mapping to 40-59. Scored 42, near the bottom. A real external trigger exists in the training session and the deload-aware streak is a genuine improvement on generic habit apps, but the cadence is two to four times a week rather than daily, which weakens the streak mechanic, and two churn factors are high severity: a free credible substitute one search away, and the structural problem that a habit product succeeding teaches the user they no longer need it.",
+    "founder_market_fit": "Scored 30, at the top of the 0-29 band's boundary and effectively the floor of the 30-49 band. Technical ability is expert and the product is well within build capacity, which is why this is not lower. Everything else is absent: no climbing domain knowledge, no audience in the sport, no consumer app experience, and a profile whose recorded niche fit scores cover AI agent security, agency tooling and GEO territories with nothing touching consumer fitness. In a community that weights practitioner credibility heavily, an outsider building a training product starts at a disadvantage that no amount of engineering skill offsets."
+  },
+  "weights_applied": {
+    "demand": 0.2,
+    "competition": 0.1,
+    "monetization": 0.2,
+    "distribution": 0.2,
+    "retention": 0.15,
+    "founder_market_fit": 0.15
+  },
+  "floor_penalty": 0.88,
+  "floor_penalty_note": "Monetization at 22 falls below the killer-dimension threshold of 25, applying a multiplicative penalty of 22/25 = 0.88 and costing roughly four points. Appropriate: an idea whose unit economics return 33 cents on the dollar should not be rescued by adequate scores elsewhere.",
+  "base_score": 32.0,
+  "missing_discount": 1.0,
+  "final_score": 28,
+  "verdict": "drop",
+  "verdict_note": "28 sits in the 0-34 drop band. The verdict is unambiguous and rests on arithmetic rather than judgement: a blended install value of 50 cents against a best-case acquisition cost of $1.50 cannot be fixed by better execution, only by changing the price model, and the price model is set by a free competitor with more credibility than a new entrant can assemble.",
+  "score_confidence": "medium",
+  "score_confidence_note": "All six dimensions have source data, which the table would place at high. Downgraded to medium because exact App Store ratings and review counts could not be obtained, so incumbent scale is qualitative rather than measured; because no climbing app publishes conversion or retention data, making both figures category-benchmarked; and because a single platform file backs the analysis rather than the two or more a consumer idea would normally warrant.",
+  "missing_inputs": [
+    "App Store ratings and review counts for Crimpd, Lattice and Sequence, which would settle incumbent dominance",
+    "Observed freemium conversion for a climbing-specific app; the 2.5% estimate drives the entire monetization verdict",
+    "Reddit and community platform research. A search for r/climbharder discussion returned academic literature on hangboard protocols rather than community threads, so the community signal is drawn from app reviews and comparison content instead"
+  ],
+  "sources_checked": 10,
+  "top_strengths": [
+    {
+      "dimension": "demand",
+      "score": 42,
+      "reason": "Both parent markets are growing: more than 6 million US indoor climbing participants with gym count up 4.6% year on year, and habit tracking compounding at 14.2% CAGR toward $6.41 billion by 2034."
+    },
+    {
+      "dimension": "retention",
+      "score": 42,
+      "reason": "A genuine external trigger exists in the two-to-four-times-weekly training session, and the deload-aware streak removes the most common reason climbers abandon generic habit apps."
+    },
+    {
+      "dimension": "competition",
+      "score": 32,
+      "reason": "One genuinely absent combination remains: no product joins habit tracking to climbing training-load knowledge, so nothing today can tell a climber their fingers have had three hard days in a row."
+    }
+  ],
+  "top_weaknesses": [
+    {
+      "dimension": "monetization",
+      "score": 22,
+      "reason": "Freemium at 2.5% conversion on a $4.99 subscription values an install at $0.50, while the cheapest channel costs $1.50, so every acquired install destroys value; even doubling conversion leaves the best channel at 0.66:1."
+    },
+    {
+      "dimension": "distribution",
+      "score": 26,
+      "reason": "k-factor of 0.064 is non-viral because a streak chart is not shareable, head ASO terms are held by Crimpd and Lattice, and a $4.99 price funds no creator commission."
+    },
+    {
+      "dimension": "founder_market_fit",
+      "score": 30,
+      "reason": "No climbing domain knowledge, no audience in the sport and no consumer app experience; the recorded niche fit scores in the profile cover AI security and agency tooling exclusively."
+    }
+  ],
+  "killer_dimensions": [
+    "monetization"
+  ],
+  "riskiest_assumption_test": {
+    "assumption": "Climbers experience habit inconsistency as a problem they would pay to solve, rather than as a background fact of amateur training they accept.",
+    "category": "demand",
+    "criticality": 5,
+    "uncertainty": 5,
+    "rat_score": 25,
+    "rat_selection_note": "Selected over the monetization assumption because it is upstream of it. If climbers do articulate this pain, a different price model might be found; if they do not, no pricing rescues the idea. The competitive research already leans against it: across three apps' documented complaints, every named frustration was technical (force gauges, periodization, session length, in-workout logging) and none was about consistency. The RAT tests whether that absence reflects the research surface or the audience.",
+    "experiment": {
+      "type": "Demand exists - behavioural evidence collection before any build",
+      "description": "Fourteen days, no code. Post in two or three climbing training communities asking a genuine question rather than pitching: what is the single thing that most gets in the way of your training, and what did you try to fix it? Do not mention habits, consistency or an app. Count unprompted mentions of consistency, skipped sessions or falling off a routine, against mentions of not knowing what to train, plateauing, time, and injury. Separately, run a landing page describing the finger-load guard and the weekly balance view with an email capture, and drive roughly 100 targeted visitors to it from the same communities.",
+      "duration": "14 days",
+      "estimated_cost": "$0-30 (landing page hosting only)",
+      "pass_threshold": "Both required. At least 30% of unprompted responses name consistency or adherence as their main obstacle, AND the landing page converts at 10% or better across at least 100 targeted visitors. Below either threshold the premise is unsupported.",
+      "fail_action": "drop. The category research already points at a better-evidenced problem: LatticePlan's sharpest documented complaint is that it prescribes 90-minute to 2.5-hour sessions that do not fit around a job. A product generating genuinely short, adaptive climbing sessions addresses a pain climbers state in their own words, which this one does not."
+    },
+    "all_assumptions_ranked": [
+      {
+        "assumption": "Climbers experience habit inconsistency as a payable problem",
+        "criticality": 5,
+        "uncertainty": 5,
+        "rat_score": 25
+      },
+      {
+        "assumption": "Freemium conversion can exceed 5% against a free credible incumbent",
+        "criticality": 5,
+        "uncertainty": 4,
+        "rat_score": 20
+      },
+      {
+        "assumption": "A new entrant can win App Store visibility against Crimpd and Lattice",
+        "criticality": 4,
+        "uncertainty": 4,
+        "rat_score": 16
+      },
+      {
+        "assumption": "Climbing load intelligence is a felt differentiator rather than a nice idea",
+        "criticality": 4,
+        "uncertainty": 4,
+        "rat_score": 16
+      },
+      {
+        "assumption": "Crimpd does not add scheduling and periodization, its two most-cited gaps",
+        "criticality": 4,
+        "uncertainty": 3,
+        "rat_score": 12
+      },
+      {
+        "assumption": "Users retain past the point where the habit is established",
+        "criticality": 3,
+        "uncertainty": 4,
+        "rat_score": 12
+      }
+    ]
+  },
+  "spec_test_note": "This idea was selected as the B2C control subject for task 3, to exercise the consumer lane of the skill system end to end. It was not generated from the user profile and is not a recommendation. The drop verdict is a valid outcome for that purpose: it demonstrates the B2C rubrics (ASO scoring, creator fit, freemium conversion, D30 retention, consumer capture rates) producing a defensible result on real research."
+}

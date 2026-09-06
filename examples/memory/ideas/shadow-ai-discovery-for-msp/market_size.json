@@ -1,0 +1,83 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "estimated_at": "2026-09-06",
+  "lane": "b2b",
+  "methodology": "icp-count",
+  "estimation_approaches": [
+    {
+      "approach": "icp-count",
+      "tam_estimate": 107460000,
+      "key_assumptions": [
+        "45,000 US MSPs, the midpoint of the 40,000-50,000 range reported for 2026 across two independent industry statistics sources",
+        "Annual contract value of $2,388 from the primary $199/month tier, before per-device overage",
+        "TAM is defined as every US MSP buying the primary tier, which is deliberately unrealistic and exists only as an upper bound",
+        "US only. International MSPs exist in quantity but bring language, data-residency and invoicing complexity that a bootstrapped solo vendor cannot service"
+      ]
+    },
+    {
+      "approach": "competitor-proxy",
+      "tam_estimate": 90000000,
+      "key_assumptions": [
+        "Cross-check only, and weak. No vendor in this category publishes revenue or customer counts, and the leading pure-play carries two G2 reviews in total",
+        "Estimated from the observable shape of the category: a handful of funded startups (Nudge, Harmonic, Cyberhaven, Obsidian, Reco) plus two MSP-native entrants, none of which appears to have reached scale in the SMB-through-MSP segment specifically",
+        "Consistent with the ICP-count figure within 20%, which raises confidence in the order of magnitude but not in the precision"
+      ]
+    }
+  ],
+  "triangulation_confidence": "medium",
+  "triangulation_note": "The two approaches agree within 20%, which the methodology treats as high confidence, but the agreement is partly artificial: the competitor proxy had so little published data that it was anchored on the same MSP population figure. Confidence is recorded as medium rather than high for that reason. The ICP count itself is well sourced; the ACV and the filters are the uncertain parts.",
+  "icp_count": {
+    "value": 4500,
+    "source": "Derived from 40,000-50,000 US MSPs (CloudSecureTech MSP Statistics 2026 and Scoop Market Managed Services Statistics 2026), midpoint 45,000, after three filters",
+    "as_of": "2026",
+    "acv": 2388,
+    "penetration_year_1_pct": 0.3
+  },
+  "tam": {
+    "value": 107460000,
+    "currency": "USD",
+    "period": "annual",
+    "assumptions": [
+      "45,000 US MSPs at $2,388 ACV",
+      "Upper bound only. It assumes universal adoption by a population that includes solo operators with one or two clients who will never buy a standalone security SKU",
+      "Excludes per-device overage revenue, which would raise blended ACV toward $2,700 in a mature cohort"
+    ]
+  },
+  "sam": {
+    "value": 10746000,
+    "filter_criteria": [
+      "Serves SMB clients in roughly the 20-250 seat range and already sells a security service line, not just helpdesk and infrastructure: retains about 50%, leaving 22,500",
+      "Has at least five active clients, excluding solo and part-time operators for whom a $199/month platform floor cannot be amortised: retains about 50%, leaving 11,250",
+      "Not already committed to an MSP security platform that bundles or is positioned to bundle this capability (Huntress, ThreatLocker, Barracuda SKOUT, Keeper, Cynomi): retains about 40%, leaving 4,500",
+      "United States only"
+    ],
+    "sam_to_tam_ratio": 0.1
+  },
+  "som": {
+    "year_1": 33600,
+    "year_3": 324000,
+    "capture_rate_year_1_pct": 0.3,
+    "capture_rate_year_3_pct": 2.0,
+    "growth_multiplier": 1.5,
+    "growth_multiplier_source": "trend_velocity 'rising-fast' in shadow-ai-msp-b2b-communities-2026-09.md maps to a 1.5-2.0x year-3 multiplier; the low end of that band is used because the same file documents Microsoft bundling the capability, which grows the addressable problem while shrinking the addressable spend"
+  },
+  "som_rationale": "Year 1 is set at 0.3%, below the 0.5-3.0% band the category benchmark gives for a vertical or role-specific B2B tool. Going below a published band needs justification and there is a specific one: the benchmark assumes a founder who can reach the buyer, and the channel research found that MSP vendor selection is gated on SOC 2 Type II, ISO 27001, current penetration-test reports and a functioning partner programme. A bootstrapped solo vendor cannot present any of them, so the normal bottom of the band is not available in year one. 0.3% of 4,500 MSPs is roughly 14 customers, which is consistent with what a warm-network-only motion produces. Year 3 at 2.0% assumes the channel qualification problem was solved somehow, which is an assumption the reader should treat as load-bearing.",
+  "market_insights_used": [
+    "shadow-ai-msp-b2b-communities-2026-09.md",
+    "ai-agent-ops-security-web-search-2026-08.md"
+  ],
+  "trend_velocity_observed": "rising-fast",
+  "monetization_evidence_found": true,
+  "reality_checks_triggered": [
+    "None of the five standard checks fired. TAM of $107M is far below the $10B inflation threshold; SAM is 10% of TAM, inside the 10-40% guidance; SOM year 1 of $33,600 is far below the $500K fantasy threshold; monetization evidence exists in quantity; the market is warm rather than cold.",
+    "A sixth observation not covered by the checks: the market is being compressed from above while it grows. Demand rises (68% unauthorised AI use, up from 41% in 2023) while the addressable spend falls as Microsoft bundles discovery into a licence SMBs already hold. A growing problem is not the same as a growing market, and the standard reality checks do not test for that."
+  ],
+  "market_size_verdict": "niche",
+  "market_size_verdict_note": "SOM year 1 of $33,600 lands in the $10K-50K niche band: side-project scale, viable only if build cost is low and another income source exists. At 15 hours a week that is a defensible fit on effort, but it sits awkwardly against a low risk tolerance, because a niche outcome takes as long to reach as a large one and pays less for the wait. Even the year-3 figure of $324,000 assumes the channel problem was solved, and the analysis found no route by which this founder solves it.",
+  "sources": [
+    { "url": "https://www.cloudsecuretech.com/insights/msp-statistics/", "title": "MSP Statistics 2026: Market Size, Growth and Trends, CloudSecureTech", "accessed": "2026-09-06", "used_for": "US MSP population of 40,000-50,000, the ICP count basis" },
+    { "url": "https://scoop.market.us/managed-services-statistics/", "title": "Managed Services Provider Statistics and Facts 2026, Scoop Market", "accessed": "2026-09-06", "used_for": "Second independent source for MSP population and market growth" },
+    { "url": "https://raic.rhindoncyber.com/resources/shadow-ai/smb-buyerguide-2026", "title": "Best Shadow AI Detection Tools 2026 - SMB Buyer's Guide, Rhindon Cyber", "accessed": "2026-09-06", "used_for": "Enterprise contract values used in the competitor proxy, and the Purview bundling that compresses addressable spend" },
+    { "url": "https://www.zomentum.com/blog/how-to-choose-vendor-partners-for-msp-business", "title": "How to Choose Vendor Partners for MSP Business, Zomentum", "accessed": "2026-09-06", "used_for": "MSP vendor selection gates, the justification for a year-1 capture rate below the category band" }
+  ]
+}

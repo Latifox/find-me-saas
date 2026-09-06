@@ -1,0 +1,166 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "modeled_at": "2026-09-06",
+  "lane": "b2b",
+  "competitive_pricing_range": {
+    "min": 0,
+    "max": 12.5,
+    "modal": null,
+    "unit": "USD per seat or device per month, normalised",
+    "note": "The market is bimodal with nothing in the middle, which is why there is no modal price. At the bottom, Microsoft Purview is bundled into M365 Business Premium and costs an SMB nothing marginal on a licence it already holds. At the top, Nudge's $750/month floor works out to $12.50 per seat for a 60-seat client, and the enterprise tier (Cyberhaven ~$40,000/yr, Obsidian ~$30,000/yr, Reco ~$25,000/yr) is off the scale entirely. The MSP-native vendors that sit in the middle, ShadowLock and Lavawall, do not publish rate cards, so the middle of this range is priced by competitors whose numbers cannot be read."
+  },
+  "anchors": [
+    {
+      "product": "Nudge Security",
+      "price": "$5/user/month for 150-2,500 users; $750/month flat below 150 users",
+      "relevance": "The only publicly documented SMB-accessible price in the category, and the ceiling this idea must undercut. At a 60-seat client the flat floor is $12.50 per seat per month, which is what makes the sub-150-seat segment nominally open."
+    },
+    {
+      "product": "Microsoft Purview (M365 Business Premium)",
+      "price": "~$22/user/month equivalent, included in the bundle as of 2026",
+      "relevance": "The most important anchor and the most damaging. For a Microsoft-native SMB the marginal price of adequate discovery is zero, because the capability arrives inside a licence already purchased. Any paid alternative must justify a new invoice against something the client already owns."
+    },
+    {
+      "product": "Control D",
+      "price": "$2 per endpoint per month for SMB",
+      "relevance": "Establishes the per-endpoint price point an MSP is used to reselling for a security utility, and therefore the shape of what a new entrant can charge."
+    },
+    {
+      "product": "DNSFilter MSP plans",
+      "price": "From $150/month",
+      "relevance": "Establishes the monthly platform floor an MSP tolerates for a single security service line."
+    },
+    {
+      "product": "ShadowLock",
+      "price": "Per device per month, rate card on request",
+      "relevance": "Direct competitor using the exact billing unit this idea would use. The withheld rate card means the true competitive price is unknown, which is itself a pricing risk."
+    },
+    {
+      "product": "Cynomi",
+      "price": "Low five figures per year per MSP team licence, scaling with client count",
+      "relevance": "Shows what an MSP already pays for multi-tenant client-facing deliverable generation, and therefore that MSP budget for this shape of product exists at a level well above this idea's target."
+    },
+    {
+      "product": "Cyberhaven / Obsidian / Reco",
+      "price": "~$40,000 / ~$30,000 / ~$25,000 per year",
+      "relevance": "Enterprise ceiling. Confirms large buyers pay heavily for the capability, and that the enterprise vendors cannot follow a per-device price down without destroying their own economics."
+    }
+  ],
+  "van_westendorp": {
+    "too_cheap": 1.0,
+    "cheap_but_acceptable": 2.0,
+    "getting_expensive": 4.0,
+    "too_expensive": 8.0,
+    "unit": "USD per device per month",
+    "methodology_note": "Anchored on the MSP's revealed tolerance for security utilities rather than on the category as a whole, per the B2B lane instruction. Control D at $2/endpoint sets 'cheap but acceptable'. Below $1 a security tool an MSP puts its own brand on reads as unserious, and the margin does not cover the support load a compliance-adjacent product generates. Above $8 a 60-device client costs $480/month, which closes on Nudge's $750 floor from a vendor with no brand, no reviews and no SOC 2 attestation, so the comparison stops being favourable."
+  },
+  "desire_premium_multiplier": 1.2,
+  "desire_premium_rationale": "Status is the primary driver, which normally carries a 1.5-2.0x premium, but two things hold it down. The desire label is moderate rather than strong, and the status being purchased is derived: the MSP wants to look prepared for a question its client has not necessarily asked yet. More importantly, a premium cannot be charged over a substitute that is free at the margin. With Purview bundled into the client's existing licence, the premium available is the difference between adequate-and-included and better-and-invoiced, which is small. Applied at 1.2x to the $2 baseline to reach a $2.40 floor, rounded into the tier structure below.",
+  "recommended_pricing_model": "Per-device monthly with a platform floor, sold to the MSP and rebilled to its clients",
+  "pricing_model_rationale": "Copy the billing rail the buyer already accepts, per the B2B lane. Every MSP-facing comparison article makes the same argument, that per-user enterprise CASB pricing does not fit MSP economics and per-device monthly does, and both ShadowLock and Control D price that way. Per-user is wrong here because a 60-person company with laptops and phones produces strange economics, and because the MSP's own resale is per endpoint. A free tier is the wrong instinct for the opposite reason it was wrong for enterprise tools: the free competitor is Microsoft, and no free tier of a startup can out-free a capability bundled into a licence the client already pays for. Compete on depth and multi-tenancy, not on being cheaper than free.",
+  "pricing_models_considered": [
+    {
+      "model": "Per-device monthly with a platform floor",
+      "fit_rationale": "Matches the revealed MSP billing unit, aligns cost with the MSP's own resale, and scales with client growth without renegotiation.",
+      "risk": "Devices are a poor proxy for AI risk; one executive with a phone can leak more than forty warehouse endpoints."
+    },
+    {
+      "model": "Flat per-client-tenant monthly",
+      "fit_rationale": "Simpler for the MSP to rebill and easier to quote; matches how the audit deliverable is actually consumed, one pack per client.",
+      "risk": "Penalises MSPs with many small clients, which is the exact profile most likely to buy."
+    },
+    {
+      "model": "Per-seat monthly",
+      "fit_rationale": "Directly comparable to Nudge, making the undercut legible.",
+      "risk": "Explicitly rejected by MSP-facing comparison content as producing strange economics for multi-device organisations, and it invites a direct feature comparison against a better-resourced incumbent."
+    },
+    {
+      "model": "Free tier",
+      "fit_rationale": "None found.",
+      "risk": "The incumbent free option is bundled inside Microsoft's licence. A startup free tier cannot win a race to zero against a capability the buyer has already paid for."
+    }
+  ],
+  "recommended_tiers": [
+    {
+      "name": "Trial",
+      "price": 0,
+      "billing": "per month",
+      "scope": "One client tenant, 30 days, full white-label, produces one complete audit evidence pack",
+      "target": "An MSP evaluating on a single real client"
+    },
+    {
+      "name": "Starter",
+      "price": 99,
+      "billing": "per month",
+      "scope": "Up to 50 devices across all client tenants, discovery, risk classification, policy generation and attestation",
+      "target": "Solo and very small MSPs with a handful of SMB clients"
+    },
+    {
+      "name": "MSP",
+      "price": 199,
+      "billing": "per month",
+      "scope": "Up to 150 devices, multi-tenant console, white-label reporting, SOC 2 and insurance evidence packs, $2 per additional device",
+      "target": "PRIMARY REVENUE TIER - established MSPs with 5-20 SMB clients"
+    },
+    {
+      "name": "MSP Pro",
+      "price": 499,
+      "billing": "per month",
+      "scope": "Up to 500 devices, custom domain, API, policy cascading across tenants, priority support, $1.50 per additional device",
+      "target": "MSPs with 20+ clients running this as a defined service line"
+    }
+  ],
+  "target_wtp_range": {
+    "low": 99,
+    "target": 199,
+    "high": 499,
+    "unit": "USD per month per MSP, equivalent to roughly $1.50-2.00 per device at the primary tier"
+  },
+  "trial_to_paid_estimate": 0.12,
+  "freemium_conversion_estimate": null,
+  "freemium_conversion_rationale": "No free tier is recommended, so freemium conversion does not apply. The relevant metric is trial-to-paid.",
+  "trial_to_paid_rationale": "The B2B benchmark for an opt-in trial that produces a real artefact during the trial is 15-25%, but this trial carries unusual friction that pulls it below the band. Deploying discovery into a live client tenant requires the MSP to obtain the end client's permission to collect telemetry, which turns a self-serve trial into a scheduled conversation with a third party. That single dependency is what separates this from a tool an MSP can try on a Tuesday afternoon. Estimated at 12%, between the no-onboarding row (5-10%) and the artefact row (15-25%), and flagged as the least certain number in this file.",
+  "rebilling_strategy": {
+    "importance": "critical",
+    "detail": "The MSP must be able to rebill this to its clients at a markup, ideally as a named line item such as an AI governance assessment or monitoring service. That moves the subscription from the MSP's cost column to its revenue column, which is the difference between a tool that gets cut in a budget review and one that gets defended. The commercial case writes itself from the channel data: 48% of MSPs rank AI and automation as their top client need while only 13% earn meaningful revenue from it, so the pitch is a ready-made billable service line into demand they have already identified. Ship a suggested-markup calculator and client-ready report templates in v1 and lead the sale with the margin, not the feature list.",
+    "evidence": "Cynomi's model of per-client deliverable generation for service providers demonstrates MSPs paying for tooling whose output they resell. The 48%-versus-13% gap comes from MSP channel research cited in ai-agent-ops-security-web-search-2026-08.md."
+  },
+  "annual_strategy": "Offer annual at two months free (about 17%). Useful for cash and for locking a customer in before Cynomi or an MSP-platform incumbent ships a competing module, which is a live risk on a quarters-not-years timescale.",
+  "b2b2c_potential": {
+    "exists": false,
+    "b2b_price_estimate": 0,
+    "rationale": "This is already a B2B2B product; the MSP resells to its business clients. There is no consumer path."
+  },
+  "price_sensitivity_notes": [
+    "The binding constraint is not what an MSP will pay but what it can rebill. If the end client answers its audit question with a free policy document or an already-licensed Purview feature, the MSP's markup evaporates and the subscription becomes pure cost.",
+    "Publishing the price is a genuine differentiator here. ShadowLock and Cynomi both withhold rate cards, so a public per-device price lets an MSP self-qualify in thirty seconds and is the cheapest competitive advantage available.",
+    "Do not price below $1 per device. The support load on a compliance-adjacent product is high because buyers ask questions they are afraid to get wrong, and the gross margin has to absorb it.",
+    "The $99 Starter tier is likely to attract the least valuable customers: solo MSPs with few clients, who are also the segment most likely to churn. Consider it a marketing tier rather than a revenue tier."
+  ],
+  "monetization_risk": "high",
+  "monetization_risk_explanation": "Higher than the candidate-stage assessment, which called pricing the strongest element of this idea. That assessment was right that the anchors are well documented and wrong about what they imply. Two findings changed the picture. First, Microsoft bundling Purview into M365 Business Premium means the marginal price of adequate discovery is zero for a large share of the target client base, and a free-at-the-margin substitute caps willingness to pay far more effectively than any competitor's list price. Second, the two vendors already occupying the MSP-native position, ShadowLock and Lavawall, publish no rate card, so this product would price into a range set by competitors whose numbers cannot be seen. The unit economics can be made to work on paper at $199/month, but the price is being set against a free bundled alternative and two invisible competitors, which is a materially worse position than a documented gap with nobody in it.",
+  "market_insights_pricing_signals": [
+    "Nudge Security $5/user/month with a $750/month floor below 150 users, the only published SMB-accessible price",
+    "Microsoft Purview bundled into M365 Business Premium at roughly $22/user/month equivalent, zero marginal cost on that SKU",
+    "Cyberhaven ~$40,000/yr with a Vendr-recorded median contract of $36,444; Obsidian ~$30,000/yr; Reco ~$25,000/yr",
+    "Control D $2 per endpoint per month; DNSFilter MSP plans from $150/month",
+    "ShadowLock per-device monthly with rate card on request; Lavawall published MSP partner volume tiers",
+    "MSP-facing comparison content argues per-device monthly is the correct unit and per-user creates strange economics"
+  ],
+  "market_insights_sources_used": [
+    "shadow-ai-msp-b2b-communities-2026-09.md",
+    "ai-agent-ops-security-web-search-2026-08.md"
+  ],
+  "pricing_rationale": "Price per device monthly with a platform floor, primary tier $199/month for up to 150 devices, because that is the billing unit the channel already runs and it lands between Control D's $2 per endpoint and Nudge's effective $12.50 per seat at SMB size. The tier structure gives an MSP a legible undercut to quote against Nudge and a margin to rebill. The pricing is defensible; what is not defensible is the position it is priced into, where a free bundled substitute sits below and two unpriced competitors sit alongside.",
+  "inputs_missing": [
+    "ShadowLock and Lavawall actual rate cards, both withheld. The true competitive price for the MSP-native segment is unknown.",
+    "Any evidence of an MSP actually paying for standalone shadow-AI discovery. No review corpus exists, so willingness to pay in this specific channel is inferred from adjacent products rather than observed."
+  ],
+  "sources": [
+    { "url": "https://raic.rhindoncyber.com/resources/shadow-ai/smb-buyerguide-2026", "title": "Best Shadow AI Detection Tools 2026 - SMB Buyer's Guide, Rhindon Cyber", "accessed": "2026-09-06", "used_for": "Nudge pricing and floor, Purview bundling and per-user equivalent, Cyberhaven/Obsidian/Reco contract values" },
+    { "url": "https://lavawall.com/best-saas-discovery-shadow-ai-detection.php", "title": "Best SaaS discovery and shadow-AI detection tools for MSPs 2026, Lavawall", "accessed": "2026-09-06", "used_for": "MSP partner volume tiers, the per-device versus per-user pricing argument" },
+    { "url": "https://shadowlock.io/blog/best-ai-governance-tools-for-msps/", "title": "Best AI Governance Tools for MSPs 2026, ShadowLock", "accessed": "2026-09-06", "used_for": "Per-device monthly as the MSP billing unit; rate card withheld" },
+    { "url": "https://cynomi.com/blog/how-msps-should-govern-client-ai-adoption/", "title": "How MSPs Should Govern Client AI Adoption, Cynomi", "accessed": "2026-09-06", "used_for": "MSP willingness to pay for multi-tenant client-facing deliverable generation" },
+    { "url": "https://www.toriihq.com/articles/five-shadow-ai-discovery-tools", "title": "5 Shadow AI Discovery Tools for 2026, Torii", "accessed": "2026-09-06", "used_for": "Enterprise licence minimums of $20,000-50,000/yr" }
+  ]
+}

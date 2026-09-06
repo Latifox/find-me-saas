@@ -1,0 +1,87 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "predicted_at": "2026-09-06",
+  "lane": "b2c",
+  "natural_usage_frequency": "weekly",
+  "usage_frequency_rationale": "Recreational climbers train two to four times a week, so the app is opened around training days rather than daily. That is better than a monthly tool and worse than a daily habit app, which matters because streak mechanics, the main retention device in this category, work best on daily cadence. A streak that advances three times a week is a weaker hook than one that advances every morning.",
+  "external_trigger": "The training session itself: arriving at the gym or the hangboard, two to four times a week. Real and reliable, but tied to a behaviour the user must already be doing, which is precisely the behaviour the app exists to encourage.",
+  "habit_formation_score": 3,
+  "habit_formation_rationale": "Scored 3 of 5. Positive: a genuine external trigger (training days), a visible progress loop (streaks and the weekly balance view), and accumulating data that gets more useful over time. Negative: no network effect, no social component, and a cadence below daily. The deload-exception streak is a real design improvement over generic habit apps, which usually punish rest, but it improves an existing mechanic rather than creating a new hook. desire_scores.json records control as the joint-primary driver, which supports retention; it also records that the assumed pain is not one the audience articulates, which undercuts the loop before it starts.",
+  "predicted_retention": {
+    "d1": 30,
+    "d7": 15,
+    "d30": 8,
+    "m1_to_m2": null,
+    "m6": null,
+    "m12": null,
+    "monthly_churn_estimate": null,
+    "benchmark_used": "Lifestyle and habit category: D1 25-35%, D7 12-20%, D30 6-12%. Placed at D1 30%, D7 15%, D30 8%, in the middle of the first two bands and the lower half of the third. The downward placement on D30 reflects the sub-daily cadence and the fact that a free alternative is one tap away in the same App Store search."
+  },
+  "d30_equivalent": 8,
+  "d30_equivalent_note": "B2C lane, so d30_equivalent is simply the D30 figure of 8%. No mapping heuristic is involved.",
+  "churn_risk_factors": [
+    {
+      "factor": "A free credible substitute is one search away",
+      "severity": "high",
+      "detail": "Crimpd offers 100+ structured workouts free from the sport's coaching authority. A user who lapses does not weigh returning against nothing; they weigh it against a free product with a better brand."
+    },
+    {
+      "factor": "Success removes the need",
+      "severity": "high",
+      "detail": "The classic habit-tracker failure. A climber who genuinely establishes a hangboard routine stops needing something to remind them of it. Value peaks during formation and decays as the product succeeds, which is the inverse of what a subscription needs."
+    },
+    {
+      "factor": "Sub-daily cadence weakens the streak mechanic",
+      "severity": "medium",
+      "detail": "Two to four sessions a week means longer gaps between opens, and every gap is an opportunity to forget the app exists."
+    },
+    {
+      "factor": "Injury or life interruption breaks the loop entirely",
+      "severity": "medium",
+      "detail": "A finger injury or a busy month stops training altogether, and unlike a general habit app there is no adjacent use case to retain the user through the gap."
+    },
+    {
+      "factor": "No social or network component",
+      "severity": "low",
+      "detail": "Nothing is lost by leaving. No friends to abandon, no shared data, no reason to stay beyond personal history."
+    }
+  ],
+  "top_churn_risk_factor": "Success removes the need. A habit product that works well enough teaches the user they no longer require it, and unlike a logbook it accumulates nothing the climber cannot walk away from.",
+  "retention_levers": [
+    {
+      "lever": "Make the accumulated record valuable in itself",
+      "impact": "high",
+      "detail": "Twelve months of load history that shows what actually preceded a grade breakthrough, or an injury, is data a climber will not want to abandon. This converts the app from a reminder into a record and is the only lever that counters the success-removes-need problem."
+    },
+    {
+      "lever": "Deload-aware streaks",
+      "impact": "medium",
+      "detail": "Rest weeks not breaking a streak removes the most common reason climbers abandon generic habit apps. A genuine improvement, and easily copied."
+    },
+    {
+      "lever": "Injury-window re-engagement",
+      "impact": "medium",
+      "detail": "When training stops, switch the app to rehab and antagonist-only mode rather than going silent. Retains the user through the gap that would otherwise end the subscription."
+    },
+    {
+      "lever": "Tie the weekly view to grade progress",
+      "impact": "medium",
+      "detail": "Connecting habits to the outcome the climber actually wants, the grade, addresses the motivational leak identified in desire scoring. Requires session logging the competitors already do better."
+    }
+  ],
+  "churn_risk": "high",
+  "churn_risk_rationale": "Two factors rated high severity, and one of them, success removing the need, is structural to the product concept rather than fixable by execution. The rubric places one to two highs at medium; this is recorded as high because the free-substitute factor and the success-removes-need factor compound: a lapsing user has both a reason to leave and a better free place to go.",
+  "retention_verdict": "moderate",
+  "retention_score": 42,
+  "retention_score_reasoning": "D30 of 8% with a moderate verdict maps to the 40-59 band. Scored 42, near the bottom, because the category placement is generous relative to the competitive reality. The +5 adjustment for daily usage does not apply at a two-to-four-times-weekly cadence, and the -10 penalty for weekly-or-less with no external trigger does not apply either, because a real trigger exists in the training session.",
+  "inputs_used": [
+    "idea.md",
+    "desire_scores.json",
+    "competitors.json",
+    "pricing.json",
+    "habit-tracking-climbing-apps-2026-09.md"
+  ],
+  "inputs_missing": [
+    "Observed retention data for climbing-specific apps; none is published, so all figures come from the lifestyle and habit category band."
+  ]
+}

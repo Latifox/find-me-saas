@@ -33,9 +33,10 @@ User expresses one of:
 ## Skill Chain
 
 ```
-1. user-background-interviewer
+1. user-background-interviewer (first-run onboarding)
    ↓ writes: memory/user_profile.md
-   ↓ condition: ALWAYS runs as the first step, even if user_profile.md exists.
+   ↓ condition: ALWAYS runs as the first step, even if user_profile.md exists. When no profile exists at all, this is FindMeSaaS's first-run onboarding and it also runs ahead of the other three workflows, not just this one.
+   |   The full and fast paths capture hours per week, monthly budget, risk tolerance and target buyer; the browse and skip paths leave them unknown and the idea-validation profile gate asks for them later.
    |   If user_profile.md exists → the skill presents the existing profile summary and asks:
    |     "Use existing profile" → keep current profile, proceed to step 2 (or step 3 if browse/skipped mode).
    |     "Update" → run full or fast interview to refresh the profile.
@@ -59,6 +60,7 @@ User expresses one of:
    ↓ reads: memory/market_insights/ (check for existing trend data)
    ↓ condition: If interview_mode = "browse", use selected_interest_domains directly as niche candidates (no need to infer or ask).
    |   Otherwise, infer niche from user_profile.md or existing market_insights/ files; ask user to confirm or describe their own.
+   |   Unless the profile makes it obvious, ask whether the user wants to build for consumers (b2c / prosumer) or for businesses (b2b-smb / b2b2c); this selects the recommended platform set (consumer: TikTok + Reddit + Apps + Web Search; business: Web Search + B2B communities + X/Twitter).
    |   Ask which platforms to include; if a relevant file already exists for the niche, present it and ask whether to skip or refresh; if missing, run trend-analysis.
    ↓ writes: memory/market_insights/<niche>-<platform>-<YYYY>-<MM>.md (one file per platform; skip if up-to-date file exists)
    → present: Share top 3 trend signals per platform, trend velocity, and overall verdict (hot/warm/cool/cold). Full analysis at memory/market_insights/<niche>-<platform>-<YYYY>-<MM>.md
@@ -66,13 +68,13 @@ User expresses one of:
 4. trend-to-product-mapper
    ↓ reads: memory/user_profile.md (domain fit filter)
    ↓ reads: memory/market_insights/<niche>-*-<YYYY>-<MM>.md (from step 3)
-   ↓ writes: memory/ideas/<idea-slug-1>/idea.md ... memory/ideas/<idea-slug-N>/idea.md (7–10 files)
-   → present: Show the summary table of all mapped idea candidates (slug, app concept, confidence, cross-platform resonance, monetization status). Full idea files at memory/ideas/<slug>/idea.md
+   ↓ writes: memory/ideas/<idea-slug-1>/idea.md ... memory/ideas/<idea-slug-N>/idea.md (7–10 files), each with business_model in the frontmatter
+   → present: Show the summary table of all mapped idea candidates (slug, app concept, business model, confidence, cross-platform resonance, monetization status). Full idea files at memory/ideas/<slug>/idea.md
 
 5. idea-scoring
-   ↓ reads: available dimension files per candidate
-   ↓ writes: memory/ideas/<slug>/scores.json (quick score for each candidate)
-   → present: Show all candidates ranked by final score with verdict labels. Highlight the top recommendation with rationale. Full scores at memory/ideas/<slug>/scores.json
+   ↓ reads: memory/ideas/<slug>/idea.md and market_insights per candidate (no dimension files exist yet)
+   ↓ writes: memory/ideas/<slug>/scores.json with scoring_stage: candidate-quick-score, rank_label, competition capped at 60 (competition_prior_capped: true), retention null, and a one-sentence reason on every strength and weakness
+   → present: Show all candidates ranked by base_score with their rank_label (strong-candidate / candidate / weak-candidate). Do NOT use the words pursue/test/pivot/drop here; those are verdicts for fully validated ideas. Say explicitly that competition is an upper bound until competitor-mapper runs. Highlight the top recommendation with rationale. Full scores at memory/ideas/<slug>/scores.json
 ```
 
 ## State Flow
@@ -83,19 +85,19 @@ User expresses one of:
 | user-segmentation-profiler | `memory/user_profile.md` | `memory/user_profile.md` (extended) |
 | trend-analysis | `memory/user_profile.md`, `memory/market_insights/` | `memory/market_insights/<niche>-<platform>-<YYYY>-<MM>.md` |
 | trend-to-product-mapper | `memory/user_profile.md`, `memory/market_insights/<niche>-*` | `memory/ideas/<slug>/idea.md` (7–10 files) |
-| idea-scoring | all available dimension files | `memory/ideas/<slug>/scores.json` |
+| idea-scoring | `idea.md` + market_insights per candidate | `memory/ideas/<slug>/scores.json` (`candidate-quick-score`) |
 
 ## Exit Output
 
 The user receives:
-- All scored idea candidates ranked by `final_score`
-- Top candidate recommended with rationale
+- All idea candidates ranked by `base_score` with `rank_label`
+- Top candidate recommended with rationale, with a reminder that competition is capped at 60 until researched
 - A file link list for all ideas, formatted as:
 
   ```
-  📄 memory/ideas/<slug-1>/idea.md  (score: XX/100)
-  📄 memory/ideas/<slug-2>/idea.md  (score: XX/100)
-  📄 memory/ideas/<slug-3>/idea.md  (score: XX/100)
+  📄 memory/ideas/<slug-1>/idea.md  (XX/100 · strong-candidate · b2b-smb)
+  📄 memory/ideas/<slug-2>/idea.md  (XX/100 · candidate · b2c)
+  📄 memory/ideas/<slug-3>/idea.md  (XX/100 · weak-candidate · prosumer)
   ...
   ```
 

@@ -1,0 +1,25 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "evaluated_at": "2026-09-06",
+  "lane": "b2c",
+  "scores": {
+    "survival": 3,
+    "status": 4,
+    "belonging": 2,
+    "control": 4,
+    "curiosity": 2
+  },
+  "score_rationale": {
+    "survival": "Injury avoidance is a genuine and specific fear for climbers, and finger injury in particular ends seasons. The finger-load guard speaks to it directly. Scored 3 rather than 4 because the fear is episodic: it spikes after a tweak and fades, and most recreational climbers do not organise their training around it until they have been hurt once.",
+    "status": "The strongest driver. Climbing publishes its status in a number: the grade. Progress is visible to everyone at the gym and the vocabulary the audience uses is explicitly grade-anchored, such as stuck at V4 or stuck at 6c. The desire to send harder is real and strong. What is weak is the link from that desire to this product: climbers want the grade, and a habit tracker is three steps removed from it.",
+    "belonging": "Low. Climbing itself is intensely social, but off-the-wall habit tracking is solitary by nature. The app has no group mechanic and nothing about a private streak connects a climber to their community. Scored 2 because the surrounding sport is social even though this product is not.",
+    "control": "Strong and joint-primary in substance. Reducing training chaos, knowing the week was balanced, and seeing that fingers have had enough rest is exactly the legibility drive the control dimension describes. It is also the desire the product most directly serves.",
+    "curiosity": "Low. There is mild interest in learning training theory, which Crimpd's free workout library already satisfies better than a tracker could."
+  },
+  "primary_driver": "status",
+  "secondary_driver": "control",
+  "desire_strength": 3.4,
+  "desire_strength_label": "moderate",
+  "virality_potential": "medium",
+  "notes": "The decisive finding is a gap between a strong desire and a weak product link. Climbers want to send harder, which is a status desire scoring 4 and one of the more powerful motivations in any amateur sport. This product does not deliver grades; it delivers adherence to habits that might eventually deliver grades. Every step in that chain leaks motivation, and the market research confirms where the leak shows: the complaints climbers actually make about training apps are about force-gauge integration, periodization and unrealistic session lengths, not about failing to keep habits. A desire the audience does not articulate as a problem is a desire that will not pull them through a signup.\n\nCommercially the driver behaves poorly for a paid product. Status desire in climbing is satisfied by the send itself and by the social proof around it, both of which are free. There is no shareable artefact here: a streak chart is not a send video, so the status loop that drives climbing content on social platforms does not touch this app. Control is the honest primary from the product's point of view, and control desires support retention better than they support acquisition, which is the wrong way round for a product that has to win attention against a free incumbent.\n\nThe weighted mean of 3.4 sits just below the 3.5 threshold for strong, which is the correct side of the line. This is a moderate desire attached to a product that must beat a free, credible alternative on day one."
+}

@@ -3,7 +3,7 @@ name: idea-scoring
 description: Aggregates all dimension scores into a final idea score (0–100) and issues a verdict. Implements a multiplicative-floor algorithm with Riskiest Assumption Test (RAT). The final output of every validation workflow.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/scores.json -->
+<!-- version: 0.5.0 | outputs: memory/ideas/<slug>/scores.json (or pivot_scores.json for pivot-rescore) -->
 
 # Skill: idea-scoring
 
@@ -23,19 +23,22 @@ Produce a single, defensible verdict on an idea by aggregating all available dim
   - `memory/ideas/<slug>/market_size.json`
   - `memory/ideas/<slug>/distribution.json`
   - `memory/ideas/<slug>/retention.json`
-  - `memory/ideas/<slug>/complexity.json`
-  - `memory/ideas/<slug>/weighted_signals.json`
 - Optional: `memory/user_profile.md` (for founder-market fit)
+- `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` (`trend_velocity` for the Demand rubric)
+
+### Lane selection
+
+Read `business_model` from `idea.md` frontmatter. `b2c` and `prosumer` use the B2C rows of every rubric below; `b2b-smb` and `b2b2c` use the B2B rows. Where a rubric has only one table, it applies to both lanes. Record the lane in `scores.json` as `lane`.
 
 ### Minimum Viable Input
 
-At least **3 of 7 dimensions** must have source data. If fewer are available, refuse to score and list what's missing. Two dimensions are **mandatory** — Demand and Distribution. Without evidence of a real problem and a path to reach users, scoring is meaningless.
+At least **3 of 6 dimensions** must have source data. If fewer are available, refuse to score and list what's missing. Two dimensions are **mandatory** — Demand and Distribution. Without evidence of a real problem and a path to reach users, scoring is meaningless.
 
 ## Scoring Dimensions
 
 | Dimension | Weight | Source | What it measures |
 |---|---|---|---|
-| Demand | 20% | `desire_scores.json` + `weighted_signals.json` + `idea.md` | Real human desire + validated market signals |
+| Demand | 20% | `desire_scores.json` + `idea.md` + market_insights `trend_velocity` | Real human desire + validated market signals |
 | Competition | 10% | `competitors.json` | Positioning gaps and defensibility |
 | Monetization | 20% | `pricing.json` + `cac.json` + `market_size.json` | Unit economics viability (LTV:CAC, WTP, market size) |
 | Distribution | 20% | `distribution.json` | Organic reach, paid viability, founder edge |
@@ -71,7 +74,11 @@ Higher = more favorable competitive landscape (counterintuitive — think of it 
 
 Adjust: +10 if top competitor complaints reveal an unserved pain point. -15 if a FAANG-class player owns the category.
 
+**Candidate-stage prior cap.** When `competitors.json` does not exist (idea-generation quick-scores), competition is an estimate from trend narrative only. Cap it at **45** and set `competition_prior_capped: true`. Evidence from this repo: in five consecutive full validations the competition score fell 20-40 points once real competitor research was done (88 to 38, 85 to 45, 85 to 65, 62 to 32, 55 to 22). Four of those five landed below 45 and the median was 38, so a cap of 45 remains an upper bound rather than a prediction while removing most of the unearned optimism. The cap was 60 from task 1 until task 4. Treat candidate-stage competition as an upper bound, and say so when presenting.
+
 ### Monetization (0–100)
+
+**B2C lane** (`b2c`, `prosumer`) — from `pricing.json` + `cac.json` + `market_size.json`:
 
 | Condition | Score range |
 |---|---|
@@ -81,7 +88,21 @@ Adjust: +10 if top competitor complaints reveal an unserved pain point. -15 if a
 | LTV:CAC < 2:1 OR viability_verdict = "not-viable" | 10–34 |
 | No pricing data or CAC data | 0–9 (flag as missing) |
 
-Adjust: +10 if `freemium_conversion_estimate` > 5%. +5 if market_size_verdict = "large".
+Adjust: +10 if `freemium_conversion_estimate` > 5%. +5 if market_size_verdict = "large", -5 if "niche", -10 if "micro-niche".
+
+**B2B lane** (`b2b-smb`, `b2b2c`) — from `pricing.json` (`recommended_tiers`, `anchors`) + `cac.json` (`ltv_cases`, `cac_by_channel_b2b`) + `market_size.json`:
+
+| Condition | Score range |
+|---|---|
+| LTV:CAC ≥ 3:1 on at least 2 channels in the base case, payback ≤ 6 months on the recommended channel, AND a validated price anchor (a named product charging the same buyer at a comparable price) | 80–100 |
+| LTV:CAC ≥ 3:1 on 1 channel, payback ≤ 9 months, price anchor exists | 60–79 |
+| LTV:CAC ≥ 2:1 on the best channel, OR payback 9–12 months, OR no price anchor (the revealed price is a gap between two clusters) | 35–59 |
+| LTV:CAC < 2:1 in the base case, OR pessimistic-case LTV:CAC < 1:1 on every channel, OR revealed price is $0 (free incumbents, nobody charges) | 10–34 |
+| No pricing data or CAC data | 0–9 (flag as missing) |
+
+Adjust: +5 if `trial_to_paid_estimate` ≥ 20% (heuristic: self-serve B2B trial-to-paid benchmarks cluster at 15–25%). +5 if an expansion mechanism exists (per-client or per-seat overage, rebilling). -10 if the pessimistic LTV case drops the recommended channel below 3:1. +5 if market_size_verdict = "large", -5 if "niche", -10 if "micro-niche".
+
+The market-size penalty was added in task 4. The rubric previously rewarded a large market with no symmetric penalty for a tiny one, which let a business with sound ratios and a $33,600 year-one SOM score in the middle of the band.
 
 ### Distribution (0–100)
 
@@ -105,7 +126,9 @@ Adjust: +10 if founder has existing audience or distribution edge (from `user_pr
 | `retention_verdict` = "disposable" OR D30 < 8% | 15–39 |
 | `churn_risk` = "high" AND no habit loop | 0–14 |
 
-Adjust: +5 if natural_usage_frequency is daily. -10 if weekly-or-less with no external trigger.
+Adjust (B2C lane): +5 if natural_usage_frequency is daily. -10 if weekly-or-less with no external trigger.
+
+**B2B lane.** `retention.json` carries `d30_equivalent` (derived from `monthly_churn_estimate`; see retention-predictor) so the bands above apply unchanged. Sanity anchors for the mapping (heuristic): monthly logo churn ≤ 3% maps to d30_equivalent ≥ 64 and "sticky"; 3–6% maps to 28–64 and "moderate"; above 6% maps below 28 and "disposable". The daily-frequency adjustment does not apply; instead +5 if an external recurring trigger exists (report cycle, audit, renewal, client onboarding) and -10 if usage is event-only with no calendar trigger.
 
 ### Founder-Market Fit (0–100)
 
@@ -115,6 +138,8 @@ Adjust: +5 if natural_usage_frequency is daily. -10 if weekly-or-less with no ex
 | Moderate domain overlap OR builder tier with adjacent experience | 50–74 |
 | Beginner tier but high motivation and time commitment (≥ 20 hrs/wk) | 30–49 |
 | No domain overlap, beginner tier, low time commitment | 0–29 |
+
+Adjust: +10 if `inner_circle_domains` in `user_profile.md` includes the idea's buyer (a design partner or first customer one call away). For B2B ideas this is the single strongest founder-fit signal. -10 if the idea requires a regulated or licensed competence the founder lacks (legal, medical, financial advice).
 
 If `user_profile.md` is unavailable, default to 50 (neutral) and flag as missing.
 
@@ -160,15 +185,19 @@ adjusted_score = base_score * floor_penalty * missing_discount
 final_score = round(clamp(adjusted_score, 0, 100))
 ```
 
-The missing-input discount ensures that ideas scored on only 3 of 7 dimensions can never reach the "pursue" tier without completing more analysis.
+`round` is round-half-to-even (Python's `round`): 72.5 becomes 72, 73.5 becomes 74. `tests/validate_memory.py` recomputes every value above with the same rule and fails the file if any differs.
+
+The missing-input discount ensures that ideas scored on only 3 of 6 dimensions can never reach the "pursue" tier without completing more analysis.
 
 ### Step 5 — Determine confidence level
 
 | Available dimensions | Confidence |
 |---|---|
-| 6–7 of 7 | high |
-| 4–5 of 7 | medium |
-| 3 of 7 (minimum) | low |
+| 6 of 6 | high |
+| 4–5 of 6 | medium |
+| 3 of 6 (minimum) | low |
+
+A skill may lower confidence below this table (for example when source data is stale or a dimension rests on a single source) but never raise it.
 
 ### Step 6 — Issue verdict
 
@@ -178,6 +207,21 @@ The missing-input discount ensures that ideas scored on only 3 of 7 dimensions c
 | 55–74 | **test** | Promising but unproven. Run the RAT experiment first. |
 | 35–54 | **pivot** | Structural weakness. Use pivot-engine to explore alternatives. |
 | 0–34 | **drop** | Fatal flaws. Move to next idea. |
+
+## Scoring Stages
+
+`scores.json` always carries `scoring_stage`. The stage decides whether the output is a verdict or a ranking.
+
+| Stage | When | Output field | Rules |
+|---|---|---|---|
+| `candidate-quick-score` | idea-generation step 5: only `idea.md` and market_insights exist | `rank_label` (no `verdict`) | Competition capped at 60 with `competition_prior_capped: true`. Retention is `null`. `missing_discount` applies as usual. `rank_label` is read from the **undiscounted** `base_score`: ≥ 65 `strong-candidate`, 50–64 `candidate`, < 50 `weak-candidate`. RAT is optional; `reason` on strengths and weaknesses is still required. |
+| `fast-validation` | idea-validation **fast path**: only `desire_scores.json`, `competitors.json` (light) and `distribution.json` exist | `verdict` | Scores exactly four dimensions — demand, competition, distribution, founder-market fit. Monetization and retention are `null`, so `missing_discount` is 4/6 and `pursue` is arithmetically unreachable (it would need a base score above 112). RAT required. `score_confidence` is at most medium. Every presentation of this score must say it is a gut check and name the two dimensions that were not examined. |
+| `full-validation` | idea-validation step 9: all dimension files exist | `verdict` | Verdict from the threshold table below. RAT required. `dimension_rationale` required: one paragraph per dimension naming the source-file value that placed it in its band. |
+| `pivot-rescore` | pivot-optimization step 4 | `verdict` + `pivot_id` | Written to `pivot_scores.json`. Dimensions adjusted per the `scoring_simulation` in `pivot_options.json`. |
+
+Why quick-scores get no verdict: with one or two dimensions missing, the missing-input discount pushes every candidate into the 45–54 band, and labelling all of them "pivot" tells the user nothing. Rank labels compare candidates with each other; verdicts compare a fully validated idea against the build threshold.
+
+Why fast-validation does get one: the four dimensions it scores include both mandatory ones (demand and distribution), and the discount already caps the ceiling. The verdict is honest as long as its two blind spots — whether anyone pays and whether they stay — are named every time the score is shown. A fast verdict of `drop` is trustworthy; a fast verdict of `test` means "worth the full chain", not "worth building".
 
 ## Riskiest Assumption Test (RAT)
 
@@ -229,33 +273,47 @@ Define the threshold **before** running the experiment. The threshold is written
 
 ## Process (step by step)
 
-1. Load all available dimension files from `memory/ideas/<slug>/`.
-2. Check minimum viable input (≥ 3 dimensions, including Demand and Distribution). If not met, refuse and list missing inputs.
+1. Read `idea.md` frontmatter: `business_model` selects the rubric lane. Load all available dimension files from `memory/ideas/<slug>/`; their presence decides `scoring_stage` (see Scoring Stages). The orchestrator states the stage when invoking the fast path or a pivot re-score; otherwise infer it from which files exist.
+2. Check minimum viable input (≥ 3 dimensions, including Demand and Distribution). If not met, refuse and list missing inputs. At candidate stage, apply the competition prior cap.
 3. Map each dimension's source data to a 0–100 sub-score using the rubrics.
 4. Compute `floor_penalty` from any sub-scores below 25.
 5. Compute `base_score` using weighted sum.
 6. Apply `floor_penalty` and `missing_discount` to get `final_score`.
 7. Determine `score_confidence`.
 8. Issue `verdict` from threshold table.
-9. Identify `top_strengths` (top 2 dimensions) and `top_weaknesses` (bottom 2 dimensions).
+9. Identify `top_strengths` (top 2 dimensions) and `top_weaknesses` (bottom 2 dimensions), each with a one-sentence `reason` that cites a concrete value from the source file (a ratio, a price, a churn figure, a named competitor), never an adjective.
 10. Run RAT identification: list assumptions, score criticality × uncertainty, select the riskiest.
 11. Design RAT experiment with pass/fail threshold.
-12. If this is a pivot re-score, write to `pivot_scores.json` instead.
+12. If this is a pivot re-score, write to `pivot_scores.json` instead with `scoring_stage: pivot-rescore` and `pivot_id`.
+13. Run `python tests/validate_memory.py --idea <slug>` if a shell is available and fix any ERROR line before presenting.
 
 ## Output
 
-Write to `memory/ideas/<slug>/scores.json` (or `pivot_scores.json` for re-scores):
+Write to `memory/ideas/<slug>/scores.json` (or `pivot_scores.json` for re-scores). The block below shows every field; `verdict`, `riskiest_assumption_test` and `dimension_rationale` appear only for `full-validation` and `pivot-rescore`, while `rank_label` and `competition_prior_capped` appear only for `candidate-quick-score`. Extra explanatory fields (`verdict_note`, `score_movement`, comparisons to sibling ideas) are welcome.
 
 ```json
 {
+  "idea_slug": "",
+  "scored_at": "YYYY-MM-DD",
+  "scoring_stage": "candidate-quick-score | full-validation | pivot-rescore",
+  "lane": "b2c | b2b",
   "dimension_scores": {
     "demand": 0,
     "competition": 0,
     "monetization": 0,
     "distribution": 0,
-    "retention": 0,
+    "retention": null,
     "founder_market_fit": 0
   },
+  "dimension_rationale": {
+    "demand": "",
+    "competition": "",
+    "monetization": "",
+    "distribution": "",
+    "retention": "",
+    "founder_market_fit": ""
+  },
+  "competition_prior_capped": false,
   "weights_applied": {
     "demand": 0.20,
     "competition": 0.10,
@@ -268,9 +326,11 @@ Write to `memory/ideas/<slug>/scores.json` (or `pivot_scores.json` for re-scores
   "base_score": 0,
   "missing_discount": 1.0,
   "final_score": 0,
+  "rank_label": "strong-candidate | candidate | weak-candidate",
   "verdict": "pursue | test | pivot | drop",
   "score_confidence": "high | medium | low",
   "missing_inputs": [],
+  "sources_checked": 0,
   "top_strengths": [
     { "dimension": "", "score": 0, "reason": "" }
   ],
@@ -298,6 +358,8 @@ Write to `memory/ideas/<slug>/scores.json` (or `pivot_scores.json` for re-scores
   }
 }
 ```
+
+`sources_checked` is the count of distinct URLs across the `sources` arrays of the dimension files read. It is a transparency number for the memo, not a score input.
 
 ## Notes
 

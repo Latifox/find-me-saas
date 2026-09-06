@@ -3,7 +3,7 @@ name: cac-modeler
 description: Models LTV, CAC by channel, LTV:CAC ratios, and payback period for an indie developer. Uses market_insights to calibrate channel CPMs and competitive intensity. Includes indie budget tier definitions and viability thresholds.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/cac.json -->
+<!-- version: 0.4.0 | outputs: memory/ideas/<slug>/cac.json -->
 
 # Skill: cac-modeler
 
@@ -14,8 +14,9 @@ Determine whether this indie developer can realistically acquire users profitabl
 ## Input
 
 - Idea slug
+- `memory/ideas/<slug>/idea.md` (`business_model`)
 - `memory/user_profile.md` (budget constraint, ICP tier)
-- `memory/ideas/<slug>/pricing.json` (target price → revenue per user)
+- `memory/ideas/<slug>/pricing.json` (target price or primary tier → revenue per user; trial-to-paid or freemium conversion)
 - `memory/ideas/<slug>/retention.json` (D30 retention, churn risk → estimated lifespan)
 - `memory/ideas/<slug>/distribution.json` (viable channels, k-factor, ASO opportunity, creator fit)
 - `memory/ideas/<slug>/competitors.json` (competitor pricing and scale signals — optional)
@@ -31,6 +32,10 @@ Trend analysis files provide critical calibration for CAC estimates. Extract the
 | `top_signals` (TikTok hashtags, Reddit threads, App Store categories) | Validate which organic channels have real activity — a niche trending on TikTok means TikTok organic CAC is at the lower end of the range |
 | `monetization_evidence` | If competitors are already running ads (visible in trend narratives), paid CPMs in that niche are likely elevated. Adjust paid CAC estimates upward. |
 | Platform narrative (Reddit pain points, creator engagement) | Identifies which communities are already activated — lower cost to reach an audience that's already discussing the problem |
+
+### Lane selection
+
+`business_model` = `b2c` uses the B2C channel table and the D30-based lifespan. `prosumer`, `b2b-smb`, and `b2b2c` use the B2B channel table, the churn-based lifespan, gross margin, and the three-case LTV. Record the lane in the output.
 
 ## LTV Estimation
 
@@ -71,6 +76,18 @@ If `retention.json` is unavailable, use category median D30 benchmarks:
 | Lifestyle / habit | 10–18% |
 | Creative tools | 12–20% |
 
+### B2B lane LTV
+
+```
+avg_lifetime_months = 1 / monthly_churn_estimate      (from retention.json)
+gross_ltv           = ARPU_monthly × avg_lifetime_months
+contribution_ltv    = gross_ltv × gross_margin
+```
+
+- `gross_margin`: 0.80–0.90 for software with light support; 0.65–0.80 when the product carries API, model, or storage cost per customer; state the assumption.
+- Model **three cases** (`ltv_cases`): base (retention.json midpoint), optimistic (churn at the low end of the segment band with the condition that makes it true), pessimistic (churn at the high end, with the condition). Use `contribution_ltv` for every ratio. A channel is only "viable" if it clears 3:1 in the base case; report the pessimistic ratio beside it.
+- ARPU uses the primary tier price; add expected expansion (per-client or per-seat overage) only when the pricing file documents it, and say how much.
+
 ### LTV Confidence
 
 | Data available | Confidence |
@@ -92,7 +109,7 @@ Define the founder's budget context before estimating per-channel CAC:
 | **Moderate** | $500–$2,000/mo | Growth-tier or funded builder | Can run proper paid campaigns with A/B testing on one platform. |
 | **Serious** | > $2,000/mo | Rare for indie; growth stage | Multi-platform paid, retargeting, influencer budgets. |
 
-Map from `user_profile.md`: `budget_constraint` = "low" → Bootstrap. "medium" → Lean. "high" → Moderate or Serious (ask if ambiguous).
+Map from `user_profile.md`: `budget_constraint` = "low" → Bootstrap. "medium" → Lean. "high" → Moderate or Serious (ask if ambiguous). "unknown" → Bootstrap, and write `founder_budget_tier: "unknown"` so the memo lists the gap.
 
 ### Channel CAC Estimation
 
@@ -120,6 +137,21 @@ For organic channels, "cost" is time-valued at $0 but the skill reports the **ef
 
 > Press/Product Hunt provides a one-time spike, not sustained acquisition. Model it as a fixed user cohort (typically 500–5,000 installs), not a recurring channel.
 
+#### B2B lane channel benchmarks (heuristic ranges for solo founders selling to SMB, agencies, and prosumers)
+
+| Channel | Base CAC range | Time to first signal | Ceiling | Adjust down if | Adjust up if |
+|---|---|---|---|---|---|
+| **Warm network / direct outreach** | $100–300 (time cost) | days | 10–30 customers, then exhausts | Founder has an inner-circle buyer or community standing | No relationships in the buyer segment |
+| **Content / SEO + comparison pages** | $200–600 | 3–6 months | high, compounds | Buyer-specific keywords are unclaimed; comparison content converts in the category | Funded incumbents own the SERP with content teams |
+| **Operator communities / directories** (subreddits, Slack, HN, IH, partner directories) | $150–400 | 2–6 weeks | medium | Communities discuss the problem already; founder is a practitioner there | Communities are vendor-hostile or the product is hard to discuss |
+| **Partnerships / integrations / co-marketing** | $250–700 | 3+ months | medium | Adjacent tools already sell to the buyer and list partners | Partner programmes are owned by competitors |
+| **Outbound email / LinkedIn DMs** | $300–900 | 2–4 weeks | medium | Buyer is identifiable by title and firmographics; trigger events exist | Buyer is diffuse or the pitch needs a demo to land |
+| **Paid — LinkedIn** | $600–1,500 | 2 weeks | high if ratio holds | Tight title targeting; ACV ≥ $150/mo | ACV under $100/mo (LinkedIn CPCs do not pay back) |
+| **Paid — Google search** | $300–1,200 | 2 weeks | medium | High-intent queries exist and CPC is under $10 | Category CPCs are bid up by funded vendors |
+| **Launch (Product Hunt, HN Show)** | $0–100, one-time cohort | days | one-time 20–200 signups | Novel concept, practitioner audience | "Me too" product |
+
+Blended CAC for a bootstrapped B2B SaaS that reaches $10k MRR typically lands at $300–900 (heuristic from public Indie Hackers and founder posts); if the model produces under $150 blended beyond the warm network, the estimate is optimistic.
+
 ### Channel Relevance Filter
 
 Not all channels apply to every idea. Skip channels that score "not applicable":
@@ -131,6 +163,8 @@ Not all channels apply to every idea. Skip channels that score "not applicable":
 | No relevant online communities exist | Reddit / community |
 | `viral_loop_exists` = false AND k_factor < 0.1 | Word of mouth / referral |
 | Utility app with no narrative angle | Press / Product Hunt |
+| B2B lane | TikTok organic, paid TikTok, ASO organic, influencer (unless a niche creator community sells to this buyer) |
+| B2C lane | Outbound email, LinkedIn paid, partnerships (unless a B2B2C path is documented) |
 
 ## LTV:CAC Ratio Thresholds
 
@@ -176,6 +210,14 @@ For **Bootstrap tier** founders, any payback period > 3 months is a red flag —
 
 If market_insights show `trend_velocity` = "rising-fast", add a note that organic CAC may improve as the market grows (more search volume, more platform promotion of trending content). This is speculative but worth flagging.
 
+### What this verdict does and does not measure
+
+The viability verdict measures **unit economics only**: whether an acquired customer returns more than it cost. It says nothing about whether those customers can be reached, how many of them exist, or whether the channel is open to this founder. Channel reachability is scored in `distribution-analysis`, market size in `tam-sam-som-builder`, and the two must be read alongside this file.
+
+This matters because the combination is common: a business can post healthy ratios on channels that cap out at a few dozen customers. Record `blended_ceiling_customers` beside the verdict so the limit is visible at a glance, and state the pairing explicitly in `viability_verdict_rationale` whenever the verdict is `viable` but the ceiling is low.
+
+**Deriving `blended_ceiling_customers`:** sum the realistic customer ceilings of every channel classified `viable` or `marginal`, excluding one-time launch cohorts, which are events rather than channels. Express it in customers so it can be read directly against the SOM in `market_size.json`. Where a ceiling is a range, use the midpoint. Where a channel is blocked rather than merely limited, contribute zero and say why.
+
 ## Process
 
 1. Load all inputs: `pricing.json`, `retention.json`, `distribution.json`, `competitors.json`, `user_profile.md`, and all matching `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` files.
@@ -195,6 +237,9 @@ Write to `memory/ideas/<slug>/cac.json`:
 
 ```json
 {
+  "idea_slug": "",
+  "modeled_at": "YYYY-MM-DD",
+  "lane": "b2c | b2b",
   "ltv": {
     "estimated_ltv": 0,
     "arpu_monthly": 0,
@@ -202,7 +247,13 @@ Write to `memory/ideas/<slug>/cac.json`:
     "ltv_confidence": "high | medium | low",
     "ltv_assumptions": []
   },
-  "founder_budget_tier": "bootstrap | lean | moderate | serious",
+  "gross_margin": null,
+  "ltv_cases": {
+    "base": { "monthly_churn": 0.0, "avg_lifetime_months": 0, "gross_ltv": 0, "contribution_ltv": 0 },
+    "optimistic": { "monthly_churn": 0.0, "avg_lifetime_months": 0, "gross_ltv": 0, "contribution_ltv": 0, "condition": "" },
+    "pessimistic": { "monthly_churn": 0.0, "avg_lifetime_months": 0, "gross_ltv": 0, "contribution_ltv": 0, "condition": "" }
+  },
+  "founder_budget_tier": "bootstrap | lean | moderate | serious | unknown",
   "cac_by_channel": {
     "aso_organic": { "cac": 0, "ltv_cac_ratio": 0, "classification": "", "payback_months": 0 },
     "content_seo": { "cac": 0, "ltv_cac_ratio": 0, "classification": "", "payback_months": 0 },
@@ -214,6 +265,9 @@ Write to `memory/ideas/<slug>/cac.json`:
     "word_of_mouth": { "cac": 0, "ltv_cac_ratio": 0, "classification": "", "payback_months": 0 },
     "press_product_hunt": { "cac": 0, "ltv_cac_ratio": 0, "classification": "", "payback_months": 0, "one_time_cohort_estimate": 0 }
   },
+  "cac_by_channel_b2b": [
+    { "channel": "", "estimated_cac": 0, "cac_basis": "", "ltv_cac_base": 0, "ltv_cac_pessimistic": 0, "payback_months": 0, "viability": "viable | marginal | not-viable", "scale_ceiling": "" }
+  ],
   "skipped_channels": [],
   "viable_channels": [],
   "marginal_channels": [],
@@ -221,11 +275,23 @@ Write to `memory/ideas/<slug>/cac.json`:
   "recommended_first_channel": "",
   "recommended_first_channel_rationale": "",
   "payback_period_months": 0,
+  "revenue_scenarios": {
+    "conservative_12mo": { "customers": 0, "blended_arpu": 0, "mrr": 0, "assumption": "" },
+    "base_12mo": { "customers": 0, "blended_arpu": 0, "mrr": 0, "assumption": "" }
+  },
   "market_insights_adjustments": [],
   "viability_verdict": "viable | marginal | not-viable",
-  "viability_verdict_rationale": ""
+  "viability_verdict_rationale": "",
+  "blended_ceiling_customers": 0,
+  "blended_ceiling_basis": "",
+  "critical_caveats": [],
+  "sources": [
+    { "url": "https://", "title": "", "accessed": "YYYY-MM-DD", "used_for": "" }
+  ]
 }
 ```
+
+Fill `cac_by_channel` (object) in the B2C lane or `cac_by_channel_b2b` (array) plus `ltv_cases` and `gross_margin` in the B2B lane; omit the other. `revenue_scenarios` is optional but recommended in the B2B lane. `sources` lists benchmark pages, founder revenue posts, and CPC data consulted.
 
 ## Notes
 

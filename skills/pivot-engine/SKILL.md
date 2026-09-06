@@ -3,7 +3,7 @@ name: pivot-engine
 description: Generates structured pivot options for a scored idea based on weak dimensions, market_insights signals, and founder constraints. Includes scoring simulation, minimum viable pivot criteria, effort estimation, and indie buildability filtering.
 ---
 
-<!-- version: 0.3.0 | outputs: memory/ideas/<slug>/pivot_options.json + memory/ideas/<slug>/pivot_report.md -->
+<!-- version: 0.5.0 | outputs: memory/ideas/<slug>/pivot_options.json + memory/ideas/<slug>/pivot_report.md -->
 
 # Skill: pivot-engine
 
@@ -15,8 +15,8 @@ When an idea scores poorly in one or more dimensions, generate concrete pivot op
 
 - Idea slug
 - `memory/ideas/<slug>/scores.json` (current scores — required)
-- `memory/ideas/<slug>/weaknesses.json` (weak dimensions with root causes — required, run weakness-detection first)
-- `memory/ideas/<slug>/idea.md` (current concept)
+- `memory/ideas/<slug>/weaknesses.json` (weak dimensions with root causes — required in standard mode, optional in micro mode)
+- `memory/ideas/<slug>/idea.md` (current concept, `business_model`)
 - `memory/ideas/<slug>/competitors.json` (positioning gaps, competitor complaints)
 - `memory/ideas/<slug>/distribution.json` (current channel assessment)
 - `memory/ideas/<slug>/pricing.json` (current pricing model and WTP)
@@ -49,6 +49,39 @@ Market insights are essential for generating pivots grounded in real demand rath
 | **Platform pivot** | Target platform (iOS → web, mobile → desktop) | Core idea and audience | Wrong platform for audience behavior or market dynamics |
 | **Monetization pivot** | Revenue model (B2C → B2C2B, app → content, product → service) | Core domain expertise | Direct monetization unviable but the domain has other revenue paths |
 | **Problem pivot** | Which problem to solve | Target audience and domain | Audience is right but the specific pain point is weak; adjacent problem is stronger |
+| **Channel-partner pivot** (B2B) | Who sells it: direct to the buyer vs. through an agency, MSP, or platform that already owns the buyer relationship | Product and end problem | Distribution is weak because the founder has no access to the buyer, but a channel partner does |
+| **Packaging pivot** (B2B) | Billing unit and tiering (per seat → per client, flat → usage, free tier → trial) | Product, audience, price level | Monetization is weak because the unit punishes the buyer or hides value, not because WTP is absent |
+| **ICP-size pivot** (B2B) | Which company size or maturity to sell to (solo operators → 5–40 person firms, or the reverse) | Product and problem | Retention is weak because of buyer mortality, or sales cycle is too long for the current segment |
+
+The `business_model` in `idea.md` decides which rows apply: the three B2B rows are for `prosumer`, `b2b-smb`, and `b2b2c` ideas; a pivot that changes `business_model` itself counts as one variable and must be flagged as such.
+
+## Micro-pivot Mode
+
+When the user names the variable themselves — "what if I charged per client instead of per seat", "what if I sold to agencies instead of end users", "what if I led with the export feature" — there is nothing to diagnose. Run micro mode:
+
+| | Standard mode | Micro mode |
+|---|---|---|
+| Trigger | A verdict of `pivot`/`drop`, or the user asks what to change | The user names one variable to change |
+| `weaknesses.json` | Required | Optional; read it if it exists, do not block on it |
+| Options generated | 2–3, ranked | **Exactly one** — the named change, worked out properly |
+| `pivot_scope` | `standard` | `micro` |
+| `variables_changed` | 1–2 | Exactly 1 |
+| Report | Full `pivot_report.md` | Short form: the change, the evidence, the score projection, the trade-off, the first action |
+
+Everything else is unchanged: the option must still pass the Minimum Viable Pivot Criteria, the scoring simulation, and the indie buildability filter. Micro mode is a shortcut through diagnosis, not through rigour — if the named change fails the criteria, say so plainly and explain what would have to change instead.
+
+## Slug Rule
+
+A pivot either updates the idea in place or becomes a new idea. Count what changes:
+
+| Condition | Decision | What happens |
+|---|---|---|
+| Exactly one variable changes (pricing, audience segment, channel, platform, feature emphasis) | `in-place` | `pivot_scores.json` is written to the same directory. The idea keeps its slug and status. If a decision memo exists, regenerate it with a version note. |
+| Two variables change, OR `business_model` changes, OR the core problem changes | `new-slug` | Create `memory/ideas/<slug>-<pivot-word>/` with a fresh `idea.md` carrying `pivot_of: <old-slug>`. Set the original's frontmatter to `status: paused` and `superseded_by: <new-slug>`. |
+
+`<pivot-word>` is one or two words naming the change (`habit-tracker-climbers-b2b`, `invoice-app-agencies`). Keep the combined slug within 40 characters.
+
+Do not copy dimension files into the new directory. A pivot big enough to earn a new slug changes the competitive set, the pricing anchors, and the channels, so those files are researched again; `idea.md` is the only inheritance. Never delete the original directory — the paused idea is the record of what was tried.
 
 ## Minimum Viable Pivot Criteria
 
@@ -166,7 +199,7 @@ Before finalizing, verify each pivot option passes these constraints:
 | **Budget feasible** | Pivot requires spend exceeding founder's budget tier (e.g., "run paid social" for a Bootstrap founder) |
 | **Time feasible** | Pivot requires > 3 months of work for the founder's tier |
 | **Skill feasible** | Pivot requires skills the founder doesn't have and can't learn in 4 weeks (e.g., "build an ML model" for a no-code beginner) |
-| **No enterprise creep** | Pivot moves the idea toward B2B enterprise, custom sales, or long sales cycles — fundamentally not an indie B2C play |
+| **Sales-cycle guard** | Pivot moves the idea to a buyer whose median sales cycle exceeds 60 days, whose first purchase requires procurement or a security review, or whose ACV exceeds ~$10k and therefore needs outbound sales. B2B-SMB, prosumer, and agency-resale buyers with self-serve or light-touch sales pass this guard; enterprise buyers do not. |
 
 If a pivot fails any constraint, either modify it to fit or discard it and note why.
 
@@ -190,6 +223,12 @@ Machine-readable structured data for downstream skills (`idea-scoring`, `decisio
 
 ```json
 {
+  "idea_slug": "",
+  "generated_at": "YYYY-MM-DD",
+  "lane": "b2c | b2b",
+  "pivot_scope": "micro | standard",
+  "slug_decision": "in-place | new-slug",
+  "new_slug": null,
   "original_score": 0,
   "original_verdict": "",
   "triggered_by_weaknesses": [
@@ -230,7 +269,7 @@ Machine-readable structured data for downstream skills (`idea-scoring`, `decisio
       },
       "indie_buildability": {
         "passes": true,
-        "constraints_checked": ["solo_buildable", "budget_feasible", "time_feasible", "skill_feasible", "no_enterprise_creep"],
+        "constraints_checked": ["solo_buildable", "budget_feasible", "time_feasible", "skill_feasible", "sales_cycle_guard"],
         "failed_constraints": []
       },
       "trade_offs": [],
@@ -348,4 +387,6 @@ created_at: <YYYY-MM-DD>
 - When generating niche pivots, always check `competitors.json` for `positioning_gaps` — an identified gap with evidence is the strongest pivot foundation.
 - Pivot options that combine two small changes (e.g., audience narrowing + pricing change) are allowed as a single option if both changes are "low" effort. Call this out as a **compound pivot** and flag the higher risk.
 - The `pivot_id` field is used by `idea-scoring` to link re-scores in `pivot_scores.json` back to the specific option.
+- `pivot_scope: micro` requires exactly one entry in `pivot_options` with `variables_changed: 1`; the harness rejects anything else. `slug_decision: new-slug` requires `new_slug` to be filled.
 - If market_insights files are past their `stale_after` date, note that pivot evidence may be outdated and recommend refreshing trend analysis before committing to a pivot direction.
+- Only `addressable_weaknesses` from `weaknesses.json` are pivot targets. A `knowledge_gaps` entry means a dimension file is missing or thin: send it back to that research skill rather than pivoting around it.

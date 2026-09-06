@@ -1,0 +1,92 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "predicted_at": "2026-09-06",
+  "lane": "b2b",
+  "natural_usage_frequency": "monthly",
+  "usage_frequency_rationale": "The rhythm is set by the MSP's own service calendar rather than by anything the product must manufacture: a client is onboarded and gets a tenant, a monthly or quarterly governance report goes out, and an audit or insurance questionnaire triggers an evidence export. Discovery itself runs continuously in the background, but the MSP logs in monthly at most. That is adequate for a B2B tool whose value is the artefact rather than the session, and it matches the cadence of the reporting tools MSPs already keep on the books for years.",
+  "external_trigger": "Client onboarding, the monthly or quarterly client review, and the annual SOC 2 audit or cyber-insurance renewal. All three are calendar events driven by the MSP's and the client's own business cycle, so the product never has to manufacture a reason to matter.",
+  "habit_formation_score": 3,
+  "habit_formation_rationale": "Moderate and sufficient. The trigger is external and reliable (onboarding, report cycle, audit), the action produces something the MSP needs anyway, and the reward is a document it can send to a client with its own logo and often its own markup on it. Scored 3 rather than 4 because usage is monthly rather than weekly, nobody logs in for pleasure, and the desire driving it is moderate rather than strong. The desire evaluation found status as the primary driver with a score of 4, which supports the loop without strengthening it: looking prepared is re-triggered by every client review, but it does not pull the MSP into the product between those moments.",
+  "predicted_retention": {
+    "d1": null,
+    "d7": null,
+    "d30": null,
+    "m1_to_m2": "88-93%",
+    "m6": "68-78%",
+    "m12": "50-62%",
+    "monthly_churn_estimate": 0.06,
+    "benchmark_used": "B2B SMB self-serve, $100-500/mo band: 3-6% monthly logo churn. Placed at the top of that band (6%) rather than the middle because three of the five churn factors below are rated high severity, and two of them (Microsoft bundling and incumbent module launches) are external forces the product cannot influence."
+  },
+  "d30_equivalent": 28,
+  "d30_equivalent_note": "Derived by the B2B mapping heuristic: clamp(1 - 12 x 0.06, 0, 1) x 100 = 28. This is a bridge so idea-scoring's single retention rubric can be applied to a B2B product, not a measurement of anything. It places this product in the same scoring band a consumer app with 28% D30 would occupy.",
+  "churn_risk_factors": [
+    {
+      "factor": "Microsoft bundling makes the subscription look redundant",
+      "severity": "high",
+      "detail": "Purview is included in M365 Business Premium as of 2026. The renewal conversation an MSP will eventually have with its client is 'why are we paying separately for this when our Microsoft licence covers it', and the honest answer (better coverage outside the Microsoft estate, less configuration burden) is a nuanced one that loses to a simple budget question. This is the single most dangerous retention factor and it worsens with every Purview release."
+    },
+    {
+      "factor": "Incumbent consolidation gives a reason to switch",
+      "severity": "high",
+      "detail": "Cynomi is already multi-tenant and already publishing on MSP AI governance; Barracuda, Keeper, ThreatLocker and Huntress all reach the same MSPs through existing platforms. When any of them ships a comparable module, the MSP's incentive is to consolidate onto a vendor it already pays, already trusts and already has support terms with. Multi-tenant switching cost slows this but does not prevent it, because the accumulated data is a client inventory rather than years of irreplaceable history."
+    },
+    {
+      "factor": "Rebilling never adopted, so the tool stays a cost line",
+      "severity": "high",
+      "detail": "The retention case rests almost entirely on the MSP marking this up to its clients as a billable service line. If the MSP absorbs it as an internal cost instead, the subscription sits on the expense side of the ledger and is cut at the first budget review. Given that only 13% of MSPs currently earn meaningful revenue from AI services despite 48% naming it their top client need, the failure mode of buying the tool and never packaging it commercially is the base case rather than the exception."
+    },
+    {
+      "factor": "Discovery value flattens after the first sweep",
+      "severity": "medium",
+      "detail": "The first scan produces a genuine shock: dozens of unknown AI tools in use. The second and third produce a much smaller delta. Value does not decay to zero the way a one-off security scanner's does, because new AI tools keep appearing and staff keep adopting them, but the emotional peak is at month one and everything after is maintenance. Steady-state usefulness has to carry the renewal."
+    },
+    {
+      "factor": "MSP client-base contraction",
+      "severity": "medium",
+      "detail": "Per-device pricing indexes revenue to the MSP's client count, so when an MSP loses clients the subscription shrinks with it. This is a correlated-risk structure inherent to the pricing model, and it is the same structure that makes expansion automatic when the MSP grows. MSPs are considerably more stable businesses than the AI agencies evaluated elsewhere in this project, so this is a medium rather than a high concern."
+    }
+  ],
+  "top_churn_risk_factor": "Microsoft bundling Purview into M365 Business Premium, which turns every renewal into a conversation about whether the client is paying twice for the same capability.",
+  "retention_levers": [
+    {
+      "lever": "Ship rebilling support and a markup calculator in v1 and lead the sale with it",
+      "impact": "very-high",
+      "detail": "Directly attacks the highest-severity controllable churn factor. If the MSP bills a client $150/month for an AI governance service line built on a $199/month platform covering fifteen clients, cancelling means destroying revenue rather than saving cost. This inverts the renewal calculation and it is the only lever here that changes the economics rather than the experience."
+    },
+    {
+      "lever": "Build the Purview comparison into the product, not just the marketing",
+      "impact": "high",
+      "detail": "Show, per client tenant, exactly what Purview does and does not cover in that specific estate: unmanaged devices, non-Microsoft SaaS, personal accounts. Turning the strongest objection into a report the MSP can hand its client converts the bundling threat into a demonstration of value. Untested, and the honest risk is that on a Microsoft-heavy estate the report proves the objection right."
+    },
+    {
+      "lever": "Qualify on client count at signup",
+      "impact": "high",
+      "detail": "Refuse MSPs with fewer than five active clients. They cannot amortise the platform floor, they generate disproportionate support load, and they are the segment most likely to churn. Reduces signups and materially improves cohort retention, which is the right trade at this scale."
+    },
+    {
+      "lever": "Anchor the renewal to the audit calendar",
+      "impact": "medium",
+      "detail": "Time renewal conversations to land shortly before the client's SOC 2 or insurance renewal, when the evidence pack is about to be needed rather than months after it was last used. This is scheduling, not product, but it exploits the one reliable external trigger the category has."
+    },
+    {
+      "lever": "Accumulate per-tenant history so the register grows rather than decays",
+      "impact": "medium",
+      "detail": "Twelve months of attestation records and change history per client is genuinely awkward to recreate elsewhere. Real but modest: the switching cost is measured in weeks of migration, not in irreplaceable data."
+    }
+  ],
+  "churn_risk": "high",
+  "churn_risk_rationale": "Three of five factors are rated high severity, which the rubric maps to high churn risk. Two of the three (Microsoft bundling and incumbent consolidation) are external forces no product decision addresses; only the rebilling factor is controllable, and the channel data suggests most MSPs will not act on it without heavy hand-holding.",
+  "retention_verdict": "moderate",
+  "retention_score": 48,
+  "retention_score_reasoning": "The B2B verdict table places 3-6% monthly churn with a calendar trigger at 'moderate', and the mapped d30_equivalent of 28 sits in idea-scoring's 40-59 band for a moderate verdict with D30 above 8%. Scored 43 within that band on the strength of the external trigger and the absence of a clean-report paradox, then adjusted +5 for the recurring external trigger the B2B lane allows (audit, renewal, report cycle), giving 48. Held below the band midpoint because the estimate is benchmarked from an analogous segment rather than observed, and because the dominant churn driver is a competitor's bundling decision rather than anything the founder controls.",
+  "inputs_used": [
+    "idea.md",
+    "desire_scores.json",
+    "pricing.json",
+    "competitors.json",
+    "shadow-ai-msp-b2b-communities-2026-09.md"
+  ],
+  "inputs_missing": [
+    "Any observed churn data for shadow-AI discovery products. The category has no published retention figures and effectively no review corpus, so every number here is benchmarked from the SMB self-serve SaaS band rather than from this category."
+  ]
+}

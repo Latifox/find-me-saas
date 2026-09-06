@@ -1,0 +1,119 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "analyzed_at": "2026-09-06",
+  "lane": "b2b",
+  "organic_reach_potential": "low",
+  "viral_loop_exists": false,
+  "viral_loop_type": "word-of-mouth",
+  "viral_loop_description": "Two weak loops. B2B2B exposure: the MSP's clients receive a governance report, but the product is white-labelled, so the vendor is invisible by design and the exposure generates no attribution. MSP peer referral: MSP owners talk to each other constantly in peer groups and forums, and service-line adoption does spread by imitation, which is the only loop with any real force. Neither is a growth mechanism; together they modestly reduce blended acquisition cost.",
+  "k_factor_estimate": 0.126,
+  "k_factor_classification": "marginal",
+  "k_factor_rationale": "i is estimated at 1.8 mentions per customer over its lifetime, drawn from how MSP peer groups discuss tooling, and c at 0.07 because most people in an MSP peer group are not evaluating a new security SKU at the moment they hear about one. k = 0.126 sits in the marginal band: referrals meaningfully reduce cost per customer but cannot drive growth. Note the white-label design deliberately suppresses the stronger of the two loops, which is the correct product decision and a real distribution cost.",
+  "paid_feasibility": "not-viable",
+  "minimum_paid_budget_monthly": 600,
+  "paid_feasibility_rationale": "Excluded outright by budget, not by economics. The founder's captured budget is under $100 per month, which is bootstrap tier, and the channel relevance filter removes every paid channel at that tier. For reference, LinkedIn targeting MSP owners would need roughly $600 per month to produce a readable signal and a CAC around $600-1,500 against a base-case contribution LTV of $2,720. The ratio would be defensible; the money does not exist. Paid becomes available only if the business first generates its own cash, which requires the organic channels to work, which is the thing in doubt.",
+  "discovery_channel_score": {
+    "category_competition": 1,
+    "keyword_opportunity": 2,
+    "search_intent_match": 3,
+    "advocacy_prompt_potential": 2,
+    "differentiation_visibility": 1,
+    "total": 9,
+    "opportunity": "medium",
+    "factor_rationale": {
+      "category_competition": "Low. This factor asks whether buyer-specific terms are unclaimed while incumbents sell to a different buyer, and the answer here is the opposite of the agency-facing ideas in this project. MSP-specific shadow-AI content already exists from ShadowLock, Lavawall, Rhindon Cyber, Torii, MintMCP and Netwrix, several with funded content teams. The buyer-specific angle is not open; it is where the competition already is.",
+      "keyword_opportunity": "Medium. High-intent queries genuinely exist, such as shadow AI detection for MSPs, AI governance MSP, and per-endpoint AI discovery pricing. But the top results are solid, maintained comparison pages rather than thin or absent ones, which is exactly the rubric's medium condition. Long-tail gaps remain around non-Microsoft estates and specific compliance frameworks.",
+      "search_intent_match": "High, and the strongest factor here. The buying motion is documented as responsive rather than evangelistic: MSPs search after a client raises AI controls during a SOC 2 audit, a HIPAA review or a cyber-insurance renewal. That is precisely the rubric's high condition, a buyer who searches when the trigger fires. Demand does not have to be created, only captured.",
+      "advocacy_prompt_potential": "Medium. There is a positive moment when a client's audit passes or a governance report lands well, but it is muted: compliance work earns relief rather than enthusiasm, and the white-label design means any praise attaches to the MSP rather than the vendor. Some prompt moments exist, none in the core loop.",
+      "differentiation_visibility": "Low. The one-sentence position, shadow-AI discovery priced per device for MSPs, is a sentence ShadowLock can and does already claim, and Lavawall claims a version of it with published partner tiers. A position two competitors already occupy is not visible differentiation."
+    }
+  },
+  "advocacy_fit": "low",
+  "advocacy_fit_rationale": "One high factor, two medium, two low, which the rubric maps to low. Shareable artefact is low because white-labelling removes vendor visibility from the only document that leaves the building. Community presence is medium: r/msp and MSP peer groups are active and identifiable, but they are explicitly hostile to vendor self-promotion and ban for it, so a founder must participate as a peer for months before mentioning a product. Partner pull is low and effectively blocked, because RMM and PSA marketplace listings require the SOC 2 Type II and ISO 27001 attestations documented in MSP vendor-selection criteria. Practitioner credibility is medium: a SOC-analyst background is real and relevant to the subject matter, but the founder has never run an MSP and this audience distinguishes sharply between people who have carried a client roster and people who have not. Referral economics is the single high factor, because a $199 monthly ACV comfortably supports a referral incentive.",
+  "advocacy_fit_breakdown": {
+    "shareable_artefact": "low",
+    "community_presence": "medium",
+    "partner_pull": "low",
+    "practitioner_credibility": "medium",
+    "referral_economics": "high"
+  },
+  "founder_distribution_edge": {
+    "exists": true,
+    "strength": "low",
+    "advantage_type": "content-skills",
+    "components": [
+      "Marketing and lead-generation experience, which is genuine and applies directly to the comparison-content channel",
+      "SOC-analyst background giving credible authority on the subject matter itself",
+      "Demonstrated ability to research and write technical security content"
+    ],
+    "limitations": [
+      "No MSP relationships of any kind. The inner-circle contact in user_profile.md is an AI automation agency owner, which is a different buyer reached through different channels; there is no overlap with the MSP world",
+      "No existing audience of meaningful size in any channel, so the marketing skill has no distribution to apply itself to yet",
+      "The content channel this skill suits is the one contested by six vendors already publishing, several with funded content teams",
+      "15 hours a week against a 6-12 month content ramp means the compounding channel arrives late, and low risk tolerance means the founder is unlikely to still be funding it when it does"
+    ]
+  },
+  "recommended_first_channel": "MSP peer groups and operator communities, entered as a practitioner rather than a vendor, with comparison content published in parallel from week one.",
+  "recommended_first_channel_rationale": "It is the only channel that is simultaneously affordable at a bootstrap budget, open to a vendor without SOC 2 Type II, and capable of producing a customer inside a quarter. That is a description of the least-bad option rather than a good one. The honest framing: this recommendation asks the founder to spend months building standing in a community that bans vendors for selling, in order to reach a ceiling of perhaps 25 customers, while the compounding channel behind it needs a year to ramp against funded competitors.",
+  "channels_ranked": [
+    {
+      "channel": "MSP peer groups and operator communities (r/msp, MSP Slack and Discord, local peer groups)",
+      "viability": "medium",
+      "time_to_first_100_users": "not reachable; realistic ceiling 10-25 customers over 18 months",
+      "estimated_cac": "$400 (time-valued)",
+      "ceiling": "LOW. 10-25 customers, roughly $2,000-5,000 MRR. Bounded by how much credibility one person can build in communities that prohibit vendor promotion, not by market size."
+    },
+    {
+      "channel": "Comparison and buyer-intent content aimed at MSPs",
+      "viability": "medium",
+      "time_to_first_100_users": "18-24 months if it ramps at all",
+      "estimated_cac": "$900 (time-valued, contested SERP)",
+      "ceiling": "MEDIUM. The only channel whose ceiling exceeds a few dozen customers, and the only one that compounds. Needs 6-12 months to show signal at 15 hours a week, against six vendors already ranking."
+    },
+    {
+      "channel": "Outbound email and LinkedIn to MSP owners",
+      "viability": "low",
+      "time_to_first_100_users": "not reachable",
+      "estimated_cac": "$700 (time-valued)",
+      "ceiling": "LOW-MEDIUM. MSP owners are among the most heavily prospected buyers in software and filter hard on vendor maturity signals this vendor cannot provide."
+    },
+    {
+      "channel": "Launch moment (Product Hunt, Show HN, MSP trade press)",
+      "viability": "low",
+      "time_to_first_100_users": "one-time cohort of 20-60 signups",
+      "estimated_cac": "$50 (one-time)",
+      "ceiling": "ONE-TIME. Audience skews developer rather than MSP owner, so relevance is poor. Model as a cohort, not a channel."
+    },
+    {
+      "channel": "RMM and PSA partner programmes and marketplace listings",
+      "viability": "low",
+      "time_to_first_100_users": "blocked",
+      "estimated_cac": "$1,200+ plus certification cost",
+      "ceiling": "BLOCKED. Requires SOC 2 Type II, ISO 27001 and current penetration-test reports per published MSP vendor-selection criteria. This is the channel that would actually scale this business, and it is closed at this budget."
+    },
+    {
+      "channel": "Paid LinkedIn and paid search",
+      "viability": "low",
+      "time_to_first_100_users": "not applicable",
+      "estimated_cac": "$600-1,500",
+      "ceiling": "EXCLUDED by the bootstrap budget filter."
+    }
+  ],
+  "distribution_verdict": "weak",
+  "tier_adjustment_applied": "None. The founder is icp_tier growth, which permits an upgrade of one level when paid channels are viable and the founder has optimisation experience. Paid channels are excluded by a sub-$100 monthly budget, so the upgrade condition is not met and the raw verdict stands. Recording this explicitly because the tier would have improved this score under different constraints, and the constraint rather than the tier is what decided it.",
+  "distribution_verdict_rationale": "Weak on the B2B criteria. The strong condition requires either a high discovery score plus a second channel with a real ceiling, or an inner-circle buyer plus one scalable channel; neither holds. The moderate condition requires a k-factor of at least 0.2, and this is 0.126, or exactly one channel with a real ceiling. Content is arguably that channel, which is what keeps this from being the lowest possible score, but it is marginal on unit economics, needs a year to ramp at the available hours, and competes against funded content teams. Everything else is either low-ceiling, closed, or unaffordable. The decisive structural fact is the absence of a warm network: the agency-facing ideas in this project scored well here because the founder had an inner-circle buyer who was simultaneously design partner, first customer and referral source. Against MSPs he has no such person, and the channel that would substitute for one, the partner programme, is gated behind certifications a bootstrapped vendor cannot obtain.",
+  "distribution_score": 32,
+  "distribution_score_reasoning": "The rubric places a weak verdict at 15-39 and reserves 0-14 for no viable channel at all. A viable organic channel does exist, so the score sits in the upper part of the weak band at 30, plus 3 for a genuine founder capability in content and marketing that applies to the one compounding channel available, giving 32. Not the full +10 founder-edge adjustment, because that adjustment is written for a founder with an existing audience or distribution advantage, and this founder has the skill without the audience or the access.",
+  "market_insights_sources_used": [
+    "shadow-ai-msp-b2b-communities-2026-09.md",
+    "ai-agent-ops-security-web-search-2026-08.md"
+  ],
+  "sources": [
+    { "url": "https://www.zomentum.com/blog/how-to-choose-vendor-partners-for-msp-business", "title": "How to Choose Vendor Partners for MSP Business, Zomentum", "accessed": "2026-09-06", "used_for": "MSP vendor-selection criteria that close the partner channel and set the maturity filter on outbound" },
+    { "url": "https://www.magentrix.com/blog/cybersecurity-partner-programs-complete-guide", "title": "How Cybersecurity Vendors Build Partner Programs 2026, Magentrix", "accessed": "2026-09-06", "used_for": "SOC 2 Type II, ISO 27001 and pen-test requirements for security vendor partner programmes" },
+    { "url": "https://shadowlock.io/blog/best-ai-governance-tools-for-msps/", "title": "Best AI Governance Tools for MSPs 2026, ShadowLock", "accessed": "2026-09-06", "used_for": "Competitor already occupying the MSP-specific content and positioning space" },
+    { "url": "https://lavawall.com/best-saas-discovery-shadow-ai-detection.php", "title": "Best SaaS discovery and shadow-AI detection tools for MSPs 2026, Lavawall", "accessed": "2026-09-06", "used_for": "Second competitor publishing MSP-specific comparison content with public partner pricing" },
+    { "url": "https://www.channele2e.com/native/how-msps-should-govern-client-ai-adoption", "title": "How MSPs should govern client AI adoption, ChannelE2E", "accessed": "2026-09-06", "used_for": "Responsive buying motion and the search-intent-match rating" },
+    { "url": "https://www.keepersecurity.com/blog/2026/09/02/shadow-ai-what-clients-arent-telling-their-msps/", "title": "Shadow AI: What Clients Aren't Telling Their MSPs, Keeper Security", "accessed": "2026-09-06", "used_for": "MSP-channel incumbent content presence in the same keyword space" }
+  ]
+}

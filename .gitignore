@@ -24,6 +24,18 @@ memory/market_insights/*.md
 # Claude Code local overrides (project-level settings.json is committed)
 .claude/settings.local.json
 
+# ── Unrelated product work kept in this working copy ─────────────────────────
+# specs/ holds separate products (Ledger, Errorbar, LinkedIn) that are not part of
+# FindMeSaaS. Excluded from the public repository; the files stay on disk.
+specs/
+
+# ── Internal build-cycle artifacts ───────────────────────────────────────────
+.ay/
+
 # ── Logs ─────────────────────────────────────────────────────────────────────
 *.log
 codex-tui.log
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc

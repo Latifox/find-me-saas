@@ -1,0 +1,150 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "modeled_at": "2026-09-06",
+  "lane": "b2c",
+  "ltv": {
+    "estimated_ltv": 0.5,
+    "arpu_monthly": 0.125,
+    "average_lifespan_months": 4,
+    "ltv_confidence": "medium",
+    "ltv_assumptions": [
+      "Freemium ARPU is computed as the skill directs: target price x conversion rate, so $4.99 x 2.5% = $0.125 per install per month. This is blended across all installs, not per paying user",
+      "Lifespan of 4 months derives from retention.json D30 of 8%, which the category table maps to a 3-6 month average lifespan",
+      "A paying user is worth roughly $19.96 over the same period; the $0.50 figure is what an install is worth, which is the number acquisition must be measured against",
+      "Confidence is medium: pricing and conversion are modelled, and no climbing app publishes retention or conversion data"
+    ]
+  },
+  "founder_budget_tier": "bootstrap",
+  "founder_budget_tier_note": "budget_constraint is 'low' at under $100 per month, captured 2026-09-06. Every paid channel is removed by the relevance filter before modelling.",
+  "cac_by_channel": {
+    "aso_organic": {
+      "cac": 1.5,
+      "ltv_cac_ratio": 0.33,
+      "classification": "Cash burn",
+      "payback_months": 12.0
+    },
+    "content_seo": {
+      "cac": 4.0,
+      "ltv_cac_ratio": 0.13,
+      "classification": "Cash burn",
+      "payback_months": 32.0
+    },
+    "tiktok_organic": {
+      "cac": 2.5,
+      "ltv_cac_ratio": 0.2,
+      "classification": "Cash burn",
+      "payback_months": 20.0
+    },
+    "reddit_community": {
+      "cac": 2.0,
+      "ltv_cac_ratio": 0.25,
+      "classification": "Cash burn",
+      "payback_months": 16.0
+    },
+    "paid_social_meta": {
+      "cac": 0,
+      "ltv_cac_ratio": 0,
+      "classification": "skipped - bootstrap budget",
+      "payback_months": 0
+    },
+    "paid_social_tiktok": {
+      "cac": 0,
+      "ltv_cac_ratio": 0,
+      "classification": "skipped - bootstrap budget",
+      "payback_months": 0
+    },
+    "influencer": {
+      "cac": 0,
+      "ltv_cac_ratio": 0,
+      "classification": "skipped - bootstrap budget and no affiliate economics at $4.99",
+      "payback_months": 0
+    },
+    "word_of_mouth": {
+      "cac": 0.5,
+      "ltv_cac_ratio": 1.0,
+      "classification": "Unprofitable",
+      "payback_months": 4.0
+    },
+    "press_product_hunt": {
+      "cac": 0.2,
+      "ltv_cac_ratio": 2.5,
+      "classification": "Marginal",
+      "payback_months": 1.6,
+      "one_time_cohort_estimate": 500
+    }
+  },
+  "skipped_channels": [
+    "Paid social on Meta and TikTok: excluded by the bootstrap budget filter. Also excluded on economics, since a $0.50 install value cannot absorb any paid CPI",
+    "Influencer and creator partnerships: excluded by budget, and separately by affiliate economics. A $4.99 monthly subscription cannot fund a commission that would interest a climbing creator"
+  ],
+  "viable_channels": [],
+  "marginal_channels": [
+    "press_product_hunt (one-time cohort only)"
+  ],
+  "non_viable_channels": [
+    "aso_organic",
+    "content_seo",
+    "tiktok_organic",
+    "reddit_community",
+    "word_of_mouth"
+  ],
+  "recommended_first_channel": "None qualifies. If the idea were pursued regardless, ASO would be the least-bad starting point at an estimated $1.50 per install.",
+  "recommended_first_channel_rationale": "This is the honest output rather than a recommendation. No channel reaches even 1:1 against a blended install value of $0.50, and word of mouth only reaches parity. ASO is named as least-bad because it has the lowest cost per install and the category has genuine search intent, but at 0.33:1 it destroys value on every install. The arithmetic is not marginal, it is decisive: acquisition would have to cost under $0.17 per install to reach 3:1, which no channel in this category achieves.",
+  "payback_period_months": 12.0,
+  "revenue_scenarios": {
+    "conservative_12mo": {
+      "customers": 200,
+      "blended_arpu": 4.99,
+      "mrr": 998,
+      "assumption": "200 paying subscribers from organic ASO and a launch cohort, ignoring acquisition cost entirely."
+    },
+    "base_12mo": {
+      "customers": 540,
+      "blended_arpu": 4.99,
+      "mrr": 2695,
+      "assumption": "Matches the market_size.json year-1 SOM of roughly $25,900. Assumes acquisition happens at no cost, which the channel analysis says it cannot."
+    }
+  },
+  "market_insights_adjustments": [
+    "Category search intent is real, which supports ASO, but keyword saturation scored 3 of 3 in competitors.json with Crimpd and Lattice holding the head terms, so ASO CAC is placed at $1.50 rather than the $0.50 bottom of the band",
+    "Climbing has an unusually active creator ecosystem, which would normally favour influencer and TikTok channels, but a habit tracker produces no shareable artefact and the price point cannot fund commissions",
+    "Rising trend velocity (5.5% annual gym growth) slowly expands the base but does nothing to change the per-install economics"
+  ],
+  "viability_verdict": "not-viable",
+  "viability_verdict_rationale": "No channel achieves 2:1, which the rubric defines as not-viable, and the shortfall is not close: the best organic channel returns 33 cents for every dollar spent acquiring an install. The cause is structural rather than tactical. Freemium is compulsory here because the direct competitor gives away a credible product, conversion sits at the low end of a low band for the same reason, and a $4.99 price multiplied by 2.5% conversion produces an install worth cents. Even doubling conversion to 5% only reaches 0.66:1 on the best channel. The economics fail on the model, not on the execution.",
+  "critical_caveats": [
+    "A paid-only model at $4.99 would produce an LTV of about $19.96 and make ASO viable at roughly 13:1. It is excluded because pricing.json judges a paywall at the door commercially implausible against a free, credible, brand-backed competitor. That judgement, not the arithmetic, is what makes this idea fail on monetization",
+    "The single most sensitive input is freemium conversion. At 2.5% nothing works; at 10%, which is top-quartile for the category and unlikely against a free incumbent, ASO would reach 1.3:1 and still fail",
+    "The bootstrap budget is not the binding constraint here. Even with money, paid acquisition against a $0.50 install value would burn capital faster"
+  ],
+  "inputs_used": [
+    "pricing.json",
+    "retention.json",
+    "competitors.json",
+    "user_profile.md",
+    "habit-tracking-climbing-apps-2026-09.md"
+  ],
+  "inputs_missing": [
+    "Observed CPI data for climbing or niche fitness apps; channel costs are taken from the category benchmark bands"
+  ],
+  "sources": [
+    {
+      "url": "https://fitnessaitrends.com/blog/crimpd-vs-lattice-vs-sequence-climbing-training-app/",
+      "title": "Crimpd vs Lattice vs Sequence 2026, Fitness AI Trends",
+      "accessed": "2026-09-06",
+      "used_for": "Competitor pricing and free tier scope"
+    },
+    {
+      "url": "https://straitsresearch.com/report/habit-tracking-apps-market",
+      "title": "Habit Tracking Apps Market Size and Growth, Straits Research",
+      "accessed": "2026-09-06",
+      "used_for": "Freemium share of category revenue and price band"
+    },
+    {
+      "url": "https://statista.com/statistics/763788/climbing-sport-indoor-boulder-participants-us",
+      "title": "Participants in indoor climbing in the U.S., Statista",
+      "accessed": "2026-09-06",
+      "used_for": "Addressable participant base behind channel ceilings"
+    }
+  ]
+}

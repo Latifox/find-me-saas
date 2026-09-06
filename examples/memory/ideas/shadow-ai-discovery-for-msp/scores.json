@@ -1,0 +1,115 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "scored_at": "2026-09-06",
+  "scoring_stage": "full-validation",
+  "lane": "b2b",
+  "supersedes": "candidate-quick-score of 53/100 from the idea-generation run on 2026-08-26, which carried competition at 55 and flagged distribution as the weak point",
+  "dimension_scores": {
+    "demand": 64,
+    "competition": 22,
+    "monetization": 55,
+    "distribution": 32,
+    "retention": 48,
+    "founder_market_fit": 58
+  },
+  "dimension_rationale": {
+    "demand": "Trend velocity is rising-fast, which qualifies for the 60-79 band through the OR clause, while desire_strength_label is moderate rather than strong, which holds it in the lower half. Scored 59 in band plus 5 for monetization_validated being true in idea.md, giving 64. No cross-platform bonus: both research files are text research (web search and B2B communities) and idea.md records cross_platform_resonance as false. The nuance that decides this score is whose desire is being measured. The end client's need is urgent, deadline-bound and budgeted, driven by SOC 2 audits, HIPAA reviews and cyber-insurance renewals, with 68% of employees using unauthorised AI tools in early 2026 against 41% in 2023. The MSP's need is derived: it wants to look prepared and to have something to sell. Derived desires are satisfiable by cheaper substitutes, and 82% of organisations currently satisfy this one with nothing at all.",
+    "competition": "The lowest score recorded in this project, and the first maximum saturation reading. saturation_score totals 15 of 15: seven or more products sell this to this buyer, Microsoft bundles the capability into M365 Business Premium, multiple funded startups plus a platform vendor ship it natively, MSP-specific comparison pages already exist from six publishers, and every MSP-channel incumbent is producing content for this exact buyer. That places it in the 0-24 band for high saturation with dominant incumbents. Scored 22 rather than lower because one genuinely open segment remains, non-Microsoft SMB estates under 150 seats, and higher than the floor because the category has no entrenched review leader. The -15 modifier for a category owned by a FAANG-class player applies directly and is already reflected. Note the movement: the candidate stage scored this 55 from trend narrative alone, and researched competition came in 33 points lower, the fifth consecutive validation in this project where competition fell 20-40 points under real research.",
+    "monetization": "The B2B lane's 80-100 band requires a validated price anchor, defined as a named product charging the same buyer at a comparable price. There is none. Nudge charges the SMB rather than the MSP and at a different price point; Cynomi charges MSPs at five to ten times this level; ShadowLock charges MSPs per device but withholds its rate card, so it cannot validate anything. What pricing.json found instead is a bimodal market with nothing in the middle, which is the exact condition the 35-59 band names: no price anchor because the revealed price is a gap between two clusters. Scored at the top of that band at 55, because two channels do clear 3:1 in the base case with a two-month payback, plus the expansion mechanism of per-device overage and rebilling. Held there rather than higher because monetization_risk is high: the marginal price of adequate discovery is zero for any Microsoft-native client.",
+    "distribution": "distribution_verdict is weak, which maps to 15-39. Scored 30 in band, in the upper part because a viable organic channel does exist rather than none at all, plus 3 for genuine content and marketing capability that applies to the one compounding channel available. The full +10 founder-edge adjustment was not applied because it is written for a founder with an existing audience or distribution advantage, and this founder has the skill without the audience or the access. The structural finding: there is no warm network. The agency-facing ideas in this project scored 68 here because an inner-circle buyer was simultaneously design partner, first customer and referral source. Against MSPs no such person exists, and the substitute channel, the RMM and PSA partner programmes, is gated behind SOC 2 Type II and ISO 27001 attestations that a sub-$100 monthly budget cannot buy.",
+    "retention": "retention_verdict is moderate with a mapped d30_equivalent of 28, placing it in the 40-59 band. Scored 43 in band on the strength of a reliable external trigger (client onboarding, report cycle, audit and insurance renewal) and the absence of a clean-report paradox, since the register grows as the MSP adds clients rather than decaying as problems are fixed. Adjusted +5 for the recurring external trigger the B2B lane allows, giving 48. Held below the band midpoint because three of five churn factors are high severity and two of those, Microsoft bundling and incumbent module launches, are outside the founder's control entirely.",
+    "founder_market_fit": "Scored 58, in the 50-74 band for moderate domain overlap. The subject-matter fit is genuinely strong: a SOC-analyst background is directly relevant to shadow-AI risk classification, and security tooling is a trust sale where practitioner credibility matters. What keeps this out of the 75-100 band is the band's own second condition, that distribution advantages align. They do not. The +10 adjustment for an inner-circle buyer does not apply, because the inner-circle contact recorded in user_profile.md owns an AI automation agency, not an MSP, and the two buyer populations do not overlap. This is the clearest illustration in the project of the difference between knowing a domain and being able to reach its buyers."
+  },
+  "weights_applied": {
+    "demand": 0.20,
+    "competition": 0.10,
+    "monetization": 0.20,
+    "distribution": 0.20,
+    "retention": 0.15,
+    "founder_market_fit": 0.15
+  },
+  "floor_penalty": 0.88,
+  "floor_penalty_note": "Competition at 22 falls below the killer-dimension threshold of 25, applying a multiplicative penalty of 22/25 = 0.88. This is the first floor penalty recorded in this project. It costs the idea roughly 6 points and is the algorithm working exactly as intended: a market where the capability is being bundled into the buyer's existing licence should not be rescued by good scores elsewhere.",
+  "base_score": 48.3,
+  "missing_discount": 1.0,
+  "final_score": 43,
+  "verdict": "pivot",
+  "verdict_note": "43 sits in the 35-54 pivot band, ten points below the candidate-stage score of 53. The candidate note predicted the failure mode precisely, calling this an excellent market and the wrong channel for this founder, and full research confirmed it and added a second problem the candidate stage had not seen: Microsoft bundling the capability into M365 Business Premium. The pivot verdict is correct rather than generous. The market is real, the product is buildable, and the reachable version of this business is not the one described here.",
+  "score_confidence": "medium",
+  "score_confidence_note": "All six dimensions have source data, which the table would place at high. Downgraded to medium for three reasons. The category has effectively no independent review corpus, with the leading pure-play carrying two G2 reviews in total, so competitor quality and customer satisfaction are unverifiable. Retention is benchmarked from the SMB self-serve SaaS band rather than observed, because no shadow-AI vendor publishes churn. And the two competitors occupying the exact target position, ShadowLock and Lavawall, withhold their rate cards, so the competitive price this product would be quoted against is unknown.",
+  "missing_inputs": [
+    "ShadowLock and Lavawall rate cards, both withheld, leaving the true MSP-native competitive price unknown",
+    "Any observed churn or retention data for shadow-AI discovery products",
+    "Direct evidence of an MSP paying for standalone shadow-AI discovery rather than waiting for a platform vendor to bundle it (this is the RAT)",
+    "Prior revenue history for the founder, still unconfirmed, which would settle the provisional growth tier assignment"
+  ],
+  "sources_checked": 15,
+  "top_strengths": [
+    {
+      "dimension": "demand",
+      "score": 64,
+      "reason": "The buying motion is responsive rather than evangelistic: clients raise AI controls themselves during SOC 2 audits, HIPAA reviews and cyber-insurance renewals, and unauthorised AI use ran at 68% of employees in early 2026 against 41% in 2023 with one organisation in five already breached through shadow AI."
+    },
+    {
+      "dimension": "founder_market_fit",
+      "score": 58,
+      "reason": "A SOC-analyst background maps directly onto risk classification and gives credible authority in a category that is fundamentally a trust sale, which most competitors' founders cannot claim personally."
+    },
+    {
+      "dimension": "monetization",
+      "score": 55,
+      "reason": "Two channels clear 3:1 in the base case with a two-month payback on the recommended channel, and the per-device overage plus rebilling gives automatic expansion as an MSP's client count grows."
+    }
+  ],
+  "top_weaknesses": [
+    {
+      "dimension": "competition",
+      "score": 22,
+      "reason": "Maximum saturation at 15 of 15, with Microsoft bundling Purview into M365 Business Premium at roughly $22 per user per month equivalent, so the marginal price of adequate discovery is zero for Microsoft-native SMBs, while ShadowLock and Lavawall already occupy the MSP-native per-device position this idea proposed to take."
+    },
+    {
+      "dimension": "distribution",
+      "score": 32,
+      "reason": "No warm network into MSPs, and the RMM and PSA partner programmes that would scale this are gated behind SOC 2 Type II, ISO 27001 and current penetration-test reports, none of which is reachable on a sub-$100 monthly budget. The one affordable channel, MSP peer communities, bans vendors for selling in it."
+    },
+    {
+      "dimension": "retention",
+      "score": 48,
+      "reason": "Three of five churn factors are high severity and two are external: every renewal invites the question of why the client pays separately for something its Microsoft licence nominally covers, and any MSP-platform incumbent shipping a comparable module gives an immediate consolidation reason to switch."
+    }
+  ],
+  "killer_dimensions": ["competition"],
+  "score_movement": {
+    "candidate_stage": 53,
+    "full_validation": 43,
+    "competition_movement": "55 to 22",
+    "explanation": "Competition fell 33 points, the second largest single-dimension drop recorded in this project after geo-category-panel's 30-point fall. The candidate stage scored competition from trend narrative, which described ShadowLock as circling the MSP channel and rated saturation low-medium. Research found the position already occupied by two vendors with published or semi-published MSP pricing, four MSP-channel incumbents publishing to the same buyer, and, decisively, Microsoft bundling the capability into the SKU most SMB clients already own. The overall score fell only 10 points rather than 33 because the candidate stage had already scored distribution low at 62 and the full analysis found it lower still at 32, so part of the damage was already priced in.",
+    "pattern": "Fifth consecutive full validation where competition dropped 20-40 points under real research: automation-security-scanner 88 to 38, delivery-provenance-attestation 85 to 45, agent-governance-layer 85 to 65, geo-category-panel 62 to 32, and now shadow-ai-discovery-for-msp 55 to 22. The task-1 decision to cap candidate-stage competition at 60 is validated by this run; a cap at 45 would have been closer still."
+  },
+  "riskiest_assumption_test": {
+    "assumption": "MSPs will buy a standalone shadow-AI discovery SKU from an unknown solo vendor, rather than waiting for the security platform they already resell to ship the same capability.",
+    "category": "distribution",
+    "criticality": 5,
+    "uncertainty": 5,
+    "rat_score": 25,
+    "rat_selection_note": "Chosen over the competing candidate, whether Purview closes the gap, because it is both more decisive and far cheaper to test. If MSPs say they will wait for Huntress, ThreatLocker, Barracuda or Cynomi to ship it, then the product's fate is decided by a competitor's roadmap and no amount of product quality changes the outcome. It also folds in the vendor-maturity question, since an MSP explaining why it would wait will name the certifications and support expectations it needs, and those answers are the SOC 2 Type II gate in the buyer's own words.",
+    "experiment": {
+      "type": "Distribution works - cold channel test with a purchase-intent question, no product required",
+      "description": "Fourteen days, no code. Contact 25 MSP owners or vCIOs through MSP peer groups, LinkedIn and MSP-focused communities, approaching as a practitioner asking a research question rather than as a vendor pitching. Ask three things in order. One: has a client asked you about AI controls in the last six months, and what did you tell them? Two: if a purpose-built shadow-AI discovery tool existed at $2 per device per month, white-labelled and multi-tenant, would you buy it now or wait for one of your existing platform vendors to add it? Three, only for those who say they would buy now: would you commit to a paid pilot at $199 per month starting within 30 days, card on file today? The second question is the real experiment. It is designed to surface the waiting behaviour that the competitive analysis predicts, and an MSP who says wait will usually explain what would change their mind, which is the vendor-maturity answer.",
+      "duration": "14 days",
+      "estimated_cost": "$0-50 (LinkedIn outreach and community participation; no build)",
+      "pass_threshold": "Both conditions required. At least 8 of 25 MSPs (32%) say they would buy standalone now rather than wait for an existing vendor, AND at least 2 of 25 (8%) put a card on file for a 30-day paid pilot. If more than 15 of 25 (60%) say they would wait, that is a fail regardless of what the other answers show.",
+      "fail_action": "drop the MSP channel rather than the problem. The demand evidence is genuinely strong and the failure here is channel-specific, so the correct response is to re-test the same capability against the buyer the founder can actually reach: the AI automation agency in his inner circle, and agencies like it, who deploy AI into client environments and face the same governance question without an MSP's platform vendor waiting to solve it for them."
+    },
+    "all_assumptions_ranked": [
+      { "assumption": "MSPs will buy standalone rather than wait for their existing platform vendor to ship it", "criticality": 5, "uncertainty": 5, "rat_score": 25 },
+      { "assumption": "Microsoft Purview coverage stays weak enough outside the Microsoft estate to justify a separate invoice", "criticality": 5, "uncertainty": 4, "rat_score": 20 },
+      { "assumption": "An MSP will deploy telemetry into a client environment on the word of a vendor with no SOC 2 Type II and no reviews", "criticality": 5, "uncertainty": 4, "rat_score": 20 },
+      { "assumption": "MSP peer communities can be used for acquisition without the founder being banned as a vendor", "criticality": 4, "uncertainty": 4, "rat_score": 16 },
+      { "assumption": "Comparison content can rank against six publishers with funded content teams at 15 hours a week", "criticality": 4, "uncertainty": 4, "rat_score": 16 },
+      { "assumption": "MSPs will package and rebill this as a service line rather than absorbing it as a cost", "criticality": 4, "uncertainty": 3, "rat_score": 12 },
+      { "assumption": "Monthly churn holds at or below 6%", "criticality": 3, "uncertainty": 4, "rat_score": 12 },
+      { "assumption": "Multi-signal discovery is technically reliable enough to attest against", "criticality": 4, "uncertainty": 2, "rat_score": 8 }
+    ]
+  }
+}

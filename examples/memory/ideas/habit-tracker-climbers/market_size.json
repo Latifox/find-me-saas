@@ -1,0 +1,101 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "estimated_at": "2026-09-06",
+  "lane": "b2c",
+  "methodology": "triangulated",
+  "estimation_approaches": [
+    {
+      "approach": "community-proxy",
+      "tam_estimate": 287280000,
+      "key_assumptions": [
+        "Over 6 million annual indoor climbing participants in the United States (Statista panel data)",
+        "Annual revenue per paying user of $47.88, from the $3.99 target monthly WTP",
+        "TAM assumes every US indoor climber subscribes, which is an upper bound only"
+      ]
+    },
+    {
+      "approach": "competitor-proxy",
+      "tam_estimate": 240000000,
+      "key_assumptions": [
+        "Derived from the observable structure of the climbing app market: three dedicated training apps plus two logging apps serving the same participant base",
+        "No climbing app publishes revenue or user counts, so this is a shape estimate rather than a measurement",
+        "Agrees with the community proxy within 20%, which supports the order of magnitude"
+      ]
+    }
+  ],
+  "triangulation_confidence": "medium",
+  "triangulation_note": "The two approaches agree within 20%, but both rest on the same participation figure, so the agreement is weaker than it looks. Confidence is medium. The participation number itself is solid; the conversion filters are the uncertain part.",
+  "icp_count": {
+    "value": null,
+    "source": "",
+    "as_of": "",
+    "acv": null,
+    "penetration_year_1_pct": null
+  },
+  "tam": {
+    "value": 287280000,
+    "currency": "USD",
+    "period": "annual",
+    "assumptions": [
+      "6,000,000 US indoor climbing participants at $47.88 per year",
+      "Upper bound. Most participants climb casually and would never buy training software",
+      "US only; excludes the substantial European climbing population for language and payment reasons"
+    ]
+  },
+  "sam": {
+    "value": 8618400,
+    "filter_criteria": [
+      "Trains deliberately off the wall rather than only climbing at the gym: retains about 10%, leaving 600,000",
+      "Willing to pay for training or habit software at all, given a free credible option exists: retains about 30%, leaving 180,000",
+      "United States, English language",
+      "Cross-platform (iOS and Android), so no platform filter is applied"
+    ],
+    "sam_to_tam_ratio": 0.03
+  },
+  "som": {
+    "year_1": 25855,
+    "year_3": 103421,
+    "capture_rate_year_1_pct": 0.3,
+    "capture_rate_year_3_pct": 1.0,
+    "growth_multiplier": 1.2,
+    "growth_multiplier_source": "trend_velocity 'rising' in habit-tracking-climbing-apps-2026-09.md maps to a 1.2-1.5x multiplier; the low end is used because gym-count growth of 5.5% a year expands the participant base slowly and does not change the competitive structure"
+  },
+  "som_rationale": "Lifestyle and habit apps carry a year-1 capture benchmark of 0.3-1.5% of SAM and a year-3 range of 1.0-4.0%. The bottom of both bands is used, which the methodology directs when market saturation is high and no distribution advantage exists. Both conditions hold: saturation scored 13 of 15, and the founder has no audience, no climbing domain presence and no ASO track record. 0.3% of 180,000 is about 540 paying users in year one.",
+  "market_insights_used": [
+    "habit-tracking-climbing-apps-2026-09.md"
+  ],
+  "trend_velocity_observed": "rising",
+  "monetization_evidence_found": true,
+  "reality_checks_triggered": [
+    "SAM too narrow: SAM is 3% of TAM, below the 5% threshold at which the methodology warns the niche may be too narrow for viable economics. The warning is accepted rather than adjusted away. Loosening the filters would require assuming that casual gym-goers buy training software, which the category evidence does not support, so the honest conclusion is that the niche genuinely is narrow.",
+    "TAM inflation did not trigger ($287M, far below $10B). SOM fantasy did not trigger ($25,855, far below $500K). Monetization evidence exists. The market is rising rather than cold."
+  ],
+  "market_size_verdict": "niche",
+  "market_size_verdict_note": "Year-1 SOM of roughly $25,900 sits in the $10K-50K niche band: side-project scale, viable only where build cost is low and another income exists. Even the year-3 figure of about $103,000 assumes the product beat a free incumbent to a 1% share of paying deliberate trainers. Combined with the triggered SAM-too-narrow check, the sizing says this is a hobby-scale opportunity rather than a business.",
+  "sources": [
+    {
+      "url": "https://statista.com/statistics/763788/climbing-sport-indoor-boulder-participants-us",
+      "title": "Participants in indoor climbing in the U.S., Statista",
+      "accessed": "2026-09-06",
+      "used_for": "US indoor climbing participation of over 6 million"
+    },
+    {
+      "url": "https://www.ibisworld.com/united-states/number-of-businesses/climbing-gyms/6264/",
+      "title": "Climbing Gyms in the US, IBISWorld",
+      "accessed": "2026-09-06",
+      "used_for": "US climbing gym count and growth rate"
+    },
+    {
+      "url": "https://straitsresearch.com/report/habit-tracking-apps-market",
+      "title": "Habit Tracking Apps Market Size and Growth, Straits Research",
+      "accessed": "2026-09-06",
+      "used_for": "Category size, freemium share of revenue, paid price band"
+    },
+    {
+      "url": "https://fitnessaitrends.com/blog/crimpd-vs-lattice-vs-sequence-climbing-training-app/",
+      "title": "Crimpd vs Lattice vs Sequence 2026, Fitness AI Trends",
+      "accessed": "2026-09-06",
+      "used_for": "Competitor pricing, free tier scope and user complaints"
+    }
+  ]
+}

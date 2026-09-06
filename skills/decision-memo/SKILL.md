@@ -3,7 +3,7 @@ name: decision-memo
 description: Writes a concise, human-readable decision brief summarizing the full validation analysis — including score, verdict, RAT experiment, pre-mortem, and tier-appropriate next actions. The document a founder actually acts on.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/decision_memo.md -->
+<!-- version: 0.5.0 | outputs: memory/ideas/<slug>/decision_memo.md (and updates memory/ideas/<slug>/idea.md status) -->
 
 # Skill: decision-memo
 
@@ -14,6 +14,7 @@ After all analysis is complete, produce a document the user can actually act on.
 ## Input
 
 - Idea slug
+- `memory/ideas/<slug>/idea.md` (`business_model`, `status`; this skill updates the status)
 - `memory/ideas/<slug>/scores.json` (required — includes RAT)
 - `memory/ideas/<slug>/weaknesses.json` (if available)
 - `memory/ideas/<slug>/pivot_options.json` (if available and verdict is "pivot")
@@ -29,6 +30,8 @@ The memo must be **scannable in under 2 minutes**. Follow these rules:
 3. **Asymmetric emphasis on risks.** Humans overweight strengths and underweight risks. The memo corrects for this by giving risks more detail than strengths.
 4. **One clear next action.** Not three options — one. The alternative path exists only as a contingency.
 5. **Respect the founder's tier.** Don't tell a beginner to "optimize your Meta ads funnel." Don't tell a growth-tier founder to "watch some TikTok tutorials."
+6. **Argue against yourself.** The Devil's Advocate section gives the three strongest reasons the verdict is wrong, each tied to a data point. Strawmen are banned: if the counterargument would not change a reasonable reader's mind, find a better one.
+7. **Cite URLs, not file names.** Every strength, risk, and counterargument that rests on a fact must be traceable to a URL in the Sources section, pulled from the `sources` arrays of the dimension files. A reader a week from now must be able to re-verify.
 
 ## Formatting Constraints
 
@@ -41,11 +44,16 @@ The memo must be **scannable in under 2 minutes**. Follow these rules:
 | Top 3 Risks | 2 sentences each: the risk + what happens if ignored | What kills it |
 | Riskiest Assumption | 3–5 sentences | The one thing to test before building anything |
 | Pre-mortem | 3 bullet points | Failure imagination exercise |
+| Devil's Advocate | 3 bullet points, 1–2 sentences each | The strongest case against the verdict |
 | Recommended Next Step | 2–4 sentences with specifics | What to do this week |
 | Kill criteria | 1–2 sentences | When to walk away |
 | Alternative Path | 1–2 sentences | Plan B |
+| Profile gaps | 1 line, only if constraints are unknown | What the memo could not calibrate |
+| Sources | 3–10 links | Re-verification |
 
-Total memo length: **~400–600 words**. If it's longer, cut. Brevity is a feature.
+Total memo length: **700–1,000 words of prose**, measured from the end of the frontmatter to the `## Sources` heading. The Sources list itself is not counted, because citations should never compete with analysis for space. `tests/validate_memory.py` warns outside that band and fails above 1,200 words on the full body. If it's longer, cut the strengths before the risks.
+
+The band was 600–900 until task 4. Seven memos written against that budget exceeded it on first draft (977, 1,024, 1,081, 1,072, 1,082 and 1,009 words), and the last needed three trim passes to comply. Ten evidence-bearing sections do not fit in 900 words; the budget was wrong, not the memos.
 
 ## Process
 
@@ -55,6 +63,8 @@ Total memo length: **~400–600 words**. If it's longer, cut. Brevity is a featu
 4. Identify the 3 lowest-scoring dimensions → risks. For each, describe what goes wrong if ignored. If `weaknesses.json` exists, use its `root_cause_type` and `failure_mode` to add specificity.
 5. Extract the RAT from `scores.json.riskiest_assumption_test`. Frame it as the one question to answer before writing a line of code.
 6. Run a **pre-mortem**: assume the idea failed 12 months from now. Write 3 most likely causes of death based on the risk profile.
+6b. Write the **Devil's Advocate**: the three strongest arguments that the verdict is wrong. For a pursue/test verdict, argue for drop; for a pivot/drop verdict, argue for building. Each argument cites a specific number or source from a dimension file. Then state in one sentence why the verdict stands anyway (or, if it does not, change the verdict and note it in `scores.json`).
+6c. Collect **Sources**: the URLs from the `sources` arrays of the dimension files that back the strengths, risks, and counterarguments. Minimum three. Prefer primary pages (pricing pages, review pages, statistics tables) over articles about them.
 7. Compose the recommended next step:
    - If verdict = **pursue**: the next step is to build a scoped MVP (define what "scoped" means for this idea).
    - If verdict = **test**: the next step IS the RAT experiment from `scores.json`. Restate it with concrete specifics (channel, spend, threshold, timeline).
@@ -62,7 +72,10 @@ Total memo length: **~400–600 words**. If it's longer, cut. Brevity is a featu
    - If verdict = **drop**: the next step is to archive and move on. Name one thing learned from the analysis that applies to future ideas.
 8. Define **kill criteria**: the specific outcome that means "stop and move on." This is the inverse of the RAT pass threshold.
 9. Write the alternative path — what to do if the recommended step fails or the kill criteria is met.
-10. Write the memo following the template below.
+10. If `user_profile.md` has `unknown` or missing `time_per_week_hours`, `budget_constraint`, or `risk_tolerance`, add the one-line **Profile gaps** note after the watermark naming what the memo could not calibrate (pace of kill criteria, paid-channel viability).
+11. Write the memo following the template below.
+12. Update `memory/ideas/<slug>/idea.md` frontmatter: `status: scored` and `validated_at: <YYYY-MM-DD>`. Never leave a validated idea at `candidate` or `in-validation`.
+13. Run `python tests/validate_memory.py --idea <slug>` if a shell is available and fix any ERROR before presenting.
 
 ### Validation Watermark
 
@@ -103,6 +116,8 @@ created_at: ""
 
 <Validation watermark — only if confidence is medium or low>
 
+<Profile gaps: one line, only if hours / budget / risk tolerance are unknown>
+
 ---
 
 ## Why This Score
@@ -135,6 +150,16 @@ The assumption most likely to kill this idea:
 2. <Second most likely cause — specific, tied to data>
 3. <Third most likely cause — specific, tied to data>
 
+## Devil's Advocate
+
+The strongest case against this verdict:
+
+1. <Counterargument with a specific number or source>
+2. <Counterargument with a specific number or source>
+3. <Counterargument with a specific number or source>
+
+<One sentence: why the verdict stands despite these.>
+
 ---
 
 ## What To Do Now
@@ -146,11 +171,20 @@ The assumption most likely to kill this idea:
 ## If That Doesn't Work
 
 <Alternative path — one sentence. What to do if the recommended step fails or kill criteria is met.>
+
+## Sources
+
+- [<title>](<url>) — <what it backs>
+- [<title>](<url>) — <what it backs>
+- [<title>](<url>) — <what it backs>
 ```
 
 ## Notes
 
 - If the verdict is **pivot** and `pivot_options.json` exists, embed the recommended pivot in the "What To Do Now" section with enough detail to act on immediately.
 - If the verdict is **drop**, the tone should be respectful but firm. Don't soften a drop verdict. The value of a good drop is the time it saves for the next idea.
-- The memo should be re-generated whenever `scores.json` is updated (e.g., after a pivot re-score). Append a version note at the bottom: `_v2 — re-scored after [pivot description]_`.
+- The memo should be re-generated whenever `scores.json` is updated (e.g., after an in-place pivot re-score). Append a version note at the bottom: `_v2 — re-scored after [pivot description]_`.
+- When a pivot earns a new slug (see the Slug Rule in `skills/pivot-engine/SKILL.md`), do not rewrite the original memo. Append one line to it instead: `_Superseded by [<new-slug>](../<new-slug>/decision_memo.md) — <one-line reason>._` The original memo stays as the record of the decision that was made at the time.
+- Fast-path runs (`scoring_stage: fast-validation`) do not get a memo. If asked for one, run the full chain first; a four-dimension score cannot support a decision brief.
 - Decision memos are the primary artifact the user references after the session. Optimize for re-readability days later, not just first-read clarity.
+- Tier language differs by lane. B2C beginners get channels with fast feedback (community posting, short-form video); B2B founders get the first ten conversations (who, where, what to ask) and the channel that must be ramping before the warm network exhausts.

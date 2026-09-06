@@ -1,0 +1,125 @@
+{
+  "_comment": "Output contracts for memory/ideas/<slug>/*.json. Directives: required, enums, nullable, conditional (when/required/absent), nested_required (a.b[].c paths), one_of (list of key groups, at least one fully present). Extra keys are always allowed.",
+
+  "scores.json": {
+    "required": ["idea_slug", "scored_at", "scoring_stage", "dimension_scores", "weights_applied", "floor_penalty", "base_score", "missing_discount", "final_score", "score_confidence", "missing_inputs", "top_strengths", "top_weaknesses", "killer_dimensions"],
+    "enums": {
+      "scoring_stage": ["candidate-quick-score", "fast-validation", "full-validation", "pivot-rescore"],
+      "score_confidence": ["high", "medium", "low"],
+      "verdict": ["pursue", "test", "pivot", "drop"],
+      "rank_label": ["strong-candidate", "candidate", "weak-candidate"]
+    },
+    "nullable": [],
+    "conditional": [
+      { "when": { "scoring_stage": "fast-validation" }, "required": ["verdict", "riskiest_assumption_test"], "absent": ["rank_label"] },
+      { "when": { "scoring_stage": "full-validation" }, "required": ["verdict", "riskiest_assumption_test", "dimension_rationale"], "absent": ["rank_label"] },
+      { "when": { "scoring_stage": "pivot-rescore" }, "required": ["verdict", "pivot_id"], "absent": ["rank_label"] },
+      { "when": { "scoring_stage": "candidate-quick-score" }, "required": ["rank_label", "competition_prior_capped"], "absent": ["verdict"] }
+    ],
+    "nested_required": {
+      "top_strengths[]": ["dimension", "score", "reason"],
+      "top_weaknesses[]": ["dimension", "score", "reason"],
+      "riskiest_assumption_test": ["assumption", "category", "criticality", "uncertainty", "rat_score", "experiment", "all_assumptions_ranked"],
+      "riskiest_assumption_test.experiment": ["type", "description", "duration", "estimated_cost", "pass_threshold", "fail_action"]
+    }
+  },
+
+  "pivot_scores.json": {
+    "required": ["idea_slug", "scored_at", "scoring_stage", "pivot_id", "dimension_scores", "weights_applied", "floor_penalty", "base_score", "missing_discount", "final_score", "verdict", "score_confidence"],
+    "enums": { "scoring_stage": ["pivot-rescore"], "verdict": ["pursue", "test", "pivot", "drop"], "score_confidence": ["high", "medium", "low"] }
+  },
+
+  "desire_scores.json": {
+    "required": ["idea_slug", "evaluated_at", "scores", "score_rationale", "primary_driver", "secondary_driver", "desire_strength", "desire_strength_label", "virality_potential", "notes"],
+    "enums": { "desire_strength_label": ["strong", "moderate", "weak"], "virality_potential": ["high", "medium", "low"] },
+    "nested_required": { "scores": ["survival", "status", "belonging", "control", "curiosity"] }
+  },
+
+  "competitors.json": {
+    "required": ["idea_slug", "mapped_at", "direct_competitors", "indirect_competitors", "substitutes", "emerging_threats", "review_mining_summary", "positioning_gaps", "saturation_score", "saturation_rationale", "market_saturation", "differentiation_opportunities", "market_insights_sources_used", "sources"],
+    "enums": { "market_saturation": ["low", "medium", "high"] },
+    "nested_required": {
+      "direct_competitors[]": ["name", "pricing", "pricing_model", "top_features", "top_complaints"],
+      "positioning_gaps[]": ["gap_type", "description", "defensibility", "evidence"],
+      "saturation_score": ["direct_competitor_count", "incumbent_dominance", "funding_in_space", "keyword_saturation", "content_saturation", "total"],
+      "review_mining_summary": ["most_common_complaint_across_competitors", "strongest_gap_signal", "competitors_mined"],
+      "sources[]": ["url", "title", "accessed"]
+    }
+  },
+
+  "pricing.json": {
+    "required": ["idea_slug", "modeled_at", "lane", "van_westendorp", "recommended_pricing_model", "pricing_model_rationale", "competitive_pricing_range", "freemium_conversion_estimate", "monetization_risk", "market_insights_pricing_signals", "sources"],
+    "enums": { "lane": ["b2c", "b2b"], "monetization_risk": ["low", "medium", "high"] },
+    "nullable": ["freemium_conversion_estimate", "desire_premium_multiplier"],
+    "one_of": [["wtp_range", "recommended_price"], ["target_wtp_range", "recommended_tiers"]],
+    "nested_required": {
+      "van_westendorp": ["too_cheap", "cheap_but_acceptable", "too_expensive"],
+      "competitive_pricing_range": ["min", "max"],
+      "recommended_tiers[]": ["name", "price", "billing", "scope"],
+      "sources[]": ["url", "title", "accessed"]
+    }
+  },
+
+  "distribution.json": {
+    "required": ["idea_slug", "analyzed_at", "lane", "viral_loop_exists", "viral_loop_type", "k_factor_estimate", "k_factor_classification", "paid_feasibility", "paid_feasibility_rationale", "founder_distribution_edge", "recommended_first_channel", "recommended_first_channel_rationale", "channels_ranked", "distribution_verdict", "tier_adjustment_applied", "distribution_verdict_rationale", "market_insights_sources_used", "sources"],
+    "enums": {
+      "lane": ["b2c", "b2b"],
+      "viral_loop_type": ["inherent", "collaborative", "word-of-mouth", "incentivized", "content-as-distribution", "none"],
+      "k_factor_classification": ["viral-growth-engine", "viral-assist", "marginal", "non-viral"],
+      "paid_feasibility": ["viable", "marginal", "not-viable"],
+      "distribution_verdict": ["strong", "moderate", "weak"]
+    },
+    "one_of": [["platform_advantage", "creator_economy_fit"], ["discovery_channel_score"]],
+    "nested_required": {
+      "channels_ranked[]": ["channel", "viability", "time_to_first_100_users"],
+      "founder_distribution_edge": ["exists", "strength", "components", "limitations"],
+      "discovery_channel_score": ["category_competition", "keyword_opportunity", "search_intent_match", "advocacy_prompt_potential", "differentiation_visibility", "total", "opportunity"],
+      "sources[]": ["url", "title", "accessed"]
+    }
+  },
+
+  "retention.json": {
+    "required": ["idea_slug", "predicted_at", "lane", "natural_usage_frequency", "external_trigger", "habit_formation_score", "churn_risk_factors", "predicted_retention", "d30_equivalent", "top_churn_risk_factor", "retention_levers", "churn_risk", "retention_verdict"],
+    "enums": { "lane": ["b2c", "b2b"], "churn_risk": ["low", "medium", "high"], "retention_verdict": ["sticky", "moderate", "disposable"] },
+    "nested_required": { "retention_levers[]": ["lever", "impact", "detail"] }
+  },
+
+  "cac.json": {
+    "required": ["idea_slug", "modeled_at", "lane", "ltv", "founder_budget_tier", "recommended_first_channel", "recommended_first_channel_rationale", "payback_period_months", "viability_verdict", "viability_verdict_rationale", "market_insights_adjustments", "sources"],
+    "enums": { "lane": ["b2c", "b2b"], "founder_budget_tier": ["bootstrap", "lean", "moderate", "serious", "unknown"], "viability_verdict": ["viable", "marginal", "not-viable"] },
+    "one_of": [["cac_by_channel"], ["cac_by_channel_b2b", "ltv_cases", "gross_margin", "blended_ceiling_customers"]],
+    "nested_required": {
+      "ltv": ["estimated_ltv", "arpu_monthly", "average_lifespan_months", "ltv_confidence", "ltv_assumptions"],
+      "cac_by_channel_b2b[]": ["channel", "estimated_cac", "ltv_cac_base", "payback_months", "viability", "scale_ceiling"],
+      "sources[]": ["url", "title", "accessed"]
+    }
+  },
+
+  "market_size.json": {
+    "required": ["idea_slug", "estimated_at", "lane", "methodology", "estimation_approaches", "triangulation_confidence", "tam", "sam", "som", "market_insights_used", "trend_velocity_observed", "monetization_evidence_found", "reality_checks_triggered", "market_size_verdict", "sources"],
+    "enums": { "lane": ["b2c", "b2b"], "triangulation_confidence": ["high", "medium", "low"], "market_size_verdict": ["large", "medium", "niche", "micro-niche"] },
+    "nested_required": {
+      "estimation_approaches[]": ["approach", "tam_estimate", "key_assumptions"],
+      "tam": ["value", "currency", "period", "assumptions"],
+      "sam": ["value", "filter_criteria", "sam_to_tam_ratio"],
+      "som": ["year_1", "year_3", "capture_rate_year_1_pct", "capture_rate_year_3_pct", "growth_multiplier", "growth_multiplier_source"],
+      "sources[]": ["url", "title", "accessed"]
+    }
+  },
+
+  "weaknesses.json": {
+    "required": ["idea_slug", "detected_at", "weak_dimensions", "critical_weaknesses", "addressable_weaknesses", "overall_weakness_severity"],
+    "enums": { "overall_weakness_severity": ["fatal", "major", "minor"] },
+    "nested_required": { "weak_dimensions[]": ["dimension", "score", "root_cause_type", "root_cause_description", "failure_mode"] }
+  },
+
+  "pivot_options.json": {
+    "required": ["idea_slug", "generated_at", "pivot_scope", "slug_decision", "original_score", "original_verdict", "triggered_by_weaknesses", "structural_weaknesses_unpivotable", "pivot_options", "recommended_pivot", "recommended_pivot_rationale", "drop_recommendation", "market_insights_sources_used"],
+    "enums": { "pivot_scope": ["micro", "standard"], "slug_decision": ["in-place", "new-slug"] },
+    "nullable": ["new_slug"],
+    "nested_required": {
+      "pivot_options[]": ["pivot_id", "pivot_type", "description", "specific_change", "evidence", "evidence_source", "meets_minimum_viable_pivot", "scoring_simulation", "effort", "indie_buildability", "trade_offs", "variables_changed"],
+      "pivot_options[].scoring_simulation": ["dimensions_improved", "dimensions_worsened", "dimensions_unchanged", "projected_score_range", "projected_verdict_range"]
+    }
+  }
+}

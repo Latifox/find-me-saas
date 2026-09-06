@@ -2,6 +2,7 @@
   "permissions": {
     "allow": [
       "WebSearch",
+      "WebFetch",
       "Read(memory/**)",
       "Write(memory/**)"
     ]

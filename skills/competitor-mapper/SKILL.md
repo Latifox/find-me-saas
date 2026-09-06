@@ -3,7 +3,7 @@ name: competitor-mapper
 description: Maps the full competitive landscape — direct, indirect, substitute, and emerging competitors — with positioning gap analysis, review mining, and market_insights-calibrated saturation scoring. Feeds into idea-scoring, cac-modeler, pricing-and-wtp, and tam-sam-som-builder.
 ---
 
-<!-- version: 0.2.0 | outputs: memory/ideas/<slug>/competitors.json -->
+<!-- version: 0.3.0 | outputs: memory/ideas/<slug>/competitors.json -->
 
 # Skill: competitor-mapper
 
@@ -14,8 +14,12 @@ Understand what the user is actually competing against — not just other apps, 
 ## Input
 
 - Idea slug
-- `memory/ideas/<slug>/idea.md` (app concept, key features, differentiator)
+- `memory/ideas/<slug>/idea.md` (app concept, key features, differentiator, `business_model`)
 - `memory/market_insights/<niche>-*-<YYYY>-<MM>.md` (trend analysis files — **use all available platform files for this niche**)
+
+### Lane selection
+
+`business_model` = `b2c` uses the App Store search methodology (Step 2) and app-store review mining. `prosumer`, `b2b-smb`, and `b2b2c` use the B2B search methodology (Step 2b) and review mining from G2, Capterra, Reddit, and Hacker News. The competitor categories, gap analysis, and saturation scoring apply to both lanes; the B2B factor definitions are in Step 5. Record the lane in the output.
 
 ### Using Market Insights
 
@@ -27,6 +31,7 @@ Trend analysis files are a primary research source for competitor mapping. Extra
 | **Reddit** (`<niche>-reddit-*.md`) | Apps and tools users mention by name (both praised and hated), non-software workarounds users describe, recurring complaints about existing solutions |
 | **TikTok** (`<niche>-tiktok-*.md`) | Apps featured in viral content (free marketing = distribution advantage), creator-promoted tools, "alternatives to X" content trends |
 | **Web Search** (`<niche>-web-search-*.md`) | Top-ranking apps for category keywords, "best X apps" list winners, SEO-dominant competitors |
+| **B2B communities** (`<niche>-b2b-communities-*.md`) | Products named in G2/Capterra categories with review counts, tools operators say they switched from or to, pricing pages already captured, partner-directory listings, funded entrants |
 | `monetization_evidence` (from any platform) | Which competitors are actively monetizing (proves the market supports revenue, identifies pricing benchmarks) |
 | `trend_velocity` | Rising-fast markets attract new entrants quickly — flag that emerging threats will increase |
 
@@ -110,9 +115,22 @@ For each search, record:
 - Whether the top result has > 50K ratings (signals an entrenched incumbent)
 - Date of last update for top 5 results (stale apps = opportunity to displace)
 
+### Step 2b — B2B Search Methodology (prosumer, b2b-smb, b2b2c)
+
+Business buyers do not browse an app store. Use these surfaces in order and record the same fields as Step 2 (relevant results, ratings, review counts, dominance, freshness):
+
+1. **G2 and Capterra category search**: the two closest categories plus an "alternatives to <closest product>" page. Record the top 10 by review count. A product with > 500 reviews is an entrenched incumbent; > 2,000 is dominant.
+2. **Pricing pages** of the top 5: tiers, unit (per seat, per client, per workspace, flat), published or "contact sales", free tier or trial. Unpublished pricing is itself a positioning gap.
+3. **Operator search queries**: `"<problem> tool" site:reddit.com`, `"<problem>" site:news.ycombinator.com`, `"<problem>" site:indiehackers.com`. The products people recommend to each other are the real short list.
+4. **Partner and integration directories** relevant to the buyer's stack (n8n, Zapier, HubSpot, Shopify, MSP marketplaces): who is listed, who is missing.
+5. **LinkedIn**: posts by the buyer persona mentioning tools by name; comment threads are unfiltered switching stories.
+6. **Funding and launch signals**: Crunchbase or press for funded entrants in the past 18 months; Product Hunt launches.
+
+For each competitor found, record who its buyer is (the risk owner, the service provider, the end user). A competitor selling to a different buyer than this idea is adjacent, not direct, even when the feature list overlaps.
+
 ### Step 3 — Review Mining for Positioning Gaps
 
-Competitor reviews are the richest source of positioning gaps. Mine them systematically:
+Competitor reviews are the richest source of positioning gaps. Mine them systematically. In the B2C lane use App Store and Play Store reviews. In the B2B lane map the same tiers onto G2 and Capterra (1–2 star, 3 star, 5 star), plus Reddit and Hacker News threads for products with fewer than 50 reviews. B2B compliance and infrastructure products often have no public review corpus at all; when that happens say so in `review_mining_summary`, substitute pricing-page teardown and comparison content, and record it in `review_sources_used`.
 
 #### 1-star reviews (frustration signals)
 
@@ -171,6 +189,16 @@ Saturation reflects how crowded the space is and how difficult it will be to get
 | **App Store keyword saturation** | Primary keywords show few relevant results | Moderate results, some quality variance | Top results are all high-quality, well-maintained apps |
 | **Content saturation** | Few "best X apps" articles exist | Some articles, moderate SEO competition | Many SEO-optimized listicles, hard to rank |
 
+**B2B lane factor definitions** (same points, same totals):
+
+| Factor | Low (1 pt) | Medium (2 pts) | High (3 pts) |
+|---|---|---|---|
+| **Direct competitor count** | 0–2 products sell this to this buyer | 3–6 | 7+ |
+| **Incumbent dominance** | No product has > 100 G2/Capterra reviews | One has 100–500 reviews | One has > 500 reviews or a public customer count > 5,000 |
+| **Funding in space** | No funded competitors | 1–2 seed/Series A | Multiple funded companies or a platform vendor (Microsoft, Salesforce, HubSpot) ships it natively |
+| **Search and directory saturation** | Category keywords and partner directories have few relevant entries | Moderate, uneven quality | Category pages are full of maintained, reviewed products |
+| **Content saturation** | Few comparison or "best X for Y" pages | Some vendor comparison content | Every incumbent publishes comparison pages and case studies for this buyer |
+
 **Total score** (5–15 points):
 
 | Total | Saturation level |
@@ -185,13 +213,18 @@ Write to `memory/ideas/<slug>/competitors.json`:
 
 ```json
 {
+  "idea_slug": "",
+  "mapped_at": "YYYY-MM-DD",
+  "lane": "b2c | b2b",
   "direct_competitors": [
     {
       "name": "",
       "platform": "",
+      "buyer": "",
       "estimated_users": "",
-      "app_store_rating": 0,
+      "app_store_rating": null,
       "review_count": 0,
+      "review_source": "app-store | play-store | g2 | capterra | none",
       "last_updated": "",
       "pricing": "",
       "pricing_model": "",
@@ -230,6 +263,7 @@ Write to `memory/ideas/<slug>/competitors.json`:
     "strongest_gap_signal": "",
     "competitors_mined": 0
   },
+  "review_sources_used": [],
   "positioning_gaps": [
     {
       "gap_type": "audience | feature | experience | price | philosophy | platform | trust",
@@ -246,11 +280,17 @@ Write to `memory/ideas/<slug>/competitors.json`:
     "content_saturation": 0,
     "total": 0
   },
+  "saturation_rationale": "",
   "market_saturation": "low | medium | high",
   "differentiation_opportunities": [],
-  "market_insights_sources_used": []
+  "market_insights_sources_used": [],
+  "sources": [
+    { "url": "https://", "title": "", "accessed": "YYYY-MM-DD", "used_for": "" }
+  ]
 }
 ```
+
+`sources` must list every URL consulted (category pages, pricing pages, review pages, threads). idea-scoring counts them and the decision memo cites them.
 
 ## Notes
 
@@ -258,3 +298,5 @@ Write to `memory/ideas/<slug>/competitors.json`:
 - `distribution_channels_observed` for each competitor helps downstream skills (distribution-analysis, cac-modeler) understand which channels actually work in this category.
 - If market_insights show `trend_velocity` = "rising-fast", note in `emerging_threats` that the competitor landscape will shift quickly. Rising markets attract builders.
 - Substitutes with `friction_level` = "low" are the hardest to displace — if doing nothing or using a spreadsheet is easy enough, the app must provide dramatically more value to justify the download.
+- In the B2B lane the strongest substitute is often the buyer building it themselves (Zapier, a spreadsheet, an intern). Record the evidence for who pays despite being able to build; a comparable product with paying customers against the same objection is the best defence.
+- Candidate-stage competition scores in idea-generation are capped at 60 until this skill runs; when presenting, state how far the researched score moved from the capped prior.

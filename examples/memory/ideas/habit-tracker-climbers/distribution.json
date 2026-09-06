@@ -1,0 +1,132 @@
+{
+  "idea_slug": "habit-tracker-climbers",
+  "analyzed_at": "2026-09-06",
+  "lane": "b2c",
+  "organic_reach_potential": "low",
+  "viral_loop_exists": false,
+  "viral_loop_type": "word-of-mouth",
+  "viral_loop_description": "Gym-floor word of mouth is the only loop. Climbers talk about training constantly and recommend tools to each other, which is genuine but slow and unattributable. There is no content-as-distribution loop because the app produces a private streak chart rather than anything a climber would post; the shareable artefact in this sport is a send video, which this product does not create.",
+  "k_factor_estimate": 0.064,
+  "k_factor_classification": "non-viral",
+  "k_factor_rationale": "i is estimated at 0.8 recommendations per user over its life, reflecting real but infrequent gym conversation about training tools, and c at 0.08 because a recommendation lands only when the listener is already looking. k of 0.064 is below the 0.1 non-viral threshold. The absence of a shareable output is the decisive factor and it is a property of the product concept, not of its execution.",
+  "paid_feasibility": "not-viable",
+  "minimum_paid_budget_monthly": 200,
+  "paid_feasibility_rationale": "Excluded twice over. The founder's budget is under $100 per month, which is bootstrap tier and removes paid channels by filter. Independently, cac.json values an install at $0.50 blended, so no positive CPI can return a profit. Paid would remain unusable at any budget until conversion or price changed fundamentally.",
+  "platform_advantage": {
+    "aso_opportunity": "medium",
+    "aso_score_breakdown": {
+      "category_competition": 1,
+      "keyword_opportunity": 2,
+      "search_intent_match": 3,
+      "review_velocity_potential": 2,
+      "visual_differentiation": 1,
+      "total": 9
+    },
+    "aso_score_rationale": {
+      "category_competition": "Low. Climbing training queries are held by Crimpd and Lattice, both well maintained and backed by a coaching brand climbers recognise. Top-10 placement on head terms is not realistically achievable without a marketing budget.",
+      "keyword_opportunity": "Medium. Head terms are taken, but genuine long-tail room exists around phrases like climbing habit tracker, hangboard consistency and finger rest days, which no competitor targets. Volume on those terms is correspondingly small.",
+      "search_intent_match": "High. Climbers actively search the App Store for training tools; this is tool intent rather than discovery-dependent, which is the rubric's high condition and the strongest factor here.",
+      "review_velocity_potential": "Medium. Completing a training week is a natural moment to ask for a review, but it arrives less often than in a daily app and carries less emotional charge than a personal best.",
+      "visual_differentiation": "Low. Habit tracker screenshots look like habit tracker screenshots. The climbing angle is legible in copy but hard to make visually distinct in a store listing."
+    },
+    "featured_potential": false,
+    "featured_criteria_met": [
+      "Serves an underrepresented audience or emerging cultural moment (climbing's continued growth)"
+    ]
+  },
+  "creator_economy_fit": "low",
+  "creator_fit_rationale": "One high factor against three low, which the rubric maps to low. Climbing has an unusually strong creator ecosystem on YouTube and Instagram, so audience alignment is genuinely high. Everything else works against it: the app generates no visual output worth filming, a habit tracker cannot be demonstrated compellingly in a short clip, and a $4.99 subscription cannot fund a commission that would interest a creator with an audience worth reaching. Authenticity is the one salvageable factor, since a climbing creator could plausibly use a training habit app for real.",
+  "creator_fit_breakdown": {
+    "content_generation": "low",
+    "audience_alignment": "high",
+    "demo_ability": "low",
+    "authenticity": "medium",
+    "affiliate_fit": "low"
+  },
+  "founder_distribution_edge": {
+    "exists": false,
+    "strength": "none",
+    "advantage_type": "none",
+    "components": [],
+    "limitations": [
+      "No climbing domain presence, no audience in the sport, and no credibility signal in a community that weights practitioner status heavily",
+      "user_profile.md records fit_score_by_niche across AI, security and agency territories; nothing in the profile touches consumer fitness or climbing",
+      "Marketing and lead-generation experience is real but oriented to B2B channels, which do not transfer to consumer ASO and creator marketing",
+      "15 hours a week and a sub-$100 budget rule out both the content volume and the paid testing that consumer apps normally need"
+    ]
+  },
+  "recommended_first_channel": "ASO on long-tail climbing-habit terms, named as least-bad rather than recommended.",
+  "recommended_first_channel_rationale": "ASO is the only channel with genuine intent behind it and the lowest cost per install in the category. It is still value-destroying at 0.33:1 against a $0.50 install value, and the long-tail terms that are actually winnable carry small volume. Naming it is a formality: cac.json found no channel that returns more than it costs.",
+  "channels_ranked": [
+    {
+      "channel": "ASO on long-tail climbing habit terms",
+      "viability": "low",
+      "time_to_first_100_users": "4-8 months",
+      "estimated_cac": "$1.50",
+      "ceiling": "LOW. Head terms are held by Crimpd and Lattice; winnable long-tail volume is small."
+    },
+    {
+      "channel": "Climbing communities and forums",
+      "viability": "low",
+      "time_to_first_100_users": "6-12 months",
+      "estimated_cac": "$2.00",
+      "ceiling": "LOW. Active and reachable, but climbers recommend Crimpd because it is free and credible."
+    },
+    {
+      "channel": "Launch moment (Product Hunt, climbing media)",
+      "viability": "low",
+      "time_to_first_100_users": "one-time cohort of roughly 500 installs",
+      "estimated_cac": "$0.20",
+      "ceiling": "ONE-TIME. The only channel that clears 2:1, and it does not recur."
+    },
+    {
+      "channel": "TikTok and short-form organic",
+      "viability": "low",
+      "time_to_first_100_users": "not reachable",
+      "estimated_cac": "$2.50",
+      "ceiling": "LOW. Climbing content performs well; habit-tracker content does not."
+    },
+    {
+      "channel": "Creator partnerships",
+      "viability": "low",
+      "time_to_first_100_users": "not reachable",
+      "estimated_cac": "excluded",
+      "ceiling": "EXCLUDED. No commission economics at $4.99, and no budget."
+    },
+    {
+      "channel": "Paid social",
+      "viability": "low",
+      "time_to_first_100_users": "not applicable",
+      "estimated_cac": "excluded",
+      "ceiling": "EXCLUDED by budget and by a $0.50 install value."
+    }
+  ],
+  "distribution_verdict": "weak",
+  "tier_adjustment_applied": "None. The founder is icp_tier growth, which allows an upgrade where paid channels are viable and the founder has optimisation experience. Paid is excluded by both budget and unit economics, so the condition fails and the raw verdict stands.",
+  "distribution_verdict_rationale": "Weak on every dimension the rubric tests. The k-factor of 0.064 is non-viral, ASO scores medium but on long-tail terms with small volume, creator fit is low, paid is excluded twice over, and the founder has no audience, no domain presence and no distribution advantage in this sport. There is no channel that both reaches climbers at scale and returns more than it costs. Unlike the B2B subject, where a closed channel was the problem, here the channels are open and the economics behind them do not work.",
+  "distribution_score": 26,
+  "distribution_score_reasoning": "A weak verdict maps to 15-39, with 0-14 reserved for no viable channel at all. Scored 26, mid-band: channels genuinely exist and can deliver installs, which keeps it out of the bottom band, but every one of them loses money per install and none has a ceiling worth pursuing. No founder-edge adjustment applies, because the profile records no audience, no climbing presence and no consumer distribution capability.",
+  "market_insights_sources_used": [
+    "habit-tracking-climbing-apps-2026-09.md"
+  ],
+  "sources": [
+    {
+      "url": "https://fitnessaitrends.com/blog/crimpd-vs-lattice-vs-sequence-climbing-training-app/",
+      "title": "Crimpd vs Lattice vs Sequence 2026, Fitness AI Trends",
+      "accessed": "2026-09-06",
+      "used_for": "Competitor pricing and free tier scope"
+    },
+    {
+      "url": "https://www.climbing.com/gear/6-best-climbing-apps/",
+      "title": "The Best Climbing Apps, Climbing.com",
+      "accessed": "2026-09-06",
+      "used_for": "Category discovery surface and which apps media recommends"
+    },
+    {
+      "url": "https://statista.com/statistics/763788/climbing-sport-indoor-boulder-participants-us",
+      "title": "Participants in indoor climbing in the U.S., Statista",
+      "accessed": "2026-09-06",
+      "used_for": "Addressable participant base behind channel ceilings"
+    }
+  ]
+}

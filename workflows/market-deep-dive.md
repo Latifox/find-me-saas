@@ -24,11 +24,14 @@ User expresses one of:
 - "Is [category] a good market to enter?"
 - Used as a prerequisite before idea-generation in a specific category
 
+**Quick scan triggers.** Run the quick scan instead of the full chain when the user says "quick look", "just the trends", "what's happening in X" without asking about competitors or market size, or is scanning several categories to choose between them.
+
 ## Entry Conditions
 
 - User specifies a topic or category (e.g., "nutrition apps", "B2B invoicing tools")
 - No idea is required — this is pre-idea market research
 - Create a temporary slug for the research context (e.g., `market-nutrition-2026`)
+- Ask (or infer from the topic) the likely `business_model` (`b2c | prosumer | b2b-smb | b2b2c`) so trend-analysis picks the right platform set and competitor-mapper / tam-sam-som-builder / distribution-analysis use the right lane. Record it in a minimal `memory/ideas/<slug>/idea.md` frontmatter.
 
 ## Skill Chain
 
@@ -66,12 +69,25 @@ User expresses one of:
 ## Exit Output
 
 The user receives a market intelligence report synthesized from:
-- New `memory/market_insights/<niche>-<platform>-deep-dive-<YYYY>-<MM>.md` file
+- New `memory/market_insights/<niche>-<platform>-<YYYY>-<MM>.md` file(s), one per platform analysed
 - `market_size.json` — TAM/SAM/SOM estimates
 - `competitors.json` — competitive landscape
 - `distribution.json` — how people acquire users in this market
 
+---
+
+### Quick scan
+
+Trend analysis only, for choosing between categories before committing research time to one.
+
+```
+Q1. trend-analysis
+   ↓ reads: topic from the user; business_model if stated; existing memory/market_insights/ files for the niche
+   ↓ condition: one or two platforms, chosen by business model. No competitor map, no market sizing, no distribution analysis.
+   ↓ writes: memory/market_insights/<niche>-<platform>-<YYYY>-<MM>.md (one file per platform)
+   → present: the quick-scan summary below.
+```
+
+**Quick scan exit output.** The insight file(s) plus a five-line summary: trend velocity, overall verdict (hot/warm/cool/cold), the strongest signal, the clearest monetization evidence, and the biggest risk. No idea directory is created and no `competitors.json`, `market_size.json`, or `distribution.json` is written. Close by offering the full deep dive on whichever category the user picks.
 
 ## Notes
-
-<!-- TODO: Add option to run trend-analysis only (quick version without full competitor map) -->

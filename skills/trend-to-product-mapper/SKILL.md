@@ -3,7 +3,7 @@ name: trend-to-product-mapper
 description: Maps viral social content and trending topics to concrete app opportunities by extracting the underlying problem and validating monetization fit.
 ---
 
-<!-- version: 0.3.0 | outputs: memory/ideas/<slug>/idea.md (up to 10 per run) -->
+<!-- version: 0.4.0 | outputs: memory/ideas/<slug>/idea.md (up to 10 per run) -->
 
 # Skill: trend-to-product-mapper
 
@@ -77,7 +77,7 @@ Prefer signals that appear across **multiple platforms** — cross-platform reso
 2. Scan the full narrative of each file and identify **distinct** product opportunities — different underlying problems, different audience segments, or different app categories count as distinct. Do not list variations of the same idea.
 3. Rank candidates by signal strength: weight cross-platform resonance and willingness-to-pay evidence most heavily. Drop candidates with no monetization signal.
 4. Take the top 5–10 candidates (only include as many as have genuine signal — do not pad to reach 10).
-5. For each candidate: extract the underlying problem (frustration or desire, not content topic), emotional trigger, audience vocabulary, app category, key features, key differentiator, and monetization evidence.
+5. For each candidate: extract the underlying problem (frustration or desire, not content topic), emotional trigger, audience vocabulary, app category, key features, key differentiator, monetization evidence, and the **business model** (who pays: `b2c` consumer, `prosumer` individual professional, `b2b-smb` a company under ~$10k ACV, `b2b2c` a business that resells to its own customers). The business model selects the rubric lane in every downstream skill, so decide it explicitly rather than leaving it implied.
 6. Assign a slug to each idea (kebab-case, max 40 chars, derived from the app concept).
 7. Write one `idea.md` per idea to its own directory: `memory/ideas/<slug>/idea.md`.
 
@@ -101,6 +101,9 @@ trend_velocity: rising-fast | rising | stable | declining
 cross_platform_resonance: true | false
 monetization_validated: true | false
 confidence: high | medium | low
+business_model: b2c | prosumer | b2b-smb | b2b2c
+buyer: "<who pays, one line>"
+price_point_hypothesis: "<e.g. $6/mo consumer subscription, or $199/mo per agency>"
 ---
 ```
 
@@ -133,6 +136,7 @@ What trend data supports this? For each platform covered, cite the specific sign
 What is the app? Describe it in 2–3 sentences as if pitching to a user, not an investor. Focus on what it does and who it's for.
 
 **App category:** <e.g., habit tracker, AI coach, marketplace, tool>
+**Business model:** <b2c | prosumer | b2b-smb | b2b2c> — <who pays and why they are the buyer, one sentence>
 
 ## Key Features
 The 3–5 core features that directly address the problem. Each feature should map to a specific pain point or desire from the Market Signal Evidence section.
@@ -159,11 +163,11 @@ Reasoning: <1–2 sentences explaining the confidence level — what's strong, w
 
 After writing all files, present a summary table to the user:
 
-| # | Slug | App Concept | Confidence | Cross-Platform | Monetization |
-|---|---|---|---|---|---|
-| 1 | `<slug>` | ... | high/medium/low | yes/no | validated/unvalidated |
+| # | Slug | App Concept | Model | Confidence | Cross-Platform | Monetization |
+|---|---|---|---|---|---|---|
+| 1 | `<slug>` | ... | b2c/prosumer/b2b-smb/b2b2c | high/medium/low | yes/no | validated/unvalidated |
 | ... | | | | | |
 
 ## Notes
 
-<!-- TODO: Define what counts as "monetization validated" — IH revenue post? App Store paid app? -->
+- **Monetization validated** means at least one of: (a) a named competitor or comparable product with published pricing for the same buyer; (b) a public revenue post for a comparable product (Indie Hackers, X, Reddit, Stripe Atlas); (c) consulting, agency, or freelancer rates for the same job being done by hand; (d) App Store paid rank or in-app purchase evidence in the category. Stated interest ("I would pay for this") does not count.

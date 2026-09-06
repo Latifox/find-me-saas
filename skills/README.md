@@ -1,6 +1,8 @@
 # Skills — Canonical Definitions
 
-This directory contains the canonical, platform-agnostic skill definitions for the App Idea Validation Agent.
+This directory contains the canonical, platform-agnostic skill definitions for **FindMeSaaS**.
+
+The product name lives in prose only. Directory names and skill identifiers are stable, because the harness and all three platform adapters resolve skills by path.
 
 Each skill lives in its own subdirectory: `skills/<skill-name>/SKILL.md`
 

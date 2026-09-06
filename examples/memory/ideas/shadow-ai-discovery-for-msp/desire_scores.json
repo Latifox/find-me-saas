@@ -1,0 +1,25 @@
+{
+  "idea_slug": "shadow-ai-discovery-for-msp",
+  "evaluated_at": "2026-09-06",
+  "lane": "b2b",
+  "scores": {
+    "survival": 3,
+    "status": 4,
+    "belonging": 3,
+    "control": 3,
+    "curiosity": 1
+  },
+  "score_rationale": {
+    "survival": "Business survival for the MSP, and weaker than it first appears. The commercial upside is real: 48% of MSPs rank AI and automation as their top client need for 2026 while only 13% earn meaningful revenue from it, so a sellable SKU addresses a documented revenue gap. The defensive side is thinner. An MSP does not lose its business because a client's marketing team pasted data into ChatGPT; the liability sits primarily with the client. Scored 3 rather than 4 because not having this product threatens an opportunity, not the MSP's existence, and opportunity-shaped desires get postponed in a way existential ones do not.",
+    "status": "The strongest driver, and the one the trade press keeps naming. Keeper Security's September 2026 piece is literally titled 'Shadow AI: What Clients Aren't Telling Their MSPs', and ChannelE2E's guidance is that the MSPs winning these conversations are the ones who arrived with a framework before the client had a problem. The felt moment is a client's auditor or insurer asking about AI controls and the MSP having to say it will find out. That is professional credibility under scrutiny, in front of a paying client. Scored 4 rather than 5 because the audience does not yet use this language unprompted; the phrasing appears in vendor and trade content aimed at MSPs, not in MSPs' own recurring complaints.",
+    "belonging": "Moderate and genuine. MSP peer groups, r/msp and vendor partner communities are unusually tight, and service-line adoption spreads through them by imitation. 'Everyone in my peer group now offers an AI governance assessment' is a plausible 2027 sentence. It is not a purchase driver on its own today.",
+    "control": "Real but diffuse. Knowing what runs inside client environments is the MSP's core job, and shadow AI is a genuine blind spot: 68% of employees used unauthorised AI tools in early 2026, up from 41% in 2023. Scored 3 because shadow AI is one unseen thing among many an MSP already tolerates, and because the control that matters most belongs to the client's own compliance function rather than to the MSP.",
+    "curiosity": "Absent. Nobody is curious about an AI asset register. This is a chore product and designing it as anything else would be dishonest."
+  },
+  "primary_driver": "status",
+  "secondary_driver": "survival",
+  "desire_strength": 3.2,
+  "desire_strength_label": "moderate",
+  "virality_potential": "medium",
+  "notes": "The decisive finding is that the strongest version of this desire belongs to someone who is not the buyer. The end client, mid-audit or mid-insurance-renewal, has an urgent, deadline-bound, budgeted need. The MSP has a derived need: to look prepared when that moment arrives for a client, and to have something to sell into a demand it has already identified but cannot yet monetise. Derived desires are structurally weaker because they can be satisfied by cheaper substitutes. An MSP that wants to look prepared can write a policy document and an attestation form once and reuse it across every client, which is exactly what the 82% without a formal AI policy will do the moment a client asks.\n\nCommercially the driver behaves reasonably well. Status desire is continuous rather than episodic: every client QBR, every new prospect, every renewal re-triggers the question of whether the MSP looks like a serious security partner. It also converts to revenue rather than cost, because the MSP resells it, which puts the subscription on the revenue side of their ledger. Both properties argue for reasonable retention if the product is ever adopted.\n\nWhat the score cannot fix is that moderate desire plus a low-defensibility price wedge is a weak combination. Strong desire can carry a product past a crowded market because buyers seek it out; moderate desire means the product must be placed in front of the buyer by a channel, and this channel is exactly where the founder has no access. Virality is medium and specifically B2B2B: the MSP's clients see a branded report, and MSP peer groups talk. Treat that as a slow credibility loop, not growth."
+}
